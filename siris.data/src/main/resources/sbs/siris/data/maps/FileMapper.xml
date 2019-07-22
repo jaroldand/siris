@@ -1,0 +1,79 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="sbs.siris.data.FileMapper">
+  <resultMap id="FileResultMap" type="sbs.siris.domain.entity.File">
+    <id column="ID_FILE" jdbcType="NUMERIC" property="idFile" />
+    <result column="DES_DOCUMENTO" jdbcType="VARCHAR" property="desDocumento" />
+    <result column="TIP_DOCUMENTO" jdbcType="VARCHAR" property="tipDocumento" />
+    <result column="DES_EXTENSION" jdbcType="VARCHAR" property="desExtension" />
+    <result column="NUM_TAMANIO" jdbcType="NUMERIC" property="numTamanio" />
+    <result column="BIN_ARCHIVO" jdbcType="BLOB" property="binArchivo" />
+    <result column="IND_ACTIVO" jdbcType="NUMERIC" property="indActivo" />
+    <result column="AUDIT_USER_CREA" jdbcType="VARCHAR" property="auditUserCrea" />
+    <result column="AUDIT_FEC_CREA" jdbcType="TIMESTAMP" property="auditFecCrea" />
+    <result column="AUDIT_USER_MOD" jdbcType="VARCHAR" property="auditUserMod" />
+    <result column="AUDIT_FEC_MOD" jdbcType="TIMESTAMP" property="auditFecMod" />
+  </resultMap>
+  
+  <select id="selectByPrimaryKey" statementType="CALLABLE" parameterType="sbs.siris.domain.entity.base.BaseParam">
+		{
+		  call Pkg_Siris_Mantenimiento.Pr_File_GetKey(
+			#{key,jdbcType=NUMERIC},
+			#{list,mode=OUT,jdbcType=CURSOR,resultMap=FileResultMap}
+		  )
+		}
+  </select>
+  
+  <select id="selectList" statementType="CALLABLE" parameterType="sbs.siris.domain.entity.base.BaseParam">
+		{
+		  call Pkg_Siris_Mantenimiento.Pr_File_GetByEvent(
+			#{entity.idEvento,jdbcType=NUMERIC},
+			#{list,mode=OUT,jdbcType=CURSOR,resultMap=FileResultMap}
+		  )
+		}
+  </select>
+  
+  <insert id="insert" statementType="CALLABLE" parameterType="sbs.siris.domain.entity.base.BaseParam">
+		{
+			 call Pkg_Siris_Mantenimiento.Pr_File_Insert(
+			      #{entity.idFile,jdbcType=NUMERIC},
+			      #{entity.desDocumento,jdbcType=VARCHAR},
+			      #{entity.tipDocumento,jdbcType=VARCHAR},
+			      #{entity.desExtension,jdbcType=VARCHAR},
+			      #{entity.numTamanio,jdbcType=NUMERIC},
+			      #{entity.binArchivo,jdbcType=BLOB},
+			      #{entity.indActivo,jdbcType=NUMERIC},
+			      #{entity.auditUserCrea,jdbcType=VARCHAR},
+			      #{entity.auditFecCrea,jdbcType=TIMESTAMP},
+			      #{entity.auditUserMod,jdbcType=VARCHAR},
+			      #{entity.auditFecMod,jdbcType=TIMESTAMP}
+			 )
+		}
+	</insert>
+	
+	<update id="updateByPrimaryKey" statementType="CALLABLE" parameterType="sbs.siris.domain.entity.base.BaseParam">
+		{
+			call Pkg_Siris_Mantenimiento.Pr_File_Update(
+			  #{key,jdbcType=NUMERIC},
+			      
+			      #{entity.desDocumento,jdbcType=VARCHAR},
+			      #{entity.tipDocumento,jdbcType=VARCHAR},
+			      #{entity.desExtension,jdbcType=VARCHAR},
+			      #{entity.numTamanio,jdbcType=NUMERIC},
+			      #{entity.binArchivo,jdbcType=BLOB},
+			      #{entity.indActivo,jdbcType=NUMERIC},
+			      #{entity.auditUserMod,jdbcType=VARCHAR},
+			      #{entity.auditFecMod,jdbcType=TIMESTAMP}
+		      )
+		}
+	</update>
+	
+	<delete id="deleteByPrimaryKey" statementType="CALLABLE" parameterType="sbs.siris.domain.entity.base.BaseParam">
+		{ call Pkg_Siris_Mantenimiento.Pr_File_Delete(#{key,jdbcType=NUMERIC}) }
+  </delete>
+	
+	<select id="getSequenceLong" resultType="java.lang.Long">
+		SELECT SEQ_ID_FILE.NEXTVAL FROM dual			
+	</select>
+  
+</mapper>

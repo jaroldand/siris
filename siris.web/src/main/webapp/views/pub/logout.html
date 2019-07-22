@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html layout:decorate="~{pub/sys.free}">
+
+<head>
+<title>Timeout</title>
+<script th:inline="javascript">
+/*<![CDATA[*/
+	function redir(){
+	    setTimeout(function(){window.location.href = jbase.prop.url_login_base},0)
+	}
+/*]]>*/
+</script>
+</head>
+
+<body onload="redir()">
+	<div class="container navless-container sbs-wrapper" layout:fragment="content">
+		<div class="timeout_special_sbs">
+			<div class="row">
+          		<div class="col-sm-12">
+            		<h4 class="panel-title">
+              			<strong>Redireccionando, por favor espere...</strong>
+            		</h4>
+          		</div>
+        	</div>			
+		</div>	
+	</div>
+</body>
+</html>

@@ -1,0 +1,63 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="sbs.siris.data.ImpactoMapper">
+  <resultMap id="ImpactoResultMap" type="sbs.siris.domain.entity.Impacto">
+    <id column="ID_IMPACTO" jdbcType="NUMERIC" property="idImpacto" />
+    <result column="ID_EVENTO" jdbcType="NUMERIC" property="idEvento" />
+    <result column="TIPO_IMPACTO" jdbcType="VARCHAR" property="tipoImpacto" />
+    <result column="DESCRIPCION" jdbcType="VARCHAR" property="descripcion" />
+    <result column="IMPACTO_DETAIL" jdbcType="VARCHAR" property="impactoDetail" />
+    <result column="IND_ACTIVO" jdbcType="NUMERIC" property="indActivo" />
+    <result column="AUDIT_USER_CREA" jdbcType="VARCHAR" property="auditUserCrea" />
+    <result column="AUDIT_FEC_CREA" jdbcType="TIMESTAMP" property="auditFecCrea" />
+    <result column="AUDIT_USER_MOD" jdbcType="VARCHAR" property="auditUserMod" />
+    <result column="AUDIT_FEC_MOD" jdbcType="TIMESTAMP" property="auditFecMod" />
+  </resultMap>
+  
+  
+  <select id="selectList" statementType="CALLABLE" parameterType="sbs.siris.domain.entity.base.BaseParam">
+		{
+		  call Pkg_Siris_Mantenimiento.Pr_Impacto_GetByEvent(
+			#{entity.idEvento,jdbcType=NUMERIC},
+			#{list,mode=OUT,jdbcType=CURSOR,resultMap=ImpactoResultMap}
+		  )
+		}
+  </select>
+  
+  <insert id="insert" statementType="CALLABLE" parameterType="sbs.siris.domain.entity.base.BaseParam">
+		{
+			 call Pkg_Siris_Mantenimiento.Pr_Impacto_Insert(
+			      #{entity.idImpacto,jdbcType=NUMERIC},
+			      #{entity.idEvento,jdbcType=NUMERIC},
+			      #{entity.tipoImpacto,jdbcType=VARCHAR},
+			      #{entity.descripcion,jdbcType=VARCHAR},
+			      #{entity.impactoDetail,jdbcType=VARCHAR},
+			      #{entity.indActivo,jdbcType=NUMERIC},
+			      #{entity.auditUserCrea,jdbcType=VARCHAR},
+			      #{entity.auditFecCrea,jdbcType=TIMESTAMP},
+			      #{entity.auditUserMod,jdbcType=VARCHAR},
+			      #{entity.auditFecMod,jdbcType=TIMESTAMP}
+			 )
+		}
+	</insert>
+	
+	<update id="updateByPrimaryKey" statementType="CALLABLE" parameterType="sbs.siris.domain.entity.base.BaseParam">
+		{
+			call Pkg_Siris_Mantenimiento.Pr_Impacto_Update(
+			  #{key,jdbcType=NUMERIC},
+			      #{entity.idEvento,jdbcType=NUMERIC},
+			      #{entity.tipoImpacto,jdbcType=VARCHAR},
+			      #{entity.descripcion,jdbcType=VARCHAR},
+			      #{entity.impactoDetail,jdbcType=VARCHAR},
+			      #{entity.indActivo,jdbcType=NUMERIC},
+			      #{entity.auditUserMod,jdbcType=VARCHAR},
+			      #{entity.auditFecMod,jdbcType=TIMESTAMP}
+		      )
+		}
+	</update>
+	
+	<select id="getSequenceLong" resultType="java.lang.Long">
+		SELECT SEQ_ID_IMPACTO.NEXTVAL FROM dual			
+	</select>
+  
+</mapper>

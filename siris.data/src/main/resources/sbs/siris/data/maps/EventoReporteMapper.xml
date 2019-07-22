@@ -1,0 +1,107 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="sbs.siris.data.EventoReporteMapper">
+
+  <resultMap id="BandejaResponse" type="sbs.siris.domain.entity.dto.BandejaDTO">
+	<result property="codigo" column="CODIGO" />
+	<result property="idEvento" column="ID_EVENTO" />
+	<result property="descCortaEvento" column="DESC_CORTA_EVENTO" />
+	<result property="fechaEventoBandeja" column="FEC_EVENTO" />
+	<result property="fechaEnvio" column="FEC_ENVIO" />
+	<result property="idEstado" column="ID_ESTADO" />
+	<result property="descEstado" column="DESC_ESTADO" />  
+	<result property="isEditar" column="EDITAR" />
+	<result property="isEliminar" column="ELIMINAR" />
+  </resultMap>
+  
+  <resultMap id="FileResultsMap" type="sbs.siris.domain.entity.File">
+    <id column="ID_FILE" jdbcType="NUMERIC" property="idFile" />
+    <result column="DES_DOCUMENTO" jdbcType="VARCHAR" property="desDocumento" />
+    <result column="TIP_DOCUMENTO" jdbcType="VARCHAR" property="tipDocumento" />
+    <result column="DES_EXTENSION" jdbcType="VARCHAR" property="desExtension" />
+    <result column="NUM_TAMANIO" jdbcType="NUMERIC" property="numTamanio" />
+    <result column="BIN_ARCHIVO" jdbcType="BLOB" property="binArchivo" />
+    <result column="IND_ACTIVO" jdbcType="NUMERIC" property="indActivo" />
+    <result column="AUDIT_USER_CREA" jdbcType="VARCHAR" property="auditUserCrea" />
+    <result column="AUDIT_FEC_CREA" jdbcType="TIMESTAMP" property="auditFecCrea" />
+    <result column="AUDIT_USER_MOD" jdbcType="VARCHAR" property="auditUserMod" />
+    <result column="AUDIT_FEC_MOD" jdbcType="TIMESTAMP" property="auditFecMod" />
+  </resultMap>
+  
+  <resultMap type="java.lang.String" id="AnioResultMap"> 
+	  <result property="" column="ANIO"/> 
+  </resultMap> 
+  
+  <select id="validarEventos" statementType="CALLABLE" parameterType="sbs.siris.domain.entity.base.BaseParam">
+  		{ call Pkg_Siris_Evento_Reporte.Pr_Valida_Eventos(
+			#{keyMap.checkA.isSelected,jdbcType=NUMERIC},
+			#{keyMap.checkB.isSelected,jdbcType=NUMERIC},
+			#{keyMap.checkB1.isSelected,jdbcType=NUMERIC},
+			#{keyMap.checkC.isSelected,jdbcType=NUMERIC},
+			#{keyMap.checkD.isSelected,jdbcType=NUMERIC},
+			#{keyMap.checkE.isSelected,jdbcType=NUMERIC},
+			#{key,mode=OUT,jdbcType=NUMERIC,javaType=Integer},
+			#{result,mode=OUT,jdbcType=BLOB}
+		  )
+		}
+  	</select>
+  	
+  	<select id="obtenerEventos" statementType="CALLABLE" parameterType="sbs.siris.domain.entity.base.BaseParam">
+  		{ call Pkg_Siris_Evento_Reporte.Pr_Obtener_Eventos(
+			#{key,jdbcType=VARCHAR,mode=IN},
+		  	#{list,mode=OUT,jdbcType=CURSOR,resultMap=BandejaResponse}
+		  )
+		}
+  	</select>
+  	
+  	<select id="obtenerEventosHist" statementType="CALLABLE" parameterType="sbs.siris.domain.entity.base.BaseParam">
+  		{ call Pkg_Siris_Evento_Reporte.Pr_Obtener_Eventos_Hist(
+			#{key,jdbcType=VARCHAR,mode=IN},
+			#{keyMap.Anio,jdbcType=VARCHAR},
+		  	#{list,mode=OUT,jdbcType=CURSOR,resultMap=BandejaResponse}
+		  )
+		}
+  	</select>
+  	
+  	<select id="deleteFileCommentAdic" statementType="CALLABLE" parameterType="sbs.siris.domain.entity.base.BaseParam">
+  		{ call Pkg_Siris_Evento_Reporte.Pr_Delete_File_Adic(
+			#{keyMap.idEvento,jdbcType=NUMERIC},
+			#{keyMap.idFile,jdbcType=NUMERIC},
+			
+		  	#{result,mode=OUT,jdbcType=NUMERIC,javaType=Integer}
+		  )
+		}
+  	</select>
+  	
+  	<select id="enviarEventoReporte" statementType="CALLABLE" parameterType="sbs.siris.domain.entity.base.BaseParam">
+  		{ call Pkg_Siris_Evento_Reporte.Pr_Enviar_Evento_Reporte(
+			#{entity.idEvento,jdbcType=NUMERIC},
+			#{entity.auditUserMod,jdbcType=VARCHAR}
+		  )
+		}
+  	</select>
+  	
+  	<select id="eliminarEventoReporte" statementType="CALLABLE" parameterType="sbs.siris.domain.entity.base.BaseParam">
+  		{ call Pkg_Siris_Evento_Reporte.Pr_Eliminar_Evento_Reporte(
+			#{entity.idEvento,jdbcType=NUMERIC},
+			#{entity.auditUserMod,jdbcType=VARCHAR}
+		  )
+		}
+  	</select>
+  	
+  	<select id="obtenerConstanciaEnvio" statementType="CALLABLE" parameterType="sbs.siris.domain.entity.base.BaseParam">
+  		{ call Pkg_Siris_Evento_Reporte.Pr_Obtener_Constancia_Envio(
+			#{key,jdbcType=VARCHAR,mode=IN},
+		  	#{list,mode=OUT,jdbcType=CURSOR,resultMap=FileResultsMap}
+		  )
+		}
+  	</select>
+  	
+  	<select id="obtenerAniosHist" statementType="CALLABLE" parameterType="sbs.siris.domain.entity.base.BaseParam">
+  		{ call Pkg_Siris_Evento_Reporte.Pr_Get_Anios(
+		  	#{list,mode=OUT,jdbcType=CURSOR,resultMap=AnioResultMap}
+		  )
+		}
+  	</select>
+	
+</mapper>

@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+<meta charset="utf-8" />
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="context-path" th:content="@{/}" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<title layout:title-pattern="$LAYOUT_TITLE - $CONTENT_TITLE">SIRIS</title>
+<link rel="shortcut icon" type="image/x-icon" th:href="@{/resources/imgs/favicon.ico}"/>
+<link rel="stylesheet" th:href="@{/resources/bundle/css_app.css}">
+<script th:src="@{/resources/bundle/js_app.js}"></script>
+<script th:inline="javascript">	
+	/*<![CDATA[*/
+	    jbase.loadUrls("uriRegistroSiris.properties");
+	    jbase.prop.url_login_base = /*[[${T(sbs.siris.web.controller.base.WebProperties).URL_LOGIN_BASE}]]*/ "";
+	/*]]>*/
+</script>
+
+
+</head>
+
+<body>
+
+	<div class="sbs-wrapper mdl-layout mdl-js-layout mdl-layout--fixed-header" style="position:absolute">
+		<!-- HEADER -->
+		<div th:replace="base/_sys.header :: header" />
+		<div th:replace="base/_sys.omenu :: omenu" />
+
+		<div id="load_secondary">
+			<!-- BODY -->
+			
+			<div layout:fragment="content"></div>
+			<div layout:fragment="content_modal"></div>
+
+
+			<!-- FOTER -->
+			<div th:replace="base/_sys.footer :: footer" />
+
+		</div>
+
+	</div>
+	
+	<div id="custom-overlay" style="display: none;">
+		<div class="loading-spinner">Cargando ...</div>
+	</div>
+
+</body>
+
+<js layout:fragment="scripts"></js>
+
+</html>

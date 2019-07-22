@@ -1,0 +1,101 @@
+<beans:beans 
+    xmlns:security="http://www.springframework.org/schema/security" 
+    xmlns:beans="http://www.springframework.org/schema/beans" 
+    xmlns:context="http://www.springframework.org/schema/context" 
+    xmlns:mvc="http://www.springframework.org/schema/mvc" 
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xmlns:transaction="http://www.springframework.org/schema/tx" 
+	xmlns:mybatis="http://mybatis.org/schema/mybatis-spring"
+	xsi:schemaLocation="
+        http://www.springframework.org/schema/beans
+        http://www.springframework.org/schema/beans/spring-beans.xsd
+        http://www.springframework.org/schema/context
+        http://www.springframework.org/schema/context/spring-context.xsd
+        http://www.springframework.org/schema/mvc
+        http://www.springframework.org/schema/mvc/spring-mvc.xsd
+        http://www.springframework.org/schema/security
+        http://www.springframework.org/schema/security/spring-security.xsd
+        http://mybatis.org/schema/mybatis-spring 
+        http://mybatis.org/schema/mybatis-spring.xsd
+        http://www.springframework.org/schema/util 
+        http://www.springframework.org/schema/util/spring-util.xsd
+        http://www.springframework.org/schema/tx
+        http://www.springframework.org/schema/tx/spring-tx.xsd">
+
+	<mvc:annotation-driven enable-matrix-variables="true">
+		<!-- Timeout en milisegundos, 30 seg -->
+		<mvc:async-support default-timeout="30000"></mvc:async-support>
+	</mvc:annotation-driven>
+
+	<context:component-scan base-package="sbs.siris.service.controller.**,sbs.siris.domain.core,sbs.siris.domain.entity" />
+	<mvc:resources mapping="/public/**" location="/public/" />
+
+	<beans:bean id="dataSource" class="org.springframework.jndi.JndiObjectFactoryBean">
+		<beans:property name="jndiName" value="jdbc/SIRIS-DS" />
+		<!-- <beans:property name="jndiName" value="jdbc/COOPAC-QC" /> -->
+	</beans:bean>
+
+	<beans:bean id="sqlSessionFactory" class="org.mybatis.spring.SqlSessionFactoryBean">
+		<beans:property name="dataSource" ref="dataSource" />
+		<beans:property name="mapperLocations" value="classpath:/sbs/siris/data/maps/*.xml" />
+	</beans:bean>
+
+	<beans:bean id="transactionManager" class="org.springframework.jdbc.datasource.DataSourceTransactionManager">
+		<beans:property name="dataSource" ref="dataSource" />
+	</beans:bean>
+
+	<transaction:annotation-driven transaction-manager="transactionManager" />
+
+	<beans:bean id="restAuthenticationEntryPoint" class="sbs.siris.service.config.RestAuthenticationEntryPoint" />
+	<beans:bean id="tokenAuthenticationProvider" class="sbs.siris.service.config.TokenAuthenticationProvider" />
+ 	<beans:bean id="multipartResolver" class="org.springframework.web.multipart.commons.CommonsMultipartResolver">
+  
+        <!-- one of the several properties available; the maximum file size in bytes -->
+        <beans:property name="maxUploadSizePerFile" value="20485760"/>
+    </beans:bean>
+	<beans:bean id="httpFirewall" class="org.springframework.security.web.firewall.StrictHttpFirewall">
+		<beans:property name="allowSemicolon" value="true" />
+		<!-- <beans:property name="allowUrlEncodedPercent" value="true" /> -->
+	</beans:bean>
+
+
+	<mybatis:scan base-package="sbs.siris.data" factory-ref="sqlSessionFactory" />
+
+	<!-- INI: Spring security: Importa el orden, como las reglas de un firewall -->
+	<security:global-method-security pre-post-annotations="enabled" />
+	
+	<security:http use-expressions="true" create-session="stateless">
+		<security:csrf disabled="true" />
+		<security:headers disabled="true" />
+		<!-- <security:intercept-url pattern="/siris_api/usuario/**" -->
+		<!-- access="permitAll" requires-channel="any" /> isAnonymous() | permitAll | denyAll -->
+		<security:intercept-url pattern="/siris_api/evento_reporte/download_file/**" access="permitAll" requires-channel="any" /> <!-- isAuthenticated() -->
+		<security:intercept-url pattern="/siris_api/evento_reporte/download_file_constancia/**" access="permitAll" requires-channel="any" /> <!-- isAuthenticated() -->
+		<security:intercept-url pattern="/siris_api/evento_reporte/**" access="hasRole('ROLE_APP')" requires-channel="any" /> <!-- isAuthenticated() -->
+		<security:intercept-url pattern="/siris_api/tipos/**" access="hasRole('ROLE_APP')" requires-channel="any" /> <!-- isAuthenticated() -->
+
+		<security:intercept-url pattern="/**" access="hasRole('ROLE_ADMIN')" requires-channel="any" /> <!-- isAnonymous() | permitAll | denyAll -->
+
+		<security:http-basic entry-point-ref="restAuthenticationEntryPoint" authentication-details-source-ref="" />
+
+	</security:http>
+
+	<security:authentication-manager>
+		<security:authentication-provider ref="tokenAuthenticationProvider" />
+	</security:authentication-manager>
+
+	<security:http-firewall ref="httpFirewall" />
+
+	<!-- FIN: Spring security -->
+
+
+	<!-- <http> -->
+	<!-- ... -->
+	<!-- <port-mappings> -->
+	<!-- <port-mapping http="9080" https="9443"/> -->
+	<!-- </port-mappings> -->
+	<!-- </http> -->
+
+</beans:beans>
+
+<!-- If you are creating rest service consumed by non-browser clients, you can disable csrf in your security config. <security:csrf disabled="true"/> -->

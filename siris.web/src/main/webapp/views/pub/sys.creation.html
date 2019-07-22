@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+
+<meta charset="utf-8" />
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="context-path" th:content="@{/}" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<title layout:title-pattern="$LAYOUT_TITLE - $CONTENT_TITLE">COOPAC</title>
+<link rel="shortcut icon" type="image/x-icon" th:href="@{/resources/imgs/favicon.ico}"/>
+<link rel="stylesheet" th:href="@{/resources/bundle/css_pub.css}">
+<script th:src="@{/resources/bundle/js_pub.js}"></script>
+
+<script th:inline="javascript">
+/*<![CDATA[*/
+	jbase.loadUrls("uriCreacionUsuario.properties");
+	jbase.prop.session_time = [[${#session.maxInactiveInterval}]];
+	jbase.prop.url_login= /*[[${T(sbs.sgc.cross.resources.RestExterno).URL_LOGIN}]]*/ "";
+	jbase.allowExtension.jpg.type = /*[[${T(sbs.sgc.cross.resources.TipoValor).SGC_DOCUMENTO_TIP_DOCUMENTO_JPG}]]*/ "";
+	jbase.allowExtension.png.type = /*[[${T(sbs.sgc.cross.resources.TipoValor).SGC_DOCUMENTO_TIP_DOCUMENTO_PNG}]]*/ "";
+	jbase.allowExtension.pdf.type =  /*[[${T(sbs.sgc.cross.resources.TipoValor).SGC_DOCUMENTO_TIP_DOCUMENTO_PDF}]]*/ "";
+/*]]>*/
+</script>
+</head>
+
+<body>
+
+	<div class="sbs-wrapper">
+
+		<!-- HEADER -->
+		<header th:replace="pub/_sys.header :: header" ></header>
+
+		<!-- BODY -->
+		<div layout:fragment="content" id="container_primary"></div>
+
+		<!-- FOOTER -->
+		<div th:replace="pub/_sys.footer :: footer" ></div>
+	</div>
+
+	<div id="custom-overlay" style="display: none;">
+		<div class="loading-spinner">Cargando ...</div>
+	</div>
+
+	<div class="modal fade" id="div-modal" tabindex="-1" role="dialog" aria-labelledby="div-modal-tit" aria-hidden="true" ></div>
+
+</body>
+
+<js layout:fragment="scripts"></js>
+
+</html>

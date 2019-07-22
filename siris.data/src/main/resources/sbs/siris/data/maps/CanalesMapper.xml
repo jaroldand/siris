@@ -1,0 +1,64 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="sbs.siris.data.CanalesMapper">
+  <resultMap id="CanalesResultMap" type="sbs.siris.domain.entity.Canales">
+    <id column="ID_CANALES" jdbcType="NUMERIC" property="idCanales" />
+    <result column="ID_EVENTO" jdbcType="NUMERIC" property="idEvento" />
+    <result column="TIP_CANAL_GRUPO" jdbcType="VARCHAR" property="tipCanalGrupo" />
+    <result column="TIP_CANAL_DETALLE" jdbcType="VARCHAR" property="tipCanalDetalle" />
+    <result column="DESC_CANAL_DETALLE" jdbcType="VARCHAR" property="descCanalDetalle" />
+    <result column="IND_COND_NORMAL" jdbcType="VARCHAR" property="indCondNormal" />
+    <result column="IND_ACTIVO" jdbcType="NUMERIC" property="indActivo" />
+    <result column="AUDIT_USER_CREA" jdbcType="VARCHAR" property="auditUserCrea" />
+    <result column="AUDIT_FEC_CREA" jdbcType="TIMESTAMP" property="auditFecCrea" />
+    <result column="AUDIT_USER_MOD" jdbcType="VARCHAR" property="auditUserMod" />
+    <result column="AUDIT_FEC_MOD" jdbcType="TIMESTAMP" property="auditFecMod" />
+  </resultMap>
+  
+  
+  <select id="selectList" statementType="CALLABLE" parameterType="sbs.siris.domain.entity.base.BaseParam">
+		{
+		  call Pkg_Siris_Mantenimiento.Pr_Canales_GetByEvent(
+			#{entity.idEvento,jdbcType=NUMERIC},
+			#{list,mode=OUT,jdbcType=CURSOR,resultMap=CanalesResultMap}
+		  )
+		}
+  </select>
+  
+  <insert id="insert" statementType="CALLABLE" parameterType="sbs.siris.domain.entity.base.BaseParam">
+		{
+			 call Pkg_Siris_Mantenimiento.Pr_Canales_Insert(
+			      #{entity.idCanales,jdbcType=NUMERIC},
+			      #{entity.idEvento,jdbcType=NUMERIC},
+			      #{entity.tipCanalGrupo,jdbcType=VARCHAR},
+			      #{entity.tipCanalDetalle,jdbcType=VARCHAR},
+			      #{entity.indCondNormal,jdbcType=VARCHAR},
+			      #{entity.indActivo,jdbcType=NUMERIC},
+			      #{entity.auditUserCrea,jdbcType=VARCHAR},
+			      #{entity.auditFecCrea,jdbcType=TIMESTAMP},
+			      #{entity.auditUserMod,jdbcType=VARCHAR},
+			      #{entity.auditFecMod,jdbcType=TIMESTAMP}
+			 )
+		}
+	</insert>
+	
+	<update id="updateByPrimaryKey" statementType="CALLABLE" parameterType="sbs.siris.domain.entity.base.BaseParam">
+		{
+			call Pkg_Siris_Mantenimiento.Pr_Canales_Update(
+			  #{key,jdbcType=NUMERIC},
+		     	#{entity.idEvento,jdbcType=NUMERIC},
+			      #{entity.tipCanalGrupo,jdbcType=VARCHAR},
+			      #{entity.tipCanalDetalle,jdbcType=VARCHAR},
+			      #{entity.indCondNormal,jdbcType=VARCHAR},
+			      #{entity.indActivo,jdbcType=NUMERIC},
+			      #{entity.auditUserMod,jdbcType=VARCHAR},
+			      #{entity.auditFecMod,jdbcType=TIMESTAMP}
+		      )
+		}
+	</update>
+	
+	<select id="getSequenceLong" resultType="java.lang.Long">
+		SELECT SEQ_ID_CANALES.NEXTVAL FROM dual			
+	</select>
+  
+</mapper>

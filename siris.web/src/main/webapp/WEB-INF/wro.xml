@@ -1,0 +1,139 @@
+<groups xmlns="http://www.isdc.ro/wro">
+	
+	<!-- INI: RECUROS PÚBLICOS -->
+
+	<group name="css_pub">
+
+		<css>/resources/css/bootstrap.css</css>
+		<css>/resources/css/material.css</css>
+		<css>/resources/css/base.css</css>
+		<css>/resources/css/fontawesome.all.css</css>
+		<css>/resources/css/jquery.loading.css</css>
+	</group>
+
+	<group name="js_pub">
+
+		<js>/resources/js/jquery-3.3.1.js</js>
+		<js>/resources/js/jquery.noty.packaged.js</js>
+		<js>/resources/js/jquery.numeric.js</js>
+		<js>/resources/js/jquery.extensions.js</js>
+		<js>/resources/js/bootstrap.js</js>
+		<js>/resources/js/material.js</js>
+		<js>/resources/js/vue.js</js>
+		<js>/resources/js/base.js</js>
+		<js>/resources/js/base.alert.js</js>
+		<js>/resources/js/ajax.js</js>
+		<js>/resources/js/jquery.loading.js</js>
+
+	</group>
+
+	<!-- INI: RECUROS PÚBLICOS -->
+	<!-- ===================== -->
+	<!-- ===================== -->
+	<!-- ===================== -->
+
+
+	<!-- ===================== -->
+	<!-- ===================== -->
+	<!-- ===================== -->
+	<!-- INI: RECUROS PRIVADOS -->
+
+	<group name="css_app">
+		<css>/resources/css/bootstrap.css</css>
+		<css>/resources/css/bootstrap.picker.css</css>
+		<css>/resources/css/material.css</css>
+		<css>/resources/css/base.css</css>
+		<css>/resources/css/fontawesome.all.css</css>
+		<css>/resources/css/jquery.loading.css</css>
+		<css>/resources/css/app/view.css</css>
+		<css>/resources/css/menu.css</css>
+		<css>/resources/css/grid.css</css>
+		<css>/resources/css/app/tablero_registro.css</css>
+		<css>/resources/css/bs-stepper.min.css</css>
+		<css>/resources/css/jquery.multiselect.css</css>
+		<css>/resources/css/jquery-ui.css</css>
+	</group>
+
+	<group name="js_app">
+		<js>/resources/js/jquery-3.3.1.js</js>
+		<js>/resources/js/jquery.noty.packaged.js</js>
+		<js>/resources/js/jquery.numeric.js</js>
+		<js>/resources/js/jquery.extensions.js</js>
+		<js>/resources/js/bootstrap.js</js>
+		<js>/resources/js/bootstrap.picker.js</js>
+		<js>/resources/js/material.js</js>
+		<js>/resources/js/vue.js</js>
+		<js>/resources/js/base.js</js>
+		<js>/resources/js/base.alert.js</js>
+		<js>/resources/js/ajax.js</js>
+		<js>/resources/js/jquery.loading.js</js>
+		<js>/resources/js/control.js</js>
+		<js>/resources/js/control.ruler.js</js>
+		<js>/resources/js/icontains.js</js>
+		<js>/resources/js/comboTreePlugin.js</js>
+		
+		<js>/resources/js/jquery-ui.js</js>
+	</group>
+
+	<!-- FIN: RECUROS PRIVADOS -->
+	<!-- ===================== -->
+	<!-- ===================== -->
+	<!-- ===================== -->
+	
+	
+	<!-- =================================== -->
+	<!-- =================================== -->
+	<!-- =================================== -->
+	<!-- INI: INTERRUPCIONES -->
+	<group name="js_app_inicio">
+		<js>/resources/js/app/registro_datos/flujo_registro.js</js>
+		<js>/resources/js/app/registro_datos/inicio.js</js>
+	</group>
+
+	<group name="js_app_tablero">
+		<js>/resources/js/pagination.js</js>
+		<js>/resources/js/app/registro_datos/tablero_registro.js</js>
+	</group>
+	
+	<group name="js_app_historico">
+		<js>/resources/js/app/registro_datos/historico.js</js>
+	</group>
+	<group name="js_app_valida_reporte">
+		<js>/resources/js/app/registro_datos/valida_reporte.js</js>
+	</group>
+	<group name="js_app_informe_reporte">
+		<js>/resources/js/jquery.multiselect.js</js>
+		<js>/resources/js/app/registro_datos/informe_reporte.js</js>
+		
+		<js>/resources/js/mask/imask.js</js>
+		<js>/resources/js/mask/moment.min.js</js>
+	</group>
+	<group name="js_app_informe_constancia">
+		<js>/resources/js/jquery.multiselect.js</js>
+		<js>/resources/js/app/registro_datos/informe_constancia.js</js>
+		
+		<js>/resources/js/mask/imask.js</js>
+		<js>/resources/js/mask/moment.min.js</js>
+	</group>
+	<group name="js_app_informe_reporte_read">
+		<js>/resources/js/jquery.multiselect.js</js>
+		<js>/resources/js/app/registro_datos/informe_reporte_read.js</js>
+		
+		<js>/resources/js/mask/imask.js</js>
+		<js>/resources/js/mask/moment.min.js</js>
+	</group>
+	<group name="js_app_informe_reporte_read_all">
+		<js>/resources/js/jquery.multiselect.js</js>
+		<js>/resources/js/app/registro_datos/informe_reporte_read_all.js</js>
+		
+		<js>/resources/js/mask/imask.js</js>
+		<js>/resources/js/mask/moment.min.js</js>
+	</group>
+	<!-- ================================== -->
+	<!-- ================================== -->
+	<!-- ================================== -->
+	<!-- FIN: INTERRUPCIONES  -->
+	
+	
+
+</groups>

@@ -1,0 +1,35 @@
+# Para modificación
+  vn_Ret := Pkg_Sgc_Seguridad.Fn_Auditoria_Abrir(pn_idauditoria => 24, pn_idtabla => 23, pc_codusuario => 'ISRAEL.BUSTIOS', pc_tipusuario => '013000', pc_tipevento => '014001');
+
+    UPDATE Sgc_Telefono SET Des_Telefono = '9999sdfs9df99' WHERE Id_Telefono = 96;
+
+    vn_Ret := Pkg_Sgc_Seguridad.Fn_Auditoria_Cerrar(24, 23, vn_Ret);
+    
+# para nuevo
+
+	vn_id := Seq_Id_Auditoria.Nextval;
+	
+     INSERT INTO Sgc_Telefono
+        (Id_Telefono,
+         Id_Entidad,
+         Id_Tabla,
+         Tip_Telefono,
+         Cod_Ciudad,
+         Des_Telefono,
+         Des_Anexo,
+         Ind_Activo,
+         Fec_Creacion,
+         Id_Auditoria)
+    VALUES
+        (Seq_Id_Telefono.Nextval,
+         1,
+         1,
+         '005000',
+         '002000',
+         '312321',
+         '123',
+         1,
+         To_Date('13-11-2018 18:28:17', 'dd-mm-yyyy hh24:mi:ss'),
+         vn_id);**/
+
+    vn_Ret := Pkg_Sgc_Seguridad.Fn_Auditoria_Nueva(pn_idauditoria => vn_id, pn_idtabla => 23, pc_codusuario => 'ISRAEL.BUSTIOS', pc_tipusuario => '013000', pc_tipevento => '014001');

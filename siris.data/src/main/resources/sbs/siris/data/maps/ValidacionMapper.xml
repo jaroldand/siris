@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="sbs.siris.data.ValidacionMapper">
+	
+	<resultMap id="ValidacionResult" type="sbs.siris.domain.entity.Validacion">
+		<result property="idValidacion" column="ID_VALIDACION" />
+		<result property="idEvento" column="ID_EVENTO" />
+		<result property="tipoValidacion" column="TIPO_VALIDACION" />
+		<result property="isSelected" column="IS_SELECTED" />
+	</resultMap>
+  
+	<insert id="insert" statementType="CALLABLE" parameterType="sbs.siris.domain.entity.base.BaseParam">
+		{
+		 call Pkg_Siris_Mantenimiento.Pr_Validacion_Insert(
+		      #{entity.idValidacion,jdbcType=NUMERIC},
+		      #{entity.idEvento,jdbcType=NUMERIC},
+		      #{entity.tipoValidacion,jdbcType=VARCHAR},
+		      #{entity.isSelected,jdbcType=VARCHAR},
+		      
+		      #{entity.auditUserCrea,jdbcType=VARCHAR},
+		      #{entity.auditFecCrea,jdbcType=TIMESTAMP},
+		      #{entity.auditUserMod,jdbcType=VARCHAR},
+		      #{entity.auditFecMod,jdbcType=TIMESTAMP}
+		 )
+		}
+	</insert>
+	
+	<select id="updateByPrimaryKey" statementType="CALLABLE" parameterType="sbs.siris.domain.entity.base.BaseParam">
+		{CALL Pkg_Siris_Mantenimiento.Pr_Validacion_Update(
+		      #{key,jdbcType=NUMERIC},
+			  #{entity.isSelected,jdbcType=VARCHAR},
+			  #{entity.auditUserMod,jdbcType=VARCHAR},
+		      #{entity.auditFecMod,jdbcType=TIMESTAMP}
+		 )
+		}
+	</select>
+
+	<select id="getSequenceLong" resultType="java.lang.Long">
+		SELECT SEQ_ID_VALIDACION.NEXTVAL FROM dual			
+	</select>
+	
+	<select id="listarValidacionByEvent" statementType="CALLABLE" parameterType="sbs.siris.domain.entity.base.BaseParam">
+  		{ call Pkg_Siris_Mantenimiento.Pr_Validacion_List_By_Event(
+			#{key,jdbcType=NUMERIC,mode=IN},
+			#{list,mode=OUT,jdbcType=CURSOR,resultMap=ValidacionResult}
+		  )
+		}
+  	</select>
+	
+</mapper>

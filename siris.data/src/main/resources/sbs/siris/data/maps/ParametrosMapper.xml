@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="sbs.siris.data.ParametrosMapper">
+	
+	<resultMap id="ParametrosResultMap" type="sbs.siris.domain.entity.Parametros">
+	    <id column="ID_PARAMETRO" jdbcType="VARCHAR" property="idParametro" />
+	    <result column="TIP_PARAMETRO" jdbcType="VARCHAR" property="tipParametro" />
+	    <result column="DES_PARAMETRO" jdbcType="VARCHAR" property="desParametro" />
+	    <result column="VALOR_1" jdbcType="VARCHAR" property="valor1" />
+	    <result column="IND_ACTIVO" jdbcType="NUMERIC" property="indActivo" />
+	</resultMap>
+	
+	<select id="listarParametrosByDesc" statementType="CALLABLE" parameterType="sbs.siris.domain.entity.base.BaseParam">
+  		{ call Pkg_Siris_Mantenimiento.Pr_Parametros_List_By_Desc(
+			#{key,jdbcType=VARCHAR,mode=IN},
+			#{list,mode=OUT,jdbcType=CURSOR,resultMap=ParametrosResultMap}
+		  )
+		}
+  	</select>
+	
+</mapper>

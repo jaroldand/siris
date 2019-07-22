@@ -1,0 +1,80 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="sbs.siris.data.TipoListaMapper">
+  <resultMap id="BaseResultMapTipoLista" type="sbs.siris.domain.entity.TipoLista">
+    <id column="COD_LISTA" jdbcType="VARCHAR" property="codLista" />
+    <result column="COD_GRUPO" jdbcType="VARCHAR" property="codGrupo" />
+    <result column="VALOR_0" jdbcType="VARCHAR" property="valor0" />
+    <result column="VALOR_1" jdbcType="VARCHAR" property="valor1" />
+    <result column="IND_ACTIVO" jdbcType="NUMERIC" property="indActivo" />
+  </resultMap>
+  
+  <resultMap id="BaseResultMapClaveValor" type="sbs.siris.domain.entity.ClaveValor">
+    <id column="COD_LISTA" jdbcType="VARCHAR" property="clave" />
+    <result column="VALOR_0" jdbcType="VARCHAR" property="valor" />
+    <result column="VALOR_1" jdbcType="VARCHAR" property="valor1" />
+  </resultMap>
+  
+  <resultMap id="BaseResultMapUbigeo" type="sbs.siris.domain.entity.ClaveValor">
+    <id column="COD_UBIGEO" jdbcType="VARCHAR" property="clave" />
+    <result column="DES_UBIGEO" jdbcType="VARCHAR" property="valor" />
+  </resultMap>
+  
+  
+  <select id="selectByPrimaryKey" statementType="CALLABLE" parameterType="sbs.siris.domain.entity.base.BaseParam">
+		{
+			call Pkg_Siris_Mantenimiento.Pr_Ubigeo_GetKey(
+				#{key,jdbcType=VARCHAR},
+				#{list,mode=OUT,jdbcType=CURSOR,resultMap=BaseResultMapUbigeo}
+			)
+		}
+	</select>
+ 
+ 
+  	<select id="selectListClaveValor" statementType="CALLABLE"
+		parameterType="sbs.siris.domain.entity.base.BaseParam">
+		{ 
+			call Pkg_Siris_Mantenimiento.Pr_TipoLista_List(
+				#{key,jdbcType=VARCHAR},
+				#{list,mode=OUT,jdbcType=CURSOR,resultMap=BaseResultMapClaveValor}
+			) 
+		}
+	</select>
+	
+
+	<delete id="deleteByPrimaryKey" statementType="CALLABLE"
+		parameterType="sbs.siris.domain.entity.base.BaseParam">
+		{ 
+			call Pkg_Siris_Mantenimiento.Pr_TipoLista_Delete(
+				#{key,jdbcType=VARCHAR}
+			)
+		}
+	</delete>
+
+	<insert id="insert" statementType="CALLABLE"
+		parameterType="sbs.siris.domain.entity.base.BaseParam">
+		{
+			call Pkg_Siris_Mantenimiento.Pr_TipoLista_Insert(
+			  #{entity.codLista,jdbcType=VARCHAR}, 
+		      #{entity.codGrupo,jdbcType=VARCHAR}, 
+		      #{entity.valor0,jdbcType=VARCHAR}, 
+		      #{entity.valor1,jdbcType=VARCHAR}, 
+		      #{entity.indActivo,jdbcType=NUMERIC}
+		 	)
+		}
+	</insert>
+
+	<update id="updateByPrimaryKey" statementType="CALLABLE"
+		parameterType="sbs.siris.domain.entity.base.BaseParam">
+		{
+		 call Pkg_Siris_Mantenimiento.Pr_TipoLista_Update(
+			  #{key,jdbcType=VARCHAR},
+		      #{entity.codGrupo,jdbcType=VARCHAR}, 
+		      #{entity.valor0,jdbcType=VARCHAR}, 
+		      #{entity.valor1,jdbcType=VARCHAR}, 
+		      #{entity.indActivo,jdbcType=NUMERIC}		
+		 )
+		}
+	</update>
+ 
+</mapper>

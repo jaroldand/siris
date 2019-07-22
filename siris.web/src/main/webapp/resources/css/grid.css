@@ -1,0 +1,36 @@
+.md-table-toolbar__title {
+    -webkit-box-flex: 1;
+    flex: 1;
+    font-size: 16px;
+    font-family: 'Merriweather SBS';
+    margin: 0;
+    margin-bottom: 10px;
+}
+
+.md-table-content {
+    overflow: auto;
+    /* padding: 5px; */
+    box-shadow: 0 2px 2px 0 rgba(0, 0, 0, 0.14), 0 3px 1px -2px rgba(0, 0, 0, 0.2), 0 1px 5px 0 rgba(0, 0, 0, 0.12);
+    border: 1px solid rgba(0, 0, 0, 0.12);
+}
+
+.mdl-data-table {
+    box-shadow: none;
+    border: none;
+    /* table-layout: fixed; */
+    width: 100%;
+    margin: auto;
+}
+
+.mdl-data-table td {
+    border-bottom: none;
+}
+
+.md-toolbar-table--col-opc {
+    padding-left: 0;
+    padding-right: 0;
+}
+
+.mdl-data-table .md-td__edit:hover {
+    background-color: #fff !important;
+}

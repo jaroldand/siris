@@ -1,0 +1,78 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="sbs.siris.data.NotificacionMapper">
+  <resultMap id="NotificacionResultMap" type="sbs.siris.domain.entity.Notificacion">
+    <id column="ID_NOTIFICACION" jdbcType="NUMERIC" property="idNotificacion" />
+    <result column="ID_EVENTO" jdbcType="NUMERIC" property="idEvento" />
+    <result column="TIP_NOTIFICACION" jdbcType="VARCHAR" property="tipNotificacion" />
+    <result column="EST_NOTIFICACION" jdbcType="VARCHAR" property="estNotificacion" />
+    <result column="DES_NOTIFICACION" jdbcType="VARCHAR" property="desNotificacion" />
+    <result column="FEC_ENVIO" jdbcType="TIMESTAMP" property="fecEnvio" />
+    <result column="FEC_RECIBIDO" jdbcType="TIMESTAMP" property="fecRecibido" />
+    <result column="ID_DOCUMENTO" jdbcType="NUMERIC" property="idDocumento" />
+    <result column="COD_FORMATO" jdbcType="VARCHAR" property="codFormato" />
+    <result column="TXT_ENVIADO" jdbcType="VARCHAR" property="txtEnviado" />
+    <result column="IND_ACTIVO" jdbcType="NUMERIC" property="indActivo" />
+    <result column="AUDIT_USER_CREA" jdbcType="VARCHAR" property="auditUserCrea" />
+    <result column="AUDIT_FEC_CREA" jdbcType="TIMESTAMP" property="auditFecCrea" />
+    <result column="AUDIT_USER_MOD" jdbcType="VARCHAR" property="auditUserMod" />
+    <result column="AUDIT_FEC_MOD" jdbcType="TIMESTAMP" property="auditFecMod" />
+  </resultMap>
+  
+  
+  <select id="selectList" statementType="CALLABLE" parameterType="sbs.siris.domain.entity.base.BaseParam">
+		{
+		  call Pkg_Siris_Mantenimiento.Pr_Notificacion_GetByEvent(
+			#{entity.idEvento,jdbcType=NUMERIC},
+			#{list,mode=OUT,jdbcType=CURSOR,resultMap=NotificacionResultMap}
+		  )
+		}
+  </select>
+  
+  <insert id="insert" statementType="CALLABLE" parameterType="sbs.siris.domain.entity.base.BaseParam">
+		{
+			 call Pkg_Siris_Mantenimiento.Pr_Notificacion_Insert(
+			      #{entity.idNotificacion,jdbcType=NUMERIC},
+			      #{entity.idEvento,jdbcType=NUMERIC},
+			      #{entity.tipNotificacion,jdbcType=VARCHAR},
+			      #{entity.estNotificacion,jdbcType=VARCHAR},
+			      #{entity.desNotificacion,jdbcType=VARCHAR},
+			      #{entity.fecEnvio,jdbcType=TIMESTAMP},
+			      #{entity.fecRecibido,jdbcType=TIMESTAMP},
+			      #{entity.idDocumento,jdbcType=NUMERIC},
+			      #{entity.codFormato,jdbcType=VARCHAR},
+			      #{entity.txtEnviado,jdbcType=VARCHAR},
+			      #{entity.indActivo,jdbcType=NUMERIC},
+			      #{entity.auditUserCrea,jdbcType=VARCHAR},
+			      #{entity.auditFecCrea,jdbcType=TIMESTAMP},
+			      #{entity.auditUserMod,jdbcType=VARCHAR},
+			      #{entity.auditFecMod,jdbcType=TIMESTAMP}
+			 )
+		}
+	</insert>
+	
+	<update id="updateByPrimaryKey" statementType="CALLABLE" parameterType="sbs.siris.domain.entity.base.BaseParam">
+		{
+			call Pkg_Siris_Mantenimiento.Pr_Notificacion_Update(
+			  #{key,jdbcType=NUMERIC},
+			      #{entity.idEvento,jdbcType=NUMERIC},
+			      #{entity.tipNotificacion,jdbcType=VARCHAR},
+			      #{entity.estNotificacion,jdbcType=VARCHAR},
+			      #{entity.desNotificacion,jdbcType=VARCHAR},
+			      #{entity.fecEnvio,jdbcType=TIMESTAMP},
+			      #{entity.fecRecibido,jdbcType=TIMESTAMP},
+			      #{entity.idDocumento,jdbcType=NUMERIC},
+			      #{entity.codFormato,jdbcType=VARCHAR},
+			      #{entity.txtEnviado,jdbcType=VARCHAR},
+			      #{entity.indActivo,jdbcType=NUMERIC},
+			      #{entity.auditUserMod,jdbcType=VARCHAR},
+			      #{entity.auditFecMod,jdbcType=TIMESTAMP}
+		      )
+		}
+	</update>
+	
+	<select id="getSequenceLong" resultType="java.lang.Long">
+		SELECT SEQ_ID_NOTIFICACION.NEXTVAL FROM dual			
+	</select>
+  
+</mapper>

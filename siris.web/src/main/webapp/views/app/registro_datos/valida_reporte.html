@@ -1,0 +1,105 @@
+
+<script th:inline="javascript">
+/*<![CDATA[*/
+    
+	jbase.prop.id_ent_vig = /*[[${T(sbs.siris.web.controller.base.HelperController).getIdEntVig()}]]*/ "";
+	jbase.prop.id_evento = /*[[${idEvento}]]*/;
+/*]]>*/
+</script>
+
+<!-- BODY -->
+<div class="container navless-container sbs-wrapper" id="app" style="display: none;max-width: 90%" layout:fragment="content">
+
+	<div th:replace="base/_sys.submenu :: submenu" />
+
+    <div class="content">
+        
+        <div class="col-md-12">
+         <fieldset><legend>A. Validación</legend>
+            <div class="row sbs-rectangle">
+	         <div class="card-body">
+	           	Marque todas las opciones que describen el evento de interrupción a reportar.
+		         <div class="alert alert-secondary">
+		           		a) La interrupción se debió a un evento planificado y controlado.
+		           		<input type="checkbox" class="mdl-checkbox__input look-forward float-right" v-model="model.checkA.selectedBol">
+		         </div>
+	           	
+	           	<div class="alert alert-secondary" >
+	           			b) Se interrumpió algún canal de atención.
+	           			<input type="checkbox" class="mdl-checkbox__input look-forward float-right" v-model="model.checkB.selectedBol">
+	           	</div>
+	           	
+	           	<div class="alert alert-secondary" v-bind:class="{ 'text-muted': !model.checkB }">
+	           			b.1) Se interrumpió más del 50% a nivel nacional o regional.
+	           			<input type="checkbox" class="mdl-checkbox__input look-forward float-right" v-model="model.checkB1.selectedBol" v-bind:disabled="!model.checkB.selectedBol">
+	           	</div>
+	           	
+	           	<div class="alert alert-secondary" >
+	           			c) La duración de la interrupción fue mayor al tiempo objetivo de recuperación de los productos o servicios afectados.
+	           			<input type="checkbox" class="mdl-checkbox__input look-forward float-right" v-model="model.checkC.selectedBol">
+	           	</div>
+	           	
+	           	<div class="alert alert-secondary" >
+	           			d) La duración de la interrupción fue mayor que 4 horas.
+	           			<input type="checkbox" class="mdl-checkbox__input look-forward float-right" v-model="model.checkD.selectedBol">
+	           	</div>
+	           	
+	           	<div class="alert alert-secondary" >
+	           			e) Fue necesario activar el Comité de Crisis.
+	           			<input type="checkbox" class="mdl-checkbox__input look-forward float-right" v-model="model.checkE.selectedBol">
+	           	</div>
+	           </div>
+          </div>
+         </fieldset>
+         
+        </div>
+        
+         <div class="form-group row"></div>
+        
+        <div class="form-group row">
+           	<div class="offset-md-6 col-md-3">
+                 <a href="javascript:void(0)" class="btn btn-block mdl-button mdl-js-button mdl-button--raised mdl-button--colored mdl-js-ripple-effect sbs-submit" v-on:click="validar_reporte">
+                     <span><i class="fas fas fa-arrow-circle-right"></i>Siguiente</span>
+                 </a>
+            </div>
+            <div class="col-md-3">
+                <a href="javascript:void(0)" class="btn btn-block mdl-button mdl-js-button mdl-button--raised mdl-button--colored mdl-js-ripple-effect sbs-submit" onclick="flujoRegistro.setStep('module/tablero_registro','00')">
+                    <span><i class="fas fa-window-close"></i>Cancelar</span>
+                </a>
+            </div>
+	    </div>
+        
+        
+        <div class="modal fade" id="div-modal_enviar" tabindex="-1" role="dialog" aria-labelledby="div-modal-tit" aria-hidden="true">
+		    <div id="adv" class="modal-dialog modal-lg" role="document">
+		        <div class="modal-content">
+		            <div class="modal-header">
+		                <h5 class="modal-title" id="div-modal-tit">Motivo de Rechazo</h5>
+		                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+		                            <span aria-hidden="true">&times;</span>
+		                        </button>
+		            </div>
+		            <div class="modal-body">
+		
+		                <div class="form-group row">
+		                    <div class="col-sm-12">
+		                    	<div id="enviar_message"></div>
+		                    </div>
+		                </div>
+		
+		            </div>
+		
+		            <div class="modal-footer">
+		                <button type="button" class="btn btn-secondary" data-dismiss="modal">Cerrar</button>
+		            </div>
+		
+		        </div>
+		    </div>
+		</div>
+        
+    </div>
+</div>
+
+<js layout:fragment="scripts"> <script th:src="@{/resources/bundle/js_app_valida_reporte.js}"></script></js>
+
+<div th:replace="base/_sys.footer :: footer" />

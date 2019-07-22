@@ -1,0 +1,70 @@
+
+<script th:inline="javascript">
+/*<![CDATA[*/
+    
+	jbase.prop.id_ent_vig = /*[[${T(sbs.siris.web.controller.base.HelperController).getIdEntVig()}]]*/ "";
+/*]]>*/
+</script>
+
+<!-- BODY -->
+<div class="container navless-container sbs-wrapper" id="app" style="display: none;max-width: 90%" layout:fragment="content">
+
+	<div th:replace="base/_sys.submenu :: submenu" />
+
+    <div class="content">
+    
+    	<div class="form-group row">
+    		<div class="col-md-2">
+    			<div class="mdl-selectfield mdl-js-selectfield mdl-selectfield--floating-label" v-bind:class="{ 'is-dirty': (model.anio_select ? true : false) }">
+                    <select id="anio_interrup" name="anio_interrup" class="mdl-selectfield__select" v-model="model.anio_select" v-on:change="obtenerHistoricoAnio">
+                            <option v-for="obj in anios_hist" v-bind:value="obj">
+                                 {{ obj }}
+                            </option>
+                    </select>
+                    <div class="mdl-selectfield__icon"><i class="fas fa-sort-down"></i></div>
+                    <label class="mdl-selectfield__label" for="anio_interrup">Año</label>
+                </div>
+    		</div>
+    	</div>
+        
+		<div class="row">
+        		<div class="col-md-12">
+        			<div class="md-table">
+                            <div class="md-table-content">
+                                <table class="mdl-data-table mdl-js-data-table mdl-shadow--2dp responsive-table" id="myTable">
+                                	<thead>
+                                        <tr>
+                                            <th class="mdl-data-table__cell--non-numeric">Código</th>
+                                            <th class="mdl-data-table__cell--non-numeric">Descripción corta del evento</th>
+                                            <th class="mdl-data-table__cell--non-numeric">Fecha evento</th>
+                                            <th class="mdl-data-table__cell--non-numeric">Fecha de envío</th>
+                                            <th class="mdl-data-table__cell--non-numeric">Opciones</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                    	<tr v-for="item in model.list_events_hist">
+                                    		<td class="mdl-data-table__cell--non-numeric">{{item.codigo}}</td>
+                                    		<td class="mdl-data-table__cell--non-numeric">{{item.descCortaEvento}}</td>
+                                    		<td class="mdl-data-table__cell--non-numeric">{{item.fechaEventoBandeja}}</td>
+                                    		<td class="mdl-data-table__cell--non-numeric">{{item.fechaEnvio}}</td>
+                                    		<td class="mdl-data-table__cell--non-numeric"></td>
+                                    	</tr>
+                                	</tbody>
+                                	<tfoot>
+									    <tr>
+									      <td colspan="5"> <ul class="pagination pager" id="myPager" style="float:left; width:70%;"></ul> <span id="total_reg"></span> </td>
+									    </tr>
+									</tfoot>
+                                </table>
+                            </div>
+                      </div>
+        		</div>
+        </div>
+
+
+    </div>
+</div>
+
+<js layout:fragment="scripts"> <script th:src="@{/resources/bundle/js_app_historico.js}"></script></js>
+
+<div th:replace="base/_sys.footer :: footer" />

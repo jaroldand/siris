@@ -1,0 +1,84 @@
+<beans:beans xmlns:security="http://www.springframework.org/schema/security" xmlns:beans="http://www.springframework.org/schema/beans" xmlns:context="http://www.springframework.org/schema/context" xmlns:mvc="http://www.springframework.org/schema/mvc" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xmlns:mybatis="http://mybatis.org/schema/mybatis-spring"
+	xsi:schemaLocation="
+        http://www.springframework.org/schema/beans
+        http://www.springframework.org/schema/beans/spring-beans.xsd
+        http://www.springframework.org/schema/context
+        http://www.springframework.org/schema/context/spring-context.xsd
+        http://www.springframework.org/schema/mvc
+        http://www.springframework.org/schema/mvc/spring-mvc.xsd
+        http://www.springframework.org/schema/security
+        http://www.springframework.org/schema/security/spring-security.xsd
+        http://mybatis.org/schema/mybatis-spring 
+        http://mybatis.org/schema/mybatis-spring.xsd
+        http://www.springframework.org/schema/util 
+        http://www.springframework.org/schema/util/spring-util.xsd">
+
+	<context:component-scan base-package="sbs.siris.web.controller.**" />
+
+	<mvc:annotation-driven />
+	<mvc:resources mapping="/views/pub/global/**" location="/public/" />
+	<!-- <mvc:resources mapping="/resources/bundle/**" location="/resources/bundle/" /> -->
+	<mvc:resources mapping="/resources/fonts/**" location="/resources/fonts/" />
+	<mvc:resources mapping="/resources/imgs/**" location="/resources/imgs/" />
+
+	<beans:bean id="templateResolver" class="org.thymeleaf.templateresolver.ServletContextTemplateResolver">
+		<!-- <property name="prefix" value="/WEB-INF/views/" /> -->
+		<beans:property name="prefix" value="/views/" />
+		<beans:property name="suffix" value=".html" />
+		<beans:property name="cacheable" value="false" />
+		<beans:property name="templateMode" value="HTML" />
+		<beans:property name="characterEncoding" value="UTF-8" />
+	</beans:bean>
+
+	<beans:bean id="templateEngine" class="org.thymeleaf.spring5.SpringTemplateEngine">
+		<beans:property name="templateResolver" ref="templateResolver" />
+		<beans:property name="additionalDialects">
+			<beans:set>
+				<beans:bean class="nz.net.ultraq.thymeleaf.LayoutDialect" />
+			</beans:set>
+		</beans:property>
+	</beans:bean>
+
+	<beans:bean class="org.thymeleaf.spring5.view.ThymeleafViewResolver">
+		<beans:property name="templateEngine" ref="templateEngine" />
+		<beans:property name="characterEncoding" value="UTF-8" />
+		<beans:property name="order" value="1" />
+	</beans:bean>
+
+
+	<beans:bean id="tokenAuthenticationProvider" class="sbs.siris.web.config.TokenAuthenticationProvider" />
+	<beans:bean id="httpFirewall" class="org.springframework.security.web.firewall.StrictHttpFirewall" />
+
+	<security:global-method-security pre-post-annotations="enabled" />
+
+	<security:http pattern="/login/**" security="none"/>
+	<security:http pattern="/logout/**" security="none"/>
+	<security:http auto-config="true" use-expressions="true">
+		<security:csrf disabled="true" />
+		<security:headers disabled="true" />
+
+		<security:intercept-url pattern="/siris_web/start/**" access="permitAll" requires-channel="any" />
+		<security:intercept-url pattern="/public/**" access="permitAll" requires-channel="any" /> <!-- isAuthenticated() -->
+		<security:intercept-url pattern="/resources/fonts/**" access="permitAll" requires-channel="any" />
+		<security:intercept-url pattern="/resources/imgs/**" access="permitAll" requires-channel="any" />
+
+		<security:intercept-url pattern="/siris_web/registro_siris/**" access="hasRole('ROLE_APP')" requires-channel="any" /> <!-- isAuthenticated() -->
+
+		<security:intercept-url pattern="/siris_web/service_discovery/**" access="hasAnyRole('ROLE_APP', 'ROLE_ADD')" requires-channel="any" /> <!-- isAuthenticated() -->
+
+		<security:intercept-url pattern="/**" access="hasRole('ROLE_ADMIN')" requires-channel="any" /> <!-- isAnonymous() | permitAll | denyAll -->
+
+		<!-- <security:form-login login-page="http://localhost:9080/sgc.web/sgc_web/login/" /> -->
+		<security:form-login login-page="http://localhost:9080/siris.web/logout" /> <!-- CAMBIAR EN PASE A PRODUCCIÓN --> 
+        <!--  <security:form-login login-page="https://coopac.sbs.gob.pe/auth.web/"/>  -->
+	
+	</security:http>
+
+	<security:authentication-manager alias="authenticationManager">
+		<security:authentication-provider ref="tokenAuthenticationProvider" />
+	</security:authentication-manager>
+
+	<security:http-firewall ref="httpFirewall" />
+
+</beans:beans>

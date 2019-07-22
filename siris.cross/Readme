@@ -1,0 +1,32 @@
+# Query para obtener los grupos.properties
+
+SELECT Lower(Col_Destino) || '=' || Cod_Grupo FROM Sgc_Tipo_Grupo ORDER BY Cod_Grupo
+
+
+# Query para obtener la clase GrupoValor.java
+
+SELECT 'public static final String ' || REPLACE(Upper(Col_Destino), '.', '_') || ' = Setup.getValueKey(GRUPO_PROPERTY, "' || Lower(Col_Destino) || '");' FROM Sgc_Tipo_Grupo ORDER BY Cod_Grupo
+	
+# Query para obtener los tipos.properties
+
+SELECT Lower(Col_Destino || '.' || REPLACE(REPLACE(REPLACE(REPLACE(translate(lower(Valor_0),'áéíó-','aeio '), ',', ''), '(', ''), ')', ''), ' ', '_'))||'='||cod_lista
+  FROM Sgc_Tipo_Lista a
+ INNER JOIN Sgc_Tipo_Grupo b ON b.Cod_Grupo = a.Cod_Grupo
+ where b.cod_grupo not in ('002', '016')
+ order by cod_lista
+ 
+ # Query para obtener la clase TipoValor.java
+ 
+SELECT 'public static final String ' ||  UPPER(replace(Col_Destino, '.', '_') || '_' || REPLACE(REPLACE(REPLACE(REPLACE(translate(upper(Valor_0),'ÁÉÍÓ-','AEIO '), ',', ''), '(', ''), ')', ''), ' ', '_')) || ' = Setup.getValueKey(TIPO_PROPERTY, "' || Lower(Col_Destino || '.' || REPLACE(REPLACE(REPLACE(REPLACE(translate(lower(Valor_0),'áéíó-','aeio '), ',', ''), '(', ''), ')', ''), ' ', '_')) || '");'
+  FROM Sgc_Tipo_Lista a
+ INNER JOIN Sgc_Tipo_Grupo b ON b.Cod_Grupo = a.Cod_Grupo
+ where b.cod_grupo not in ('002', '016')
+ order by cod_lista
+ 
+ # Query para obtener los diccionario.properties
+ 
+ SELECT Lower(Nom_Tabla) || '=' || Id_Tabla FROM Sgc_Diccionario ORDER BY Id_Tabla
+ 
+ # Query para obtener la clase DiccionarioValor.java
+ 
+ SELECT 'public static final short ' || Upper(Nom_Tabla) || ' = Setup.getValueKey(DICCIONARIO_PROPERTY, "' || Lower(Nom_Tabla) || '", short.class);' FROM Sgc_Diccionario ORDER BY Id_Tabla

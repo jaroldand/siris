@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8"?><project-modules id="moduleCoreId" project-version="1.5.0">
+    <wb-module deploy-name="siris.service">
+        <wb-resource deploy-path="/" source-path="/target/m2e-wtp/web-resources"/>
+        <wb-resource deploy-path="/" source-path="/src/main/webapp" tag="defaultRootSource"/>
+        <wb-resource deploy-path="/WEB-INF/classes" source-path="/src/main/java"/>
+        <wb-resource deploy-path="/WEB-INF/classes" source-path="/src/main/resources"/>
+        <wb-resource deploy-path="/WEB-INF/classes" source-path="/.apt_generated"/>
+        <dependent-module archiveName="siris.domain-0.0.1.jar" deploy-path="/WEB-INF/lib" handle="module:/resource/siris.domain/siris.domain">
+            <dependency-type>uses</dependency-type>
+        </dependent-module>
+        <dependent-module archiveName="siris.data-0.0.1.jar" deploy-path="/WEB-INF/lib" handle="module:/resource/siris.data/siris.data">
+            <dependency-type>uses</dependency-type>
+        </dependent-module>
+        <dependent-module archiveName="siris.domain.entity-0.0.1.jar" deploy-path="/WEB-INF/lib" handle="module:/resource/siris.domain.entity/siris.domain.entity">
+            <dependency-type>uses</dependency-type>
+        </dependent-module>
+        <dependent-module archiveName="siris.cross-0.0.1.jar" deploy-path="/WEB-INF/lib" handle="module:/resource/siris.cross/siris.cross">
+            <dependency-type>uses</dependency-type>
+        </dependent-module>
+        <property name="context-root" value="siris.service"/>
+        <property name="java-output-path" value="/siris.service/target/classes"/>
+    </wb-module>
+</project-modules>

@@ -1,0 +1,131 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="sbs.siris.data.InformeMapper">
+  
+  <resultMap id="InformeResultMap" type="sbs.siris.domain.entity.Informe">
+    <id column="ID_INFORME" jdbcType="NUMERIC" property="idInforme" />
+    <result column="ID_EVENTO" jdbcType="NUMERIC" property="idEvento" />
+    <result column="TIP_EVENTO" jdbcType="VARCHAR" property="tipEvento" />
+    <result column="IS_EVENTO_SEG" jdbcType="VARCHAR" property="isEventoSeg" />
+    <result column="IS_EVENTO_FIN" jdbcType="VARCHAR" property="isEventoFin" />
+    <result column="FEC_INI_INTERRUPCION" jdbcType="DATE" property="fecIniInterrupcion" />
+    <result column="HOR_INI_INTERRUPCION" jdbcType="VARCHAR" property="horIniInterrupcion" />
+    <result column="FEC_FIN_INTERRUPCION" jdbcType="DATE" property="fecFinInterrupcion" />
+    <result column="HOR_FIN_INTERRUPCION" jdbcType="VARCHAR" property="horFinInterrupcion" />
+    <result column="TOTAL_INTERRUPCION" jdbcType="NUMERIC" property="totalInterrupcion" />
+    <result column="MENOR_INTERRUPCION" jdbcType="NUMERIC" property="menorInterrupcion" />
+    <result column="DESC_CORTA_EVENTO" jdbcType="VARCHAR" property="descCortaEvento" />
+    <result column="DESC_EVENTO" jdbcType="VARCHAR" property="descEvento" />
+    <result column="CAUSA_INTERRUPCION" jdbcType="VARCHAR" property="causaInterrupcion" />
+    <result column="DESC_ACCIONES" jdbcType="VARCHAR" property="descAcciones" />
+    <result column="COMENT_ADIC" jdbcType="VARCHAR" property="comentAdic" />
+    <result column="FILE_COMENT_ADIC" jdbcType="NUMERIC" property="fileComentAdic" />
+    <result column="FEC_ENVIO_REP_INICIAL" jdbcType="DATE" property="fecEnvioRepInicial" />
+    <result column="CONTACTO_NOMB" jdbcType="VARCHAR" property="contactoNomb" />
+    <result column="CONTACTO_CARGO" jdbcType="VARCHAR" property="contactoCargo" />
+    <result column="CONTACTO_TELEF" jdbcType="VARCHAR" property="contactoTelef" />
+    <result column="CONTACTO_CORREO" jdbcType="VARCHAR" property="contactoCorreo" />
+    <result column="IND_ACTIVO" jdbcType="NUMERIC" property="indActivo" />
+    <result column="FEC_ENVIO" jdbcType="DATE" property="fecEnvio" />
+    <result column="AUDIT_USER_CREA" jdbcType="VARCHAR" property="auditUserCrea" />
+    <result column="AUDIT_FEC_CREA" jdbcType="TIMESTAMP" property="auditFecCrea" />
+    <result column="AUDIT_USER_MOD" jdbcType="VARCHAR" property="auditUserMod" />
+    <result column="AUDIT_FEC_MOD" jdbcType="TIMESTAMP" property="auditFecMod" />
+  </resultMap>
+  
+  
+  <select id="selectList" statementType="CALLABLE" parameterType="sbs.siris.domain.entity.base.BaseParam">
+		{
+		  call Pkg_Siris_Mantenimiento.Pr_Informe_GetByEvent(
+			#{entity.idEvento,jdbcType=NUMERIC},
+			#{list,mode=OUT,jdbcType=CURSOR,resultMap=InformeResultMap}
+		  )
+		}
+  </select>
+  
+  <insert id="insert" statementType="CALLABLE" parameterType="sbs.siris.domain.entity.base.BaseParam">
+		{
+		 call Pkg_Siris_Mantenimiento.Pr_Informe_Insert(
+		      #{entity.idInforme,jdbcType=NUMERIC},
+				#{entity.idEvento,jdbcType=NUMERIC},
+				#{entity.tipEvento,jdbcType=VARCHAR},
+				#{entity.isEventoSeg,jdbcType=VARCHAR},
+				#{entity.isEventoFin,jdbcType=VARCHAR},
+				#{entity.fecIniInterrupcion,jdbcType=TIMESTAMP},
+				#{entity.fecFinInterrupcion,jdbcType=TIMESTAMP},
+				
+				#{entity.horIniInterrupcion,jdbcType=VARCHAR},
+				#{entity.horFinInterrupcion,jdbcType=VARCHAR},
+				
+				#{entity.totalInterrupcion,jdbcType=NUMERIC},
+				#{entity.menorInterrupcion,jdbcType=NUMERIC},
+				#{entity.descCortaEvento,jdbcType=VARCHAR},
+				#{entity.descEvento,jdbcType=VARCHAR},
+				#{entity.causaInterrupcion,jdbcType=VARCHAR},
+				#{entity.descAcciones,jdbcType=VARCHAR},
+				#{entity.comentAdic,jdbcType=VARCHAR},
+				#{entity.fileComentAdic,jdbcType=NUMERIC},
+				#{entity.fecEnvioRepInicial,jdbcType=TIMESTAMP},
+				#{entity.contactoNomb,jdbcType=VARCHAR},
+				#{entity.contactoCargo,jdbcType=VARCHAR},
+				#{entity.contactoTelef,jdbcType=VARCHAR},
+				#{entity.contactoCorreo,jdbcType=VARCHAR},
+				#{entity.indActivo,jdbcType=NUMERIC},
+				#{entity.fecEnvio,jdbcType=NUMERIC},
+				#{entity.auditUserCrea,jdbcType=VARCHAR},
+				#{entity.auditFecCrea,jdbcType=TIMESTAMP},
+				#{entity.auditUserMod,jdbcType=VARCHAR},
+				#{entity.auditFecMod,jdbcType=TIMESTAMP}
+		 )
+		}
+	</insert>
+	
+	<update id="updateByPrimaryKey" statementType="CALLABLE" parameterType="sbs.siris.domain.entity.base.BaseParam">
+		{
+			call Pkg_Siris_Mantenimiento.Pr_Informe_Update(
+			  #{key,jdbcType=NUMERIC},
+		     	#{entity.idEvento,jdbcType=NUMERIC},
+				#{entity.tipEvento,jdbcType=VARCHAR},
+				#{entity.isEventoSeg,jdbcType=VARCHAR},
+				#{entity.isEventoFin,jdbcType=VARCHAR},
+				#{entity.fecIniInterrupcion,jdbcType=TIMESTAMP},
+				#{entity.fecFinInterrupcion,jdbcType=TIMESTAMP},
+				
+				#{entity.horIniInterrupcion,jdbcType=VARCHAR},
+				#{entity.horFinInterrupcion,jdbcType=VARCHAR},
+				
+				#{entity.totalInterrupcion,jdbcType=NUMERIC},
+				#{entity.menorInterrupcion,jdbcType=NUMERIC},
+				#{entity.descCortaEvento,jdbcType=VARCHAR},
+				#{entity.descEvento,jdbcType=VARCHAR},
+				#{entity.causaInterrupcion,jdbcType=VARCHAR},
+				#{entity.descAcciones,jdbcType=VARCHAR},
+				#{entity.comentAdic,jdbcType=VARCHAR},
+				#{entity.fileComentAdic,jdbcType=NUMERIC},
+				#{entity.fecEnvioRepInicial,jdbcType=TIMESTAMP},
+				#{entity.contactoNomb,jdbcType=VARCHAR},
+				#{entity.contactoCargo,jdbcType=VARCHAR},
+				#{entity.contactoTelef,jdbcType=VARCHAR},
+				#{entity.contactoCorreo,jdbcType=VARCHAR},
+				#{entity.indActivo,jdbcType=NUMERIC},
+				#{entity.fecEnvio,jdbcType=NUMERIC},
+				#{entity.auditUserMod,jdbcType=VARCHAR},
+				#{entity.auditFecMod,jdbcType=TIMESTAMP}
+		      )
+		}
+	</update>
+	
+	<update id="updateFileAdic" statementType="CALLABLE" parameterType="sbs.siris.domain.entity.base.BaseParam">
+		{
+			call Pkg_Siris_Mantenimiento.Pr_Informe_Update_FileAdic(
+			  	#{entity.idEvento,jdbcType=NUMERIC},
+			  	#{entity.fileComentAdic,jdbcType=NUMERIC}
+			)
+		}
+	</update>
+	
+	<select id="getSequenceLong" resultType="java.lang.Long">
+		SELECT SEQ_ID_INFORME.NEXTVAL FROM dual			
+	</select>
+  
+</mapper>

@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html layout:decorate="~{pub/sys.free}">
+
+<head>
+<title>Login simulado</title>
+</head>
+
+<body>
+	<div class="container navless-container sbs-wrapper" layout:fragment="content">
+		<form action="/sgc.web/sgc_web/login/" method="post">
+			<h3>EL GRAN LOGIN</h3>
+			<table>
+
+				<tr>
+					<td>Usuario:</td>
+					<td><input type="text" name="usuario" /></td>
+				</tr>
+				<tr>
+					<td colspan="2"><br /></td>
+				</tr>
+				<tr>
+					<td>Parte:</td>
+					<td><select name="seccion">
+							<option value=""></option>
+							<option value="registro">Parte Registro</option>
+							<option value="creacion">Parte Creación</option>
+					</select></td>
+				</tr>
+
+				<tr>
+					<td colspan="2"><br /></td>
+				</tr>
+				<tr>
+					<td colspan="2">
+						<button type="submit">Ingresar</button>
+					</td>
+				</tr>
+			</table>
+
+		</form>
+	</div>
+</body>
+</html>

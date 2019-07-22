@@ -1,0 +1,326 @@
+/* merriweather-regular - latin */
+@font-face {
+	font-family: 'Merriweather SBS';
+	font-style: normal;
+	font-weight: 400;
+	src: url('../fonts/merriweather-v19-latin-regular.eot');
+	/* IE9 Compat Modes */
+	src: local('Merriweather Regular'), local('Merriweather-Regular'), url('../fonts/merriweather-v19-latin-regular.eot?#iefix')
+		format('embedded-opentype'), /* IE6-IE8 */
+    url('../fonts/merriweather-v19-latin-regular.woff2') format('woff2'), /* Super Modern Browsers */
+    url('../fonts/merriweather-v19-latin-regular.woff') format('woff'), /* Modern Browsers */
+    url('../fonts/merriweather-v19-latin-regular.ttf') format('truetype'), /* Safari, Android, iOS */
+    url('../fonts/merriweather-v19-latin-regular.svg#Merriweather') format('svg');
+	/* Legacy iOS */
+}
+
+/* open-sans-regular - latin */
+@font-face {
+	font-family: 'Open Sans SBS';
+	font-style: normal;
+	font-weight: 400;
+	src: url('../fonts/open-sans-v15-latin-regular.eot');
+	/* IE9 Compat Modes */
+	src: local('Open Sans Regular'), local('OpenSans-Regular'), url('../fonts/open-sans-v15-latin-regular.eot?#iefix') format('embedded-opentype'),
+		/* IE6-IE8 */
+    url('../fonts/open-sans-v15-latin-regular.woff2') format('woff2'), /* Super Modern Browsers */
+    url('../fonts/open-sans-v15-latin-regular.woff') format('woff'), /* Modern Browsers */
+    url('../fonts/open-sans-v15-latin-regular.ttf') format('truetype'), /* Safari, Android, iOS */
+    url('../fonts/open-sans-v15-latin-regular.svg#OpenSans') format('svg');
+	/* Legacy iOS */
+}
+
+/* ============================================ GENERAL.HTML ======================================= */
+hr {
+	margin: 24px 0;
+	overflow: hidden;
+}
+
+.sbs-wrapper {
+	position: relative;
+	min-height: 100%;
+}
+
+body {
+	height: calc(100% - 51px);
+	margin: 0;
+	padding: 0;
+}
+
+.navbar-empty {
+	height: 45px;
+	background: #fff;
+	border-bottom: 1px solid #f0f0f0;
+}
+
+.navless-container {
+	padding: 60px 15px;
+}
+
+.navless-container-in {
+	padding: 5px 15px 55px 15px;
+}
+
+.sbs-footer {
+	background-color: #001E6B;
+	height: 40px;
+	position: absolute;
+	bottom: 0;
+	left: 0;
+	right: 0;
+}
+
+.footer-container, hr.footer-fixed {
+	position: absolute;
+	bottom: 0;
+	left: 0;
+	right: 0;
+	height: 40px;
+}
+
+.footer-container a {
+	font-size: 13px;
+	color: #fff;
+}
+
+.footer-links {
+	padding-top: 10px;
+	font-family: 'Merriweather SBS'
+}
+
+.footer-links a {
+	margin-right: 15px;
+}
+
+.sbs-logo {
+	font-weight: 900;
+	color: #fff;
+}
+
+.sbs-logo img {
+	width: 180px;
+}
+
+.sbs-header {
+	background-color: #001E6B;
+}
+
+/* @media (max-width: 815px) {
+    .sbs-logo {
+        padding-left: 50px;
+    }
+} */
+.mdl-textfield, .mdl-selectfield {
+	margin-top: -15px;
+	margin-bottom: -15px;
+	padding: 27px 0;
+}
+
+.mdl-textfield__label, .mdl-selectfield__label {
+	top: 30px;
+	font-size: 14px;
+	color: #7E8594;
+}
+
+.mdl-textfield, .mdl-selectfield {
+	width: 100%;
+}
+
+.mdl-textfield--floating-label.is-dirty .mdl-textfield__label, .mdl-textfield--floating-label.is-focused .mdl-textfield__label,
+	.mdl-selectfield--floating-label.is-dirty .mdl-selectfield__label, .mdl-selectfield--floating-label.is-focused .mdl-selectfield__label {
+	top: 10px;
+}
+
+.alert {
+	font-family: 'Merriweather SBS';
+}
+
+.alert hr {
+	margin: 1em 0;
+}
+
+.alert h5 {
+	font-family: 'Merriweather SBS';
+	margin-top: 10px;
+}
+
+.alert a {
+	color: #01C4B3;
+}
+
+.alert-secondary {
+	background-color: #F2F3F6;
+}
+
+.mdl-button .fa, .mdl-button .fas, .mdl-button .far, .mdl-button .fal, .mdl-button .fab {
+	margin-left: 5px;
+	margin-right: 5px;
+}
+
+.mdl-button--raised.mdl-button--colored.sbs-button-standard:hover {
+	background-color: rgba(0, 30, 107, .8);
+}
+
+.mdl-button--raised.mdl-button--colored.sbs-button-standard[disabled]:hover {
+	background-color: rgba(0, 0, 0, 0.12);
+}
+
+.sbs-textarea--col-2 {
+	height: 82px;
+}
+
+.sbs-center-vertical {
+	margin-top: auto;
+	margin-bottom: auto;
+}
+
+.sbs-rectangle {
+	border-color: #d6d8db;
+	border: 1px solid;
+	padding: 0.75rem 1.25rem;
+	margin-bottom: 1rem;
+	border-radius: 0.25rem;
+	border-color: #d6d8db;
+	padding-bottom: 0;
+	margin-bottom: 0;
+}
+
+.card .row h6 {
+	margin-top: 0px;
+	font-family: 'Merriweather SBS';
+}
+
+a.sbs-button-standard, a.sbs-submit {
+	padding: 0;
+	margin-bottom: 10px;
+}
+
+button:focus, div:focus, span:focus {
+	outline: #fff;
+}
+
+.mdl-button--date {
+	top: 23px;
+	right: 0;
+	bottom: 0;
+}
+
+input::-ms-clear {
+	display: none;
+}
+
+*:focus {
+	outline: none !important;
+}
+
+.sbs-rectangle a:hover {
+	color: rgb(1, 196, 179);
+	text-decoration: underline;
+}
+
+.sbs-rectangle a {
+	color: rgb(1, 196, 179);
+	font-weight: 500;
+}
+
+h5 {
+	margin-top: 0;
+}
+
+.md-button-circle i {
+	margin-top: 9px;
+	color: #001E6B;
+}
+
+/* ==== VALID ==== */
+.form {
+	padding-top: 15px;
+}
+
+.invalid {
+	background: url(../imgs/invalid.png) no-repeat 0 50%;
+	padding-left: 22px;
+	line-height: 24px;
+	color: #ec3f41;
+}
+
+.valid {
+	background: url(../imgs/valid.png) no-repeat 0 50%;
+	padding-left: 22px;
+	line-height: 24px;
+	color: #3a7d34;
+}
+
+/*==== NOTY ===*/
+.noty_text {
+	word-wrap: break-word;
+	-ms-word-wrap: break-word;
+	margin-bottom: 0px;
+	font-weight: 700;
+	font-size: 13px;
+}
+
+.noty_close {
+	left: 4px;
+	position: relative;
+}
+
+.list-group-item-danger {
+	color: #A91000;
+	background-color: #F9A299;
+}
+
+.list-group-item-warning {
+	color: #BAA800;
+	background-color: #F9F099;
+}
+
+.list-group-item-success {
+	color: #00B359;
+	background-color: #99F9C9;
+}
+
+.list-group-item-info {
+	color: #01C4B3;
+	background-color: #FFF; /*#E6F9F8;*/
+}
+
+.noty_buttons {
+	text-align: center;
+	padding: 5px;
+}
+
+.noty_buttons button {
+	margin-left: 5px;
+	margin-right: 5px;
+}
+
+.noty_buttons button.btn-info {
+	background: rgb(1, 196, 179);
+	color: rgb(255, 255, 255);
+}
+
+.noty_buttons button.btn-default {
+	background-color: rgb(240, 241, 242);
+}
+
+.btn:focus, .btn.focus {
+	outline: 0;
+	box-shadow: 0 0 0 0.2rem rgba(91, 99, 119, 0.25);
+}
+/*============*/
+
+.after-title {
+	font-size: 10px;
+	top: -15px;
+	position: relative;
+	color: #01c4b3;
+	font-weight: bold;
+}
+
+.custom-control {
+    position: relative;
+    display: block;
+    min-height: 1.5rem;
+    padding-left: 1.5rem;
+}
