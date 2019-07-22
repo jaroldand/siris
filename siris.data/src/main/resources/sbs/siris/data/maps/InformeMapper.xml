@@ -71,7 +71,7 @@
 				#{entity.contactoTelef,jdbcType=VARCHAR},
 				#{entity.contactoCorreo,jdbcType=VARCHAR},
 				#{entity.indActivo,jdbcType=NUMERIC},
-				#{entity.fecEnvio,jdbcType=NUMERIC},
+				#{entity.fecEnvio,jdbcType=TIMESTAMP},
 				#{entity.auditUserCrea,jdbcType=VARCHAR},
 				#{entity.auditFecCrea,jdbcType=TIMESTAMP},
 				#{entity.auditUserMod,jdbcType=VARCHAR},
@@ -108,7 +108,7 @@
 				#{entity.contactoTelef,jdbcType=VARCHAR},
 				#{entity.contactoCorreo,jdbcType=VARCHAR},
 				#{entity.indActivo,jdbcType=NUMERIC},
-				#{entity.fecEnvio,jdbcType=NUMERIC},
+				#{entity.fecEnvio,jdbcType=TIMESTAMP},
 				#{entity.auditUserMod,jdbcType=VARCHAR},
 				#{entity.auditFecMod,jdbcType=TIMESTAMP}
 		      )
