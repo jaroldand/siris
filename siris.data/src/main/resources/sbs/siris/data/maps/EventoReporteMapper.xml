@@ -65,7 +65,6 @@
   	
   	<select id="deleteFileCommentAdic" statementType="CALLABLE" parameterType="sbs.siris.domain.entity.base.BaseParam">
   		{ call Pkg_Siris_Evento_Reporte.Pr_Delete_File_Adic(
-			#{keyMap.idEvento,jdbcType=NUMERIC},
 			#{keyMap.idFile,jdbcType=NUMERIC},
 			
 		  	#{result,mode=OUT,jdbcType=NUMERIC,javaType=Integer}

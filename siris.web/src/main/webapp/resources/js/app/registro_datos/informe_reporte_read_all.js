@@ -77,7 +77,8 @@ var app = new Vue({
         	},
         	canales : [],
         	canalesActivos :[],
-        	impacto : []
+        	impacto : [],
+        	correoInforme : {}
         }
     },
     
@@ -121,6 +122,8 @@ var app = new Vue({
 			success : function(data) {
 				
 				self.model.informe = data.informe;
+				
+				self.model.correoInforme = data.correoInforme;
 				
 				self.model.informe.contactoNomb = jbase.isEmptyString( self.model.informe.contactoNomb ) ? jbase.prop.name_session_user : self.model.informe.contactoNomb;
 				

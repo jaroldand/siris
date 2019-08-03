@@ -6,5 +6,4 @@ import sbs.siris.domain.entity.base.BaseParam;
 
 public interface InformeMapper extends BaseMapper<Informe>  {
     
-	void updateFileAdic(BaseParam<Informe> param);
 }

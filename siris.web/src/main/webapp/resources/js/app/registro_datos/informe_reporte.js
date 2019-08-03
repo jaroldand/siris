@@ -61,7 +61,8 @@ var app = new Vue({
         	},
         	canales : [],
         	canalesActivos :[],
-        	impacto : []
+        	impacto : [],
+        	correoInforme : {}
         }
     },
     
@@ -95,6 +96,8 @@ var app = new Vue({
 			success : function(data) {
 				
 				self.model.informe = data.informe;
+				
+				self.model.correoInforme = data.correoInforme;
 				
 				self.model.informe.contactoNomb = jbase.isEmptyString( self.model.informe.contactoNomb ) ? jbase.prop.name_session_user : self.model.informe.contactoNomb;
 				
@@ -669,7 +672,7 @@ var app = new Vue({
     		}
     		
     		$("#mail_interrup").parent().removeClass("is-invalid");
-    		if( !jbase.isValidEmail(self.model.informe.contactoCorreo) ){
+    		if( !jbase.isValidEmail(self.model.correoInforme.desCorreo) ){
     			$("#mail_interrup").parent().addClass("is-invalid");
     			jnoty.showMessage(jnoty.typeMessage.warning, "El formato de correo no es correcto!", 2000);
 				return false;
@@ -845,6 +848,7 @@ var app = new Vue({
 			form.append("numTamanio", file_upload.size);
 			form.append("idEvento", jbase.prop.id_evento);
 			form.append("file", file_upload);
+			form.append("idInforme", self.model.informe.idInforme);
     		
 			jbase.wait(true);
     		jajax.apiAuthUploadPost({

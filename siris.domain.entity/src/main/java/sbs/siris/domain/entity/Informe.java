@@ -65,8 +65,6 @@ public class Informe extends BaseEntity {
 
     private String contactoTelef;
 
-    private String contactoCorreo;
-
     private Short indActivo;
     
     @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "dd/MM/yyyy HH:mm:ss", timezone = "America/Lima")
@@ -78,6 +76,8 @@ public class Informe extends BaseEntity {
     private String eventoSegDesc;
     
     private String eventoFinDesc;
+    
+    private String contactoCorreo;
 
     public Integer getIdInforme() {
         return idInforme;

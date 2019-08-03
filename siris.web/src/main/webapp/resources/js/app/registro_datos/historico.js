@@ -88,7 +88,7 @@ var app = new Vue({
     			nextText:'Siguiente',
     			showPrevNext:true,
     			hidePageNumbers:false,
-    			perPage:2
+    			perPage:10
     		  });
     		
     		this.update_pagination = false;

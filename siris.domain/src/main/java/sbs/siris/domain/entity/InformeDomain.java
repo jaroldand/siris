@@ -32,16 +32,4 @@ public class InformeDomain extends BaseDomain<Informe> {
 		
 		return CollectionUtils.isEmpty(informes) ? new Informe() : informes.get(0);
 	}
-	
-	public void updateFileAdic(Integer idEvento, Long idFile) {
-		
-		BaseParam<Informe> param = new BaseParam<Informe>();
-		Informe entity = new Informe();
-		entity.setIdEvento(idEvento);
-		entity.setFileComentAdic(idFile);
-		
-		param.setEntity(entity);
-		
-		mapper.updateFileAdic(param);
-	}
 }

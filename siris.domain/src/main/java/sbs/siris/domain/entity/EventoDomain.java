@@ -37,4 +37,10 @@ public class EventoDomain extends BaseDomain<Evento> {
 		
 		return evento;
 	}
+	
+	public Evento obtenerEventoById(Integer idEvento) {
+		
+		Evento evento = getEntityByKey(idEvento, null);
+		return evento;
+	}
 }

@@ -1,6 +1,31 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="sbs.siris.data.EventoMapper">
+
+	<resultMap id="EventoResultMap" type="sbs.siris.domain.entity.Evento">
+		<id column="ID_EVENTO" jdbcType="NUMERIC" property="idEvento" />
+	    <result column="ID_ENTIDAD_VIG" jdbcType="VARCHAR" property="idEntidadVig" />
+	    <result column="ID_ESTADO" jdbcType="VARCHAR" property="idEstado" />
+	    <result column="COD_ANIO" jdbcType="VARCHAR" property="codAnio" />
+	    <result column="FECHA_EVENTO" jdbcType="TIMESTAMP" property="fechaEvento" />
+	    <result column="MSG_FINALIZACION" jdbcType="VARCHAR" property="msgFinalizacion" />
+	    <result column="NOM_ENT_VIG_CORTO" jdbcType="VARCHAR" property="nomEntVigCorto" />
+    	<result column="NOM_ENT_VIG_LARGO" jdbcType="VARCHAR" property="nomEntVigLargo" />
+	    <result column="IND_ACTIVO" jdbcType="NUMERIC" property="indActivo" />
+	    <result column="AUDIT_USER_CREA" jdbcType="VARCHAR" property="auditUserCrea" />
+	    <result column="AUDIT_FEC_CREA" jdbcType="TIMESTAMP" property="auditFecCrea" />
+	    <result column="AUDIT_USER_MOD" jdbcType="VARCHAR" property="auditUserMod" />
+	    <result column="AUDIT_FEC_MOD" jdbcType="TIMESTAMP" property="auditFecMod" />
+	</resultMap>
+	
+	<select id="selectByPrimaryKey" statementType="CALLABLE" parameterType="sbs.siris.domain.entity.base.BaseParam">
+		{
+		  call Pkg_Siris_Mantenimiento.Pr_Evento_GetKey(
+			#{key,jdbcType=NUMERIC},
+			#{list,mode=OUT,jdbcType=CURSOR,resultMap=EventoResultMap}
+		  )
+		}
+    </select>
   
 	<insert id="insert" statementType="CALLABLE" parameterType="sbs.siris.domain.entity.base.BaseParam">
 		{

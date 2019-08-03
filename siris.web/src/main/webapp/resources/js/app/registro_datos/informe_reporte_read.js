@@ -68,7 +68,8 @@ var app = new Vue({
         	},
         	canales : [],
         	canalesActivos :[],
-        	impacto : []
+        	impacto : [],
+        	correoInforme : {}
         }
     },
     
@@ -102,6 +103,8 @@ var app = new Vue({
 			success : function(data) {
 				
 				self.model.informe = data.informe;
+				
+				self.model.correoInforme = data.correoInforme;
 				
 				self.model.informe.contactoNomb = jbase.isEmptyString( self.model.informe.contactoNomb ) ? jbase.prop.name_session_user : self.model.informe.contactoNomb;
 				
@@ -463,7 +466,13 @@ var app = new Vue({
     	regresar: function(evt) {
     		flujoRegistro.setStep('module/tablero_registro','00');
     	},
-    	descargar: function(evt) {
+    	descargar: function(_idDocumento) {
+    		jbase.wait(true);
+    		var urlinvokeDownload = jbase.getStringReplaced(jbase.urls.download_file_adic, [_idDocumento]);
+			$("<iframe style='display: none' src='"+urlinvokeDownload+"'></iframe>").appendTo("body");
+			jbase.wait(false);
+    	},
+    	descargar_constancia: function(evt) {
     		jbase.wait(true);
     		var urlinvokeDownload = jbase.getStringReplaced(jbase.urls.download_file_constancia, [jbase.prop.id_evento]);
 			$("<iframe style='display: none' src='"+urlinvokeDownload+"'></iframe>").appendTo("body");

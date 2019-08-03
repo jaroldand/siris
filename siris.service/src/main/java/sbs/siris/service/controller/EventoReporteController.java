@@ -118,10 +118,10 @@ public class EventoReporteController {
 	}
 	
 	@PostMapping(value = "/upload_file")
-	public DeferredResult<ResponseEntity<Long>> uploadFile(@ModelAttribute File documento, @RequestParam("file") MultipartFile uploadfile) throws Exception {
+	public DeferredResult<ResponseEntity<Long>> uploadFile(@ModelAttribute File documento, @RequestParam("file") MultipartFile uploadfile, @RequestParam("idInforme") Integer idInforme) throws Exception {
 		String user = HelperController.getCodUser();
 		return AsyncResult.Call(() -> {
-			return new ResponseEntity<Long>(eventoReporteDomain.uploadFile(documento, uploadfile, user), HttpStatus.CREATED);
+			return new ResponseEntity<Long>(eventoReporteDomain.uploadFile(documento, uploadfile, idInforme, user), HttpStatus.CREATED);
 		}, user);
 	}
 	

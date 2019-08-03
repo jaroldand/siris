@@ -639,8 +639,8 @@
                                </div>
                        	</div>
                        	<div class="col-md-3">
-                       		<div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label is-disabled" v-bind:class="{ 'is-dirty': (model.informe.contactoCorreo ? true : false) }">
-                                   <input class="mdl-textfield__input send_required" type="text" id="mail_interrup" name="mail_interrup" v-model="model.informe.contactoCorreo" maxlength="50" disabled="disabled">
+                       		<div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label is-disabled" v-bind:class="{ 'is-dirty': (model.correoInforme.desCorreo ? true : false) }">
+                                   <input class="mdl-textfield__input send_required" type="text" id="mail_interrup" name="mail_interrup" v-model="model.correoInforme.desCorreo" maxlength="50" disabled="disabled">
                                    <label class="mdl-textfield__label" for="mail_interrup">Correo *:</label>
                                </div>
                        	</div>
@@ -661,7 +661,7 @@
            	<div class="offset-md-3 col-md-3">
             </div>
             <div class="col-md-3">
-                 <a href="javascript:void(0)" class="btn btn-block mdl-button mdl-js-button mdl-button--raised mdl-button--colored mdl-js-ripple-effect sbs-submit" @click.exact="descargar">
+                 <a href="javascript:void(0)" class="btn btn-block mdl-button mdl-js-button mdl-button--raised mdl-button--colored mdl-js-ripple-effect sbs-submit" @click.exact="descargar_constancia">
                      <span><i class="fas fa-download"></i>Descargar</span>
                  </a>
             </div>

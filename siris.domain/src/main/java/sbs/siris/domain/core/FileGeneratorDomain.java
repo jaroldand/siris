@@ -34,6 +34,7 @@ public class FileGeneratorDomain {
         ReporteDTO reporte = new ReporteDTO();
         
         List<Informe> informeLista = new ArrayList<Informe>();
+        parametros.getInforme().setContactoCorreo(parametros.getCorreoInforme().getDesCorreo());//paso temporal del correo del informe
         informeLista.add(parametros.getInforme());
         
         reporte.setInforme(informeLista);

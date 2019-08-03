@@ -38,5 +38,9 @@ public class TipoValor {
 	
 	public static final String SIRIS_NOTIFICACION_EST_NOTIFICACION_ENVIADO = Setup.getValueKey(TIPO_PROPERTY, "siris_notificacion.est_notificacion.enviado");
 	public static final String SIRIS_NOTIFICACION_TIP_NOTIFICACION_CONSTANCIA_ENVIO = Setup.getValueKey(TIPO_PROPERTY, "siris_notificacion.tip_notificacion.constancia_envio");
-
+	
+	public static final String SIRIS_FILE_TIP_DOCUMENTO_DOCUMENTO_INFORME = Setup.getValueKey(TIPO_PROPERTY, "siris_file.tip_documento.documento_informe");
+	public static final String SIRIS_FILE_TIP_DOCUMENTO_DOCUMENTO_ADJUNTO_DE_ACCIONES_EN_INFORME = Setup.getValueKey(TIPO_PROPERTY, "siris_file.tip_documento.documento_adjunto_de_acciones_en_informe");
+	
+	public static final String SIRIS_CORREO_TIP_CORREO_CORREO_INFORME = Setup.getValueKey(TIPO_PROPERTY, "siris_correo.tip_correo.correo_informe");
 }

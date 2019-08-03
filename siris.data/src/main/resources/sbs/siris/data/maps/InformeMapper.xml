@@ -24,7 +24,6 @@
     <result column="CONTACTO_NOMB" jdbcType="VARCHAR" property="contactoNomb" />
     <result column="CONTACTO_CARGO" jdbcType="VARCHAR" property="contactoCargo" />
     <result column="CONTACTO_TELEF" jdbcType="VARCHAR" property="contactoTelef" />
-    <result column="CONTACTO_CORREO" jdbcType="VARCHAR" property="contactoCorreo" />
     <result column="IND_ACTIVO" jdbcType="NUMERIC" property="indActivo" />
     <result column="FEC_ENVIO" jdbcType="DATE" property="fecEnvio" />
     <result column="AUDIT_USER_CREA" jdbcType="VARCHAR" property="auditUserCrea" />
@@ -69,7 +68,6 @@
 				#{entity.contactoNomb,jdbcType=VARCHAR},
 				#{entity.contactoCargo,jdbcType=VARCHAR},
 				#{entity.contactoTelef,jdbcType=VARCHAR},
-				#{entity.contactoCorreo,jdbcType=VARCHAR},
 				#{entity.indActivo,jdbcType=NUMERIC},
 				#{entity.fecEnvio,jdbcType=TIMESTAMP},
 				#{entity.auditUserCrea,jdbcType=VARCHAR},
@@ -106,21 +104,11 @@
 				#{entity.contactoNomb,jdbcType=VARCHAR},
 				#{entity.contactoCargo,jdbcType=VARCHAR},
 				#{entity.contactoTelef,jdbcType=VARCHAR},
-				#{entity.contactoCorreo,jdbcType=VARCHAR},
 				#{entity.indActivo,jdbcType=NUMERIC},
 				#{entity.fecEnvio,jdbcType=TIMESTAMP},
 				#{entity.auditUserMod,jdbcType=VARCHAR},
 				#{entity.auditFecMod,jdbcType=TIMESTAMP}
 		      )
-		}
-	</update>
-	
-	<update id="updateFileAdic" statementType="CALLABLE" parameterType="sbs.siris.domain.entity.base.BaseParam">
-		{
-			call Pkg_Siris_Mantenimiento.Pr_Informe_Update_FileAdic(
-			  	#{entity.idEvento,jdbcType=NUMERIC},
-			  	#{entity.fileComentAdic,jdbcType=NUMERIC}
-			)
 		}
 	</update>
 	

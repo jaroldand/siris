@@ -4,6 +4,7 @@ import java.io.Serializable;
 import java.util.List;
 
 import sbs.siris.domain.entity.Canales;
+import sbs.siris.domain.entity.Correo;
 import sbs.siris.domain.entity.Impacto;
 import sbs.siris.domain.entity.Informe;
 import sbs.siris.domain.entity.PlanAccion;
@@ -21,6 +22,8 @@ public class EventoReporteDTO implements Serializable {
 	
 	private List<PlanAccion> planAccion;
 	private List<PlanAccion> planAccionActivos;
+	
+	private Correo correoInforme;
 
 	public Informe getInforme() {
 		return informe;
@@ -76,5 +79,13 @@ public class EventoReporteDTO implements Serializable {
 
 	public void setPlanAccionActivos(List<PlanAccion> planAccionActivos) {
 		this.planAccionActivos = planAccionActivos;
+	}
+
+	public Correo getCorreoInforme() {
+		return correoInforme;
+	}
+
+	public void setCorreoInforme(Correo correoInforme) {
+		this.correoInforme = correoInforme;
 	}
 }

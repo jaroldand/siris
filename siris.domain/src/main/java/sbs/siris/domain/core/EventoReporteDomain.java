@@ -29,6 +29,8 @@ import sbs.siris.domain.base.DomainProperties;
 import sbs.siris.domain.entity.Canales;
 import sbs.siris.domain.entity.CanalesDomain;
 import sbs.siris.domain.entity.ClaveValor;
+import sbs.siris.domain.entity.Correo;
+import sbs.siris.domain.entity.CorreoDomain;
 import sbs.siris.domain.entity.Evento;
 import sbs.siris.domain.entity.EventoDomain;
 import sbs.siris.domain.entity.File;
@@ -90,6 +92,9 @@ public class EventoReporteDomain {
 	@Autowired
 	private NotificacionDomain notificacionDomain;
 	
+	@Autowired
+	private CorreoDomain correoDomain;
+	
 	public List<BandejaDTO> obtenerEventosBandeja(String idEntVig) {
 		
 		BaseParam<BandejaDTO> param = new BaseParam<BandejaDTO>();
@@ -115,7 +120,9 @@ public class EventoReporteDomain {
 	public EventoReporteDTO obtenerReporteEvento(Integer idEvento) {
 		
 		Informe informe = informeDomain.buscarInforme(idEvento);
-		File archAdicional = fileDomain.buscarFile(idEvento);
+		File archAdicional = fileDomain.buscarFileInformeComent(informe.getIdInforme());
+		
+		Correo correoInforme = correoDomain.buscarCorreoInforme(informe.getIdInforme());
 		
 		Canales canal = new Canales();
 		canal.setIdEvento(idEvento);
@@ -134,6 +141,8 @@ public class EventoReporteDomain {
 		informe.setFileComentAdic(archAdicional.getIdFile());
 		informe.setNameFileComentAdic(archAdicional.getDesDocumento()+"."+archAdicional.getDesExtension());
 		resultado.setInforme(informe);
+		
+		resultado.setCorreoInforme(correoInforme);
 		
 		resultado.setCanales(canales);
 		resultado.setCanalesActivos(canales);
@@ -230,6 +239,14 @@ public class EventoReporteDomain {
 			eventoDomain.insertEventoInicial(evento, user);
 			
 			parametros.setIdEvento(evento.getIdEvento());
+			
+			// inserta informe
+			Informe informe = new Informe();
+			informe.setIdEvento(parametros.getIdEvento());
+			informe.setIdInforme((int) informeDomain.getSequenceLong() );
+			informe.setIndActivo(ConstanteValor.IND_ACTIVO);
+			
+			informeDomain.insert(informe, user);
 		}
 		
 		parametros.getValidaciones().forEach((k,v)->{
@@ -259,7 +276,7 @@ public class EventoReporteDomain {
 		byte[] constanciaPDF = fileGeneratorDomain.generarPDFConstanciaEnvio(parametros);
 		
 		//guardar el file en bd
-		Long idFile = fileDomain.registrarConstanciaPDFFile(user, constanciaPDF);
+		Long idFile = fileDomain.registrarConstanciaPDFFile(user, constanciaPDF, parametros.getIdEvento(), parametros.getInforme().getFecIniInterrupcion());
 		
 		//actualizar el estado del evento
 		BaseParam<Evento> param = new BaseParam<Evento>();
@@ -306,6 +323,12 @@ public class EventoReporteDomain {
 		}
 		
 		/* Fin save informe */
+		
+		/* Inicio save correo */
+		Correo correoInforme = parametros.getCorreoInforme();
+		correoDomain.grabarCorreoInforme(correoInforme, informe.getIdInforme(), user);
+		
+		/* Fin save correo */
 		
 		/* Inicio save canales */
 		List<Canales> canales = parametros.getCanales();
@@ -411,32 +434,17 @@ public class EventoReporteDomain {
 	}
 	
 	@Transactional(propagation = Propagation.REQUIRED)
-	public Long uploadFile(File documento, MultipartFile file, String codUser) throws Exception {
-		if (ObjectUtils.isEmpty(documento.getIdFile()) || documento.getIdFile().equals(-1L)) {//insert
-			
-			documento.setIdFile(fileDomain.getSequenceLong());
-			documento.setIndActivo(ConstanteValor.IND_ACTIVO);
-			documento.setBinArchivo(file.getBytes());
-			
-			fileDomain.insert(documento, codUser);
-			
-		} else {
-			documento.setIndActivo(ConstanteValor.IND_ACTIVO);
-			documento.setBinArchivo(file.getBytes());
-			
-			fileDomain.updateByKey(documento.getIdFile(), documento, codUser);
-		}
+	public Long uploadFile(File documento, MultipartFile file, Integer idInforme, String codUser) throws Exception {
 		
-		informeDomain.updateFileAdic(documento.getIdEvento(), documento.getIdFile());
+		Long idFile = fileDomain.guardarFileAdjuntoAccionesEnInforme(documento, file, idInforme, codUser);
 		
-		return documento.getIdFile();
+		return idFile;
 	}
 	
 	@Transactional(propagation = Propagation.REQUIRED)
 	public Boolean deleteFile(Integer idEvento, Long idFile, String codUser) {
 		
 		Map<String, Object> mapaSend = new HashMap<String, Object>();
-		mapaSend.put("idEvento", idEvento);
 		mapaSend.put("idFile", idFile);
 		
 		BaseParam<Map<String, Long>> param = new BaseParam<Map<String, Long>>();

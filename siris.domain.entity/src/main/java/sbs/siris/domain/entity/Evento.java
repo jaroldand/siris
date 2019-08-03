@@ -18,6 +18,11 @@ public class Evento extends BaseEntity{
     private String msgFinalizacion;
 
     private Short indActivo;
+    
+    //for reportes
+    private String nomEntVigCorto;
+    
+    private String nomEntVigLargo;
 
     public Integer getIdEvento() {
         return idEvento;
@@ -74,6 +79,22 @@ public class Evento extends BaseEntity{
     public void setIndActivo(Short indActivo) {
         this.indActivo = indActivo;
     }
+    
+    public String getNomEntVigCorto() {
+		return nomEntVigCorto;
+	}
+
+	public void setNomEntVigCorto(String nomEntVigCorto) {
+		this.nomEntVigCorto = nomEntVigCorto;
+	}
+
+	public String getNomEntVigLargo() {
+		return nomEntVigLargo;
+	}
+
+	public void setNomEntVigLargo(String nomEntVigLargo) {
+		this.nomEntVigLargo = nomEntVigLargo;
+	}
 
     @Override
     public boolean equals(Object that) {

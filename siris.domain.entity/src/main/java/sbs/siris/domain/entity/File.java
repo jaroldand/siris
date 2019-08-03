@@ -21,6 +21,10 @@ public class File extends BaseEntity{
     private Short indActivo;
 
     private byte[] binArchivo;
+    
+    private Integer idEntidad;
+    
+    private short idTabla;
 
     public Long getIdFile() {
         return idFile;
@@ -84,6 +88,22 @@ public class File extends BaseEntity{
 
 	public void setIdEvento(Integer idEvento) {
 		this.idEvento = idEvento;
+	}
+	
+	public Integer getIdEntidad() {
+		return idEntidad;
+	}
+
+	public void setIdEntidad(Integer idEntidad) {
+		this.idEntidad = idEntidad;
+	}
+
+	public short getIdTabla() {
+		return idTabla;
+	}
+
+	public void setIdTabla(short idTabla) {
+		this.idTabla = idTabla;
 	}
 
     @Override
