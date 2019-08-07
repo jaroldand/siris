@@ -22,7 +22,7 @@ public class NotificacionDomain extends BaseDomain<Notificacion> {
 		super.setMapper(notificacionMapper);
 	}
 	
-	public void generarConstanciaEnvio(Integer idEvento, Long idFile, String user) {
+	public void generarConstanciaEnvio(Integer idEvento, String user) {
 		
 		Notificacion notificacion = new Notificacion();
 		notificacion.setIdNotificacion( getSequenceLong() );
@@ -30,8 +30,6 @@ public class NotificacionDomain extends BaseDomain<Notificacion> {
 		notificacion.setEstNotificacion(TipoValor.SIRIS_NOTIFICACION_EST_NOTIFICACION_ENVIADO);
 		notificacion.setTipNotificacion(TipoValor.SIRIS_NOTIFICACION_TIP_NOTIFICACION_CONSTANCIA_ENVIO);
 		
-		notificacion.setFecEnvio(new Date());
-		notificacion.setIdDocumento(idFile);
 		notificacion.setIndActivo(ConstanteValor.IND_ACTIVO);
 		
 		insert(notificacion, user);

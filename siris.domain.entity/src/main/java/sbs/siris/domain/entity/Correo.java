@@ -15,7 +15,7 @@ public class Correo extends BaseEntity {
 
     private Short indActivo;
 
-    private Short indEnviado;
+    private Long idNotificacion;
 
     public Long getIdCorreo() {
         return idCorreo;
@@ -64,14 +64,14 @@ public class Correo extends BaseEntity {
     public void setIndActivo(Short indActivo) {
         this.indActivo = indActivo;
     }
+    
+    public Long getIdNotificacion() {
+		return idNotificacion;
+	}
 
-    public Short getIndEnviado() {
-        return indEnviado;
-    }
-
-    public void setIndEnviado(Short indEnviado) {
-        this.indEnviado = indEnviado;
-    }
+	public void setIdNotificacion(Long idNotificacion) {
+		this.idNotificacion = idNotificacion;
+	}
 
     @Override
     public boolean equals(Object that) {
@@ -91,7 +91,7 @@ public class Correo extends BaseEntity {
             && (this.getTipCorreo() == null ? other.getTipCorreo() == null : this.getTipCorreo().equals(other.getTipCorreo()))
             && (this.getDesCorreo() == null ? other.getDesCorreo() == null : this.getDesCorreo().equals(other.getDesCorreo()))
             && (this.getIndActivo() == null ? other.getIndActivo() == null : this.getIndActivo().equals(other.getIndActivo()))
-            && (this.getIndEnviado() == null ? other.getIndEnviado() == null : this.getIndEnviado().equals(other.getIndEnviado()))
+            && (this.getIdNotificacion() == null ? other.getIdNotificacion() == null : this.getIdNotificacion().equals(other.getIdNotificacion()))
             && (this.getAuditUserCrea() == null ? other.getAuditUserCrea() == null : this.getAuditUserCrea().equals(other.getAuditUserCrea()))
             && (this.getAuditFecCrea() == null ? other.getAuditFecCrea() == null : this.getAuditFecCrea().equals(other.getAuditFecCrea()))
             && (this.getAuditUserMod() == null ? other.getAuditUserMod() == null : this.getAuditUserMod().equals(other.getAuditUserMod()))
@@ -108,7 +108,7 @@ public class Correo extends BaseEntity {
         result = prime * result + ((getTipCorreo() == null) ? 0 : getTipCorreo().hashCode());
         result = prime * result + ((getDesCorreo() == null) ? 0 : getDesCorreo().hashCode());
         result = prime * result + ((getIndActivo() == null) ? 0 : getIndActivo().hashCode());
-        result = prime * result + ((getIndEnviado() == null) ? 0 : getIndEnviado().hashCode());
+        result = prime * result + ((getIdNotificacion() == null) ? 0 : getIdNotificacion().hashCode());
         result = prime * result + ((getAuditUserCrea() == null) ? 0 : getAuditUserCrea().hashCode());
         result = prime * result + ((getAuditFecCrea() == null) ? 0 : getAuditFecCrea().hashCode());
         result = prime * result + ((getAuditUserMod() == null) ? 0 : getAuditUserMod().hashCode());

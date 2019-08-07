@@ -9,7 +9,6 @@
     <result column="DES_NOTIFICACION" jdbcType="VARCHAR" property="desNotificacion" />
     <result column="FEC_ENVIO" jdbcType="TIMESTAMP" property="fecEnvio" />
     <result column="FEC_RECIBIDO" jdbcType="TIMESTAMP" property="fecRecibido" />
-    <result column="ID_DOCUMENTO" jdbcType="NUMERIC" property="idDocumento" />
     <result column="COD_FORMATO" jdbcType="VARCHAR" property="codFormato" />
     <result column="TXT_ENVIADO" jdbcType="VARCHAR" property="txtEnviado" />
     <result column="IND_ACTIVO" jdbcType="NUMERIC" property="indActivo" />
@@ -39,7 +38,6 @@
 			      #{entity.desNotificacion,jdbcType=VARCHAR},
 			      #{entity.fecEnvio,jdbcType=TIMESTAMP},
 			      #{entity.fecRecibido,jdbcType=TIMESTAMP},
-			      #{entity.idDocumento,jdbcType=NUMERIC},
 			      #{entity.codFormato,jdbcType=VARCHAR},
 			      #{entity.txtEnviado,jdbcType=VARCHAR},
 			      #{entity.indActivo,jdbcType=NUMERIC},
@@ -61,7 +59,6 @@
 			      #{entity.desNotificacion,jdbcType=VARCHAR},
 			      #{entity.fecEnvio,jdbcType=TIMESTAMP},
 			      #{entity.fecRecibido,jdbcType=TIMESTAMP},
-			      #{entity.idDocumento,jdbcType=NUMERIC},
 			      #{entity.codFormato,jdbcType=VARCHAR},
 			      #{entity.txtEnviado,jdbcType=VARCHAR},
 			      #{entity.indActivo,jdbcType=NUMERIC},

@@ -8,7 +8,7 @@
     <result column="TIP_CORREO" jdbcType="VARCHAR" property="tipCorreo" />
     <result column="DES_CORREO" jdbcType="VARCHAR" property="desCorreo" />
     <result column="IND_ACTIVO" jdbcType="NUMERIC" property="indActivo" />
-    <result column="IND_ENVIADO" jdbcType="NUMERIC" property="indEnviado" />
+    <result column="ID_NOTIFICACION" jdbcType="NUMERIC" property="idNotificacion" />
     <result column="AUDIT_USER_CREA" jdbcType="VARCHAR" property="auditUserCrea" />
     <result column="AUDIT_FEC_CREA" jdbcType="TIMESTAMP" property="auditFecCrea" />
     <result column="AUDIT_USER_MOD" jdbcType="VARCHAR" property="auditUserMod" />
@@ -44,7 +44,7 @@
 			      #{entity.tipCorreo,jdbcType=VARCHAR},
 			      #{entity.desCorreo,jdbcType=VARCHAR},
 			      #{entity.indActivo,jdbcType=NUMERIC},
-			      #{entity.indEnviado,jdbcType=NUMERIC},
+			      #{entity.idNotificacion,jdbcType=NUMERIC},
 			      #{entity.auditUserCrea,jdbcType=VARCHAR},
 			      #{entity.auditFecCrea,jdbcType=TIMESTAMP},
 			      #{entity.auditUserMod,jdbcType=VARCHAR},
@@ -62,7 +62,7 @@
 			      #{entity.tipCorreo,jdbcType=VARCHAR},
 			      #{entity.desCorreo,jdbcType=VARCHAR},
 			      #{entity.indActivo,jdbcType=NUMERIC},
-			      #{entity.indEnviado,jdbcType=NUMERIC},
+			      #{entity.idNotificacion,jdbcType=NUMERIC},
 			      #{entity.auditUserMod,jdbcType=VARCHAR},
 			      #{entity.auditFecMod,jdbcType=TIMESTAMP}
 		      )

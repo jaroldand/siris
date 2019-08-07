@@ -276,7 +276,7 @@ public class EventoReporteDomain {
 		byte[] constanciaPDF = fileGeneratorDomain.generarPDFConstanciaEnvio(parametros);
 		
 		//guardar el file en bd
-		Long idFile = fileDomain.registrarConstanciaPDFFile(user, constanciaPDF, parametros.getIdEvento(), parametros.getInforme().getFecIniInterrupcion());
+		fileDomain.registrarConstanciaPDFFile(user, constanciaPDF, parametros.getIdEvento(), parametros.getInforme().getFecIniInterrupcion());
 		
 		//actualizar el estado del evento
 		BaseParam<Evento> param = new BaseParam<Evento>();
@@ -288,7 +288,7 @@ public class EventoReporteDomain {
 		mapper.enviarEventoReporte(param);
 		
 		//registrar bitacora de la constancia
-		notificacionDomain.generarConstanciaEnvio(parametros.getIdEvento(), idFile, user);
+		notificacionDomain.generarConstanciaEnvio(parametros.getIdEvento(), user);
 		
 		return parametros;
 	}
