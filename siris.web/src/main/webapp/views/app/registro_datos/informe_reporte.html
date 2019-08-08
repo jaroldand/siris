@@ -64,9 +64,9 @@
                         
                         
                         <div class="col-md-3"></div>
-                        <div class="col-md-9" v-show="model.is_otro_evento">
-                       		<div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label">
-                                   <input class="mdl-textfield__input" type="text" id="det_tipo_evento" name="det_tipo_evento">
+                        <div class="col-md-9" v-show="is_otro_evento">
+                       		<div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label" v-bind:class="{ 'is-dirty': (model.informe.descTipEvento ? true : false) }">
+                                   <input class="mdl-textfield__input" type="text" id="det_tipo_evento" name="det_tipo_evento" v-model="model.informe.descTipEvento">
                                    <label class="mdl-textfield__label" for="det_tipo_evento">Detalle del tipo de evento</label>
                             </div>
                        	</div>

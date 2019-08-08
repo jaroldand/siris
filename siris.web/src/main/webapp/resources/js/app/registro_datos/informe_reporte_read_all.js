@@ -1,8 +1,8 @@
 var app = new Vue({
     el: "#app",
     data: {
-    	reporte_active : true,//para el menu
-    	historic_active : false,//para el menu
+    	reporte_active : false,//para el menu
+    	historic_active : true,//para el menu
     	
     	//constants
     	tipo_productos : jbase.prop.tipo_productos,
@@ -18,6 +18,8 @@ var app = new Vue({
     	//combos
     	tipos_eventos : [],
     	impactos : [],
+    	eval_question1 : [],
+    	eval_others : [],
     	
     	
     	//grillas y multiselect
@@ -35,6 +37,7 @@ var app = new Vue({
     	
     	is_evento_ciber : false,
     	is_upload_open : false,
+    	is_otro_evento : false,
     	
     	impacto_load : {
     		financiero: {},
@@ -63,8 +66,6 @@ var app = new Vue({
         model: {
         	idEvento : jbase.prop.id_evento,
         	
-        	is_otro_evento : false,
-        	
         	productos : [],
         	servicios : [],
         	procesos : [],
@@ -78,7 +79,18 @@ var app = new Vue({
         	canales : [],
         	canalesActivos :[],
         	impacto : [],
-        	correoInforme : {}
+        	correoInforme : {},
+        	
+        	evaluacion : {
+        		eval014000 : {},
+        		eval014001 : {},
+        		eval014002 : {},
+        		eval014003 : {},
+        		eval014004 : {},
+        		eval014005 : {}
+        	},
+        	devolucion : {},
+        	eval_diff : {}
         }
     },
     
@@ -113,6 +125,50 @@ var app = new Vue({
 				self.tipos_eventos = data;
 			}
 		});
+    	
+    	//load evaluacion question1
+    	jajax.apiAuthGet({
+			url : jbase.urls.eval_question1,
+			success : function(data) {
+				self.eval_question1 = data;
+			}
+		});
+    	
+    	//load evaluacion otros
+    	jajax.apiAuthGet({
+			url : jbase.urls.eval_otros,
+			success : function(data) {
+				self.eval_others = data;
+			}
+		});
+    	
+    	
+    	//load data evaluacion
+    	var url_evaluacion = jbase.getStringReplaced(jbase.urls.load_evaluacion, [jbase.prop.id_evento]);
+    	jajax.apiAuthGet({
+			url : url_evaluacion,
+			success : function(data) {
+				self.model.evaluacion = data;
+			}
+    	});
+    	
+    	//load data devolucion
+    	var url_devolucion = jbase.getStringReplaced(jbase.urls.load_devolucion, [jbase.prop.id_evento]);
+    	jajax.apiAuthGet({
+			url : url_devolucion,
+			success : function(data) {
+				self.model.devolucion = data;
+			}
+    	});
+    	
+    	//load data eval diff
+    	var url_eval_diff = jbase.getStringReplaced(jbase.urls.eval_diff, [jbase.prop.id_evento]);
+    	jajax.apiAuthGet({
+			url : url_eval_diff,
+			success : function(data) {
+				self.model.eval_diff = data[0];
+			}
+    	});
     	
     	
     	var url_enviar = jbase.getStringReplaced(jbase.urls.load_reporte, [jbase.prop.id_evento]);
@@ -384,28 +440,23 @@ var app = new Vue({
 			}
 		});
     	
-    	
-    	//load impactos
-    	jajax.apiAuthGet({
-			url : jbase.urls.impactos,
-			success : function(data) {
-				
-				self.impactos = data;
-			}
-		});
-    	
     },
     
     watch: {
     	"model.informe.tipEvento": function() {
     		
     		this.is_evento_ciber = false;
-    		this.model.is_otro_evento = false;
+    		this.is_otro_evento = false;
     		
     		if(this.model.informe.tipEvento === jbase.prop.tip_evento_003000){
     			this.is_evento_ciber = true;
+    			this.model.informe.descTipEvento = null;
     		} else if(this.model.informe.tipEvento === jbase.prop.tip_evento_003009){
-    			this.model.is_otro_evento = true;
+    			this.is_otro_evento = true;
+    			this.model.informe.eventoSegBol = false;
+    		} else{
+    			this.model.informe.eventoSegBol = false;
+    			this.model.informe.descTipEvento = null;
     		}
         },
         "model.informe.eventoSegBol": function() {
@@ -483,7 +534,7 @@ var app = new Vue({
     		
     	},
     	regresar: function(evt) {
-    		flujoRegistro.setStep('module/tablero_registro','00');
+    		flujoRegistro.setStep('module/historico','00');
     	},
     	descargar: function(_idDocumento) {
     		jbase.wait(true);

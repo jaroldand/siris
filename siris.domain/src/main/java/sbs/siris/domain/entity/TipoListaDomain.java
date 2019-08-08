@@ -67,6 +67,14 @@ public class TipoListaDomain extends BaseDomain<TipoLista> {
 	public List<ClaveValor> obtenerImpactosInterrupcion() {
 		return listaPorGrupo(GrupoValor.SIRIS_IMPACTO_IMPACTO_DETAIL);
 	}
+	
+	public List<ClaveValor> obtenerPreguntaEvaluacion1() {
+		return listaPorGrupo(GrupoValor.SIRIS_EVALUACION_RESP_EVALUACION_QUESTION1);
+	}
+	
+	public List<ClaveValor> obtenerPreguntaEvaluacionOtros() {
+		return listaPorGrupo(GrupoValor.SIRIS_EVALUACION_RESP_EVALUACION_QUESTION_OTHERS);
+	}
 
 	public List<TipoLista> obtenerUbigeoDepartamentos() {
 		return listaPorKey("%0000");

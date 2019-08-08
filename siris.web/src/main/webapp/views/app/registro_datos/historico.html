@@ -3,6 +3,8 @@
 /*<![CDATA[*/
     
 	jbase.prop.id_ent_vig = /*[[${T(sbs.siris.web.controller.base.HelperController).getIdEntVig()}]]*/ "";
+	
+	jbase.prop.valor_todos = /*[[${T(sbs.siris.cross.resources.ConstanteValor).VALOR_TODOS}]]*/ "";
 /*]]>*/
 </script>
 
@@ -47,7 +49,18 @@
                                     		<td class="mdl-data-table__cell--non-numeric">{{item.descCortaEvento}}</td>
                                     		<td class="mdl-data-table__cell--non-numeric">{{item.fechaEventoBandeja}}</td>
                                     		<td class="mdl-data-table__cell--non-numeric">{{item.fechaEnvio}}</td>
-                                    		<td class="mdl-data-table__cell--non-numeric"></td>
+                                    		<td class="mdl-data-table__cell--non-numeric">
+                                    			<div>
+                                    				<a href="javascript:void(0)" class="mdl-button mdl-button--colored mdl-js-button mdl-js-ripple-effect sbs-button-clean"
+                                    					@click.prevent="showModuleForm('module/informe_reporte_read_all', item.idEvento)"
+                                    					>
+                                                        <span><i class="fas fa-search-plus"></i></span>
+                                                    </a>
+                                                    <a href="javascript:void(0)" class="mdl-button mdl-button--colored mdl-js-button mdl-js-ripple-effect sbs-button-clean">
+                                                        <span><i class="fas fa-file-export"></i></span>
+                                                    </a>
+                                                </div>
+                                    		</td>
                                     	</tr>
                                 	</tbody>
                                 	<tfoot>

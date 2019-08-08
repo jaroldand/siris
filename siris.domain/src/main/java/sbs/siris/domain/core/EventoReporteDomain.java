@@ -31,6 +31,10 @@ import sbs.siris.domain.entity.CanalesDomain;
 import sbs.siris.domain.entity.ClaveValor;
 import sbs.siris.domain.entity.Correo;
 import sbs.siris.domain.entity.CorreoDomain;
+import sbs.siris.domain.entity.Devolucion;
+import sbs.siris.domain.entity.DevolucionDomain;
+import sbs.siris.domain.entity.Evaluacion;
+import sbs.siris.domain.entity.EvaluacionDomain;
 import sbs.siris.domain.entity.Evento;
 import sbs.siris.domain.entity.EventoDomain;
 import sbs.siris.domain.entity.File;
@@ -95,6 +99,12 @@ public class EventoReporteDomain {
 	@Autowired
 	private CorreoDomain correoDomain;
 	
+	@Autowired
+	private EvaluacionDomain evaluacionDomain;
+	
+	@Autowired
+	private DevolucionDomain devolucionDomain;
+	
 	public List<BandejaDTO> obtenerEventosBandeja(String idEntVig) {
 		
 		BaseParam<BandejaDTO> param = new BaseParam<BandejaDTO>();
@@ -107,7 +117,7 @@ public class EventoReporteDomain {
 	public List<BandejaDTO> obtenerEventosBandejaHistorica(String idEntVig, String anio) {
 		
 		Map<String, Object> keyMap = new HashMap<String, Object>();
-		keyMap.put("Anio", anio);
+		keyMap.put("Anio",  ConstanteValor.VALOR_TODOS.toUpperCase().equals(anio.toUpperCase()) ? "" : anio);
 		
 		BaseParam<BandejaDTO> param = new BaseParam<BandejaDTO>();
 		param.setKey(idEntVig);
@@ -166,6 +176,28 @@ public class EventoReporteDomain {
 		mapper.eliminarEventoReporte(param);
 		
 		return true;
+	}
+	
+	public Map<String, Evaluacion> loadEvaluacionEvento(Integer idEvento) {
+	
+		List<Evaluacion> evaluaciones = evaluacionDomain.getListEntity(idEvento, null, false);
+
+		Map<String, Evaluacion> evaluacion = new HashMap<String, Evaluacion>();
+		evaluaciones.forEach((p)-> {
+			
+			evaluacion.put("eval"+p.getTipoEvaluacion(), p);
+		});
+		
+		return evaluacion;
+	}
+	
+	public Devolucion loadDevolucionEvento(Integer idEvento) {
+		
+		List<Devolucion> devoluciones = devolucionDomain.getListEntity(idEvento, null, false);
+		
+		if(CollectionUtils.isEmpty(devoluciones)) return new Devolucion();
+		
+		return devoluciones.get(0);
 	}
 	
 	public Map<String, Validacion> loadValidacionEvento(Integer idEvento) {
@@ -469,6 +501,15 @@ public class EventoReporteDomain {
 		
 		BaseParam<String> param = new BaseParam<String>();
 		mapper.obtenerAniosHist(param);
+		
+		return param.getList();
+	}
+	
+	public List<String> obtenerDiffEval(Long idEvento) {
+		
+		BaseParam<String> param = new BaseParam<String>();
+		param.setKey(idEvento);
+		mapper.obtenerDiffEval(param);
 		
 		return param.getList();
 	}

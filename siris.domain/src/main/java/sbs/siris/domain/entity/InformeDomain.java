@@ -8,7 +8,6 @@ import org.springframework.util.CollectionUtils;
 
 import sbs.siris.data.InformeMapper;
 import sbs.siris.domain.base.BaseDomain;
-import sbs.siris.domain.entity.base.BaseParam;
 
 
 

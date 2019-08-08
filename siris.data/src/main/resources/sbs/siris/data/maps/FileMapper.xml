@@ -74,6 +74,16 @@
 		}
 	</update>
 	
+	<update id="inactivateFileByEntidad" statementType="CALLABLE" parameterType="sbs.siris.domain.entity.base.BaseParam">
+		{
+			call Pkg_Siris_Mantenimiento.Pr_File_Inactivate(
+			      #{entity.idEntidad,jdbcType=NUMERIC},
+			      #{entity.idTabla,jdbcType=NUMERIC},
+			      #{entity.auditUserMod,jdbcType=VARCHAR}
+		      )
+		}
+	</update>
+	
 	<delete id="deleteByPrimaryKey" statementType="CALLABLE" parameterType="sbs.siris.domain.entity.base.BaseParam">
 		{ call Pkg_Siris_Mantenimiento.Pr_File_Delete(#{key,jdbcType=NUMERIC}) }
   </delete>

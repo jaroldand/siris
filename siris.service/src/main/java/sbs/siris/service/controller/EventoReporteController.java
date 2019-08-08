@@ -23,6 +23,8 @@ import org.springframework.web.multipart.MultipartFile;
 
 import sbs.siris.domain.core.EventoReporteDomain;
 import sbs.siris.domain.entity.ClaveValor;
+import sbs.siris.domain.entity.Devolucion;
+import sbs.siris.domain.entity.Evaluacion;
 import sbs.siris.domain.entity.File;
 import sbs.siris.domain.entity.FileDomain;
 import sbs.siris.domain.entity.Validacion;
@@ -54,6 +56,20 @@ public class EventoReporteController {
 	public DeferredResult<ResponseEntity<List<BandejaDTO>>> obtenerEventosBandejaHistorica(@PathVariable String idEntVig, @PathVariable String anio) {
 		return AsyncResult.Call(() -> {
 			return new ResponseEntity<List<BandejaDTO>>(eventoReporteDomain.obtenerEventosBandejaHistorica(idEntVig, anio), HttpStatus.OK);
+		});
+	}
+	
+	@GetMapping(value = "/load/evaluacion/{idEvento}")
+	public DeferredResult<ResponseEntity<Map<String, Evaluacion>>> obtenerEvaluacion(@PathVariable Integer idEvento) {
+		return AsyncResult.Call(() -> {
+			return new ResponseEntity<Map<String, Evaluacion>>(eventoReporteDomain.loadEvaluacionEvento(idEvento), HttpStatus.OK);
+		});
+	}
+	
+	@GetMapping(value = "/load/devolucion/{idEvento}")
+	public DeferredResult<ResponseEntity<Devolucion>> obtenerDevolucion(@PathVariable Integer idEvento) {
+		return AsyncResult.Call(() -> {
+			return new ResponseEntity<Devolucion>(eventoReporteDomain.loadDevolucionEvento(idEvento), HttpStatus.OK);
 		});
 	}
 	
@@ -159,6 +175,13 @@ public class EventoReporteController {
 	public DeferredResult<ResponseEntity<List<String>>> obtenerAniosHist() {
 		return AsyncResult.Call(() -> {
 			return new ResponseEntity<List<String>>(eventoReporteDomain.obtenerAniosHist(), HttpStatus.OK);
+		});
+	}
+	
+	@GetMapping(value = "/eval_diff/{idEvento}")
+	public DeferredResult<ResponseEntity<List<String>>> obtenerDiffEval(@PathVariable Long idEvento) {
+		return AsyncResult.Call(() -> {
+			return new ResponseEntity<List<String>>(eventoReporteDomain.obtenerDiffEval(idEvento), HttpStatus.OK);
 		});
 	}
 }

@@ -13,6 +13,7 @@ public class ReporteDTO implements Serializable {
 
 	private static final long serialVersionUID = 3198480060204443378L;
 	
+	private String tipEvento;
 	private List<Informe> informe;
 	private List<Impacto> impacto;
 	private List<Canales> canales;
@@ -49,5 +50,11 @@ public class ReporteDTO implements Serializable {
 	}
 	public void setValidaciones(List<Validacion> validaciones) {
 		this.validaciones = validaciones;
+	}
+	public String getTipEvento() {
+		return tipEvento;
+	}
+	public void setTipEvento(String tipEvento) {
+		this.tipEvento = tipEvento;
 	}
 }

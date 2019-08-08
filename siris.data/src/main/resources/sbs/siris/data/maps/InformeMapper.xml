@@ -6,6 +6,7 @@
     <id column="ID_INFORME" jdbcType="NUMERIC" property="idInforme" />
     <result column="ID_EVENTO" jdbcType="NUMERIC" property="idEvento" />
     <result column="TIP_EVENTO" jdbcType="VARCHAR" property="tipEvento" />
+    <result column="DESC_TIP_EVENTO" jdbcType="VARCHAR" property="descTipEvento" />
     <result column="IS_EVENTO_SEG" jdbcType="VARCHAR" property="isEventoSeg" />
     <result column="IS_EVENTO_FIN" jdbcType="VARCHAR" property="isEventoFin" />
     <result column="FEC_INI_INTERRUPCION" jdbcType="DATE" property="fecIniInterrupcion" />
@@ -48,6 +49,7 @@
 		      #{entity.idInforme,jdbcType=NUMERIC},
 				#{entity.idEvento,jdbcType=NUMERIC},
 				#{entity.tipEvento,jdbcType=VARCHAR},
+				#{entity.descTipEvento,jdbcType=VARCHAR},
 				#{entity.isEventoSeg,jdbcType=VARCHAR},
 				#{entity.isEventoFin,jdbcType=VARCHAR},
 				#{entity.fecIniInterrupcion,jdbcType=TIMESTAMP},
@@ -84,6 +86,7 @@
 			  #{key,jdbcType=NUMERIC},
 		     	#{entity.idEvento,jdbcType=NUMERIC},
 				#{entity.tipEvento,jdbcType=VARCHAR},
+				#{entity.descTipEvento,jdbcType=VARCHAR},
 				#{entity.isEventoSeg,jdbcType=VARCHAR},
 				#{entity.isEventoFin,jdbcType=VARCHAR},
 				#{entity.fecIniInterrupcion,jdbcType=TIMESTAMP},

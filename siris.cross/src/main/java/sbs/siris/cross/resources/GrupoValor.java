@@ -15,4 +15,7 @@ public class GrupoValor {
 	public static final String SIRIS_CANALES_TIP_CANAL_DETALLE_CANALES_C = Setup.getValueKey(GRUPO_PROPERTY, "siris_canales.tip_canal_detalle.canales_c");
 	
 	public static final String SIRIS_IMPACTO_IMPACTO_DETAIL = Setup.getValueKey(GRUPO_PROPERTY, "siris_impacto.impacto_detail");
+	
+	public static final String SIRIS_EVALUACION_RESP_EVALUACION_QUESTION1 = Setup.getValueKey(GRUPO_PROPERTY, "siris_evaluacion.resp_evaluacion.question1");
+	public static final String SIRIS_EVALUACION_RESP_EVALUACION_QUESTION_OTHERS = Setup.getValueKey(GRUPO_PROPERTY, "siris_evaluacion.resp_evaluacion.question_others");
 }

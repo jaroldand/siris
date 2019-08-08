@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="reportePerfil" pageWidth="595" pageHeight="842" columnWidth="555" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20" uuid="2b66c828-28a1-4206-abbd-7b1cc4babeaf">
 	<property name="ireport.zoom" value="1.5000000000000002"/>
-	<property name="ireport.x" value="21"/>
-	<property name="ireport.y" value="131"/>
+	<property name="ireport.x" value="0"/>
+	<property name="ireport.y" value="245"/>
 	<style name="table">
 		<box>
 			<pen lineWidth="0.0" lineColor="#000000"/>
@@ -61,6 +61,7 @@
 		<field name="contactoTelef" class="java.lang.String"/>
 		<field name="contactoCorreo" class="java.lang.String"/>
 		<field name="fecEnvioRepInicialStr" class="java.lang.String"/>
+		<field name="descTipEvento" class="java.lang.String"/>
 	</subDataset>
 	<subDataset name="impacto" uuid="adc450ff-6e2c-46f6-bd77-5a0cb945a663">
 		<field name="tipoImpacto" class="java.lang.String"/>
@@ -94,17 +95,18 @@
 	<field name="canales" class="java.util.List"/>
 	<field name="planAccion" class="java.util.List"/>
 	<field name="validaciones" class="java.util.List"/>
+	<field name="tipEvento" class="java.lang.String"/>
 	<background>
 		<band splitType="Stretch"/>
 	</background>
 	<title>
 		<band height="104" splitType="Stretch">
 			<staticText>
-				<reportElement mode="Opaque" x="18" y="72" width="232" height="20" forecolor="#0058B6" uuid="19d183a8-e84f-415f-b7bb-db828e2c4600"/>
+				<reportElement mode="Opaque" x="18" y="79" width="232" height="20" forecolor="#0058B6" uuid="19d183a8-e84f-415f-b7bb-db828e2c4600"/>
 				<textElement verticalAlignment="Bottom">
 					<font size="11" isBold="true" isUnderline="true" isStrikeThrough="false"/>
 				</textElement>
-				<text><![CDATA[Confirmación de Envío]]></text>
+				<text><![CDATA[Informe de Envío]]></text>
 			</staticText>
 			<image scaleImage="RealHeight">
 				<reportElement x="0" y="1" width="180" height="59" uuid="777304b9-fd07-47fa-a7dd-f1ca4ed44928"/>
@@ -292,14 +294,14 @@
 				</jr:list>
 			</componentElement>
 		</band>
-		<band height="61">
+		<band height="31">
 			<componentElement>
-				<reportElement x="18" y="11" width="532" height="45" uuid="a2ce77e1-4a5d-4ceb-8317-76bb68dfe26f"/>
+				<reportElement positionType="Float" stretchType="RelativeToBandHeight" x="18" y="11" width="532" height="20" isRemoveLineWhenBlank="true" isPrintWhenDetailOverflows="true" uuid="a2ce77e1-4a5d-4ceb-8317-76bb68dfe26f"/>
 				<jr:list xmlns:jr="http://jasperreports.sourceforge.net/jasperreports/components" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports/components http://jasperreports.sourceforge.net/xsd/components.xsd" printOrder="Vertical">
 					<datasetRun subDataset="informe" uuid="74d9f779-bf83-4d41-b530-5491edfbfff6">
 						<dataSourceExpression><![CDATA[new net.sf.jasperreports.engine.data.JRBeanCollectionDataSource($F{informe})]]></dataSourceExpression>
 					</datasetRun>
-					<jr:listContents height="45" width="532">
+					<jr:listContents height="20" width="532">
 						<staticText>
 							<reportElement mode="Opaque" x="0" y="0" width="96" height="20" forecolor="#0058B6" backcolor="#FFFFFF" uuid="f1052b24-e88b-43a4-ad98-12db84757604"/>
 							<textElement textAlignment="Left" verticalAlignment="Middle" rotation="None" markup="none">
@@ -317,8 +319,41 @@
 							</textElement>
 							<textFieldExpression><![CDATA[$F{tipEventoDesc}]]></textFieldExpression>
 						</textField>
+					</jr:listContents>
+				</jr:list>
+			</componentElement>
+		</band>
+		<band height="20">
+			<printWhenExpression><![CDATA["003009".equals( $F{tipEvento} )]]></printWhenExpression>
+			<componentElement>
+				<reportElement positionType="Float" stretchType="RelativeToBandHeight" x="18" y="0" width="532" height="20" isRemoveLineWhenBlank="true" uuid="8c48db45-3e5b-4d9c-849d-2e08d4afa155"/>
+				<jr:list xmlns:jr="http://jasperreports.sourceforge.net/jasperreports/components" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports/components http://jasperreports.sourceforge.net/xsd/components.xsd">
+					<datasetRun subDataset="informe" uuid="9b6cf744-3f38-496f-bb80-8dd3a6ea5b9d">
+						<dataSourceExpression><![CDATA[new net.sf.jasperreports.engine.data.JRBeanCollectionDataSource($F{informe})]]></dataSourceExpression>
+					</datasetRun>
+					<jr:listContents height="20" width="532">
+						<textField isBlankWhenNull="true">
+							<reportElement x="96" y="0" width="436" height="20" isRemoveLineWhenBlank="true" uuid="2fd8cfaa-7d04-4c16-82ba-10c2fb496e68"/>
+							<textElement verticalAlignment="Middle">
+								<paragraph leftIndent="5"/>
+							</textElement>
+							<textFieldExpression><![CDATA[$F{descTipEvento}]]></textFieldExpression>
+						</textField>
+					</jr:listContents>
+				</jr:list>
+			</componentElement>
+		</band>
+		<band height="25">
+			<printWhenExpression><![CDATA["003000".equals( $F{tipEvento} )]]></printWhenExpression>
+			<componentElement>
+				<reportElement positionType="Float" stretchType="RelativeToBandHeight" x="18" y="0" width="532" height="20" isRemoveLineWhenBlank="true" uuid="0bd52af7-962c-4163-94b2-849d94605123"/>
+				<jr:list xmlns:jr="http://jasperreports.sourceforge.net/jasperreports/components" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports/components http://jasperreports.sourceforge.net/xsd/components.xsd">
+					<datasetRun subDataset="informe" uuid="093f50ff-0f4b-47b2-81d2-c7b211b04173">
+						<dataSourceExpression><![CDATA[new net.sf.jasperreports.engine.data.JRBeanCollectionDataSource($F{informe})]]></dataSourceExpression>
+					</datasetRun>
+					<jr:listContents height="20" width="532">
 						<staticText>
-							<reportElement mode="Opaque" x="0" y="20" width="194" height="20" forecolor="#0058B6" backcolor="#FFFFFF" uuid="7c1ac614-e7ff-4cf9-be59-f0ea451cabc6"/>
+							<reportElement positionType="Float" mode="Opaque" x="0" y="0" width="194" height="20" isRemoveLineWhenBlank="true" forecolor="#0058B6" backcolor="#FFFFFF" uuid="7c1ac614-e7ff-4cf9-be59-f0ea451cabc6"/>
 							<textElement textAlignment="Left" verticalAlignment="Middle" rotation="None" markup="none">
 								<font fontName="SansSerif" size="10" isBold="true" isItalic="false" isUnderline="false" isStrikeThrough="false" pdfEncoding="Cp1252" isPdfEmbedded="false"/>
 								<paragraph lineSpacing="Single" leftIndent="5"/>
@@ -326,7 +361,7 @@
 							<text><![CDATA[1.1. Evento asociado a ciberseguridad]]></text>
 						</staticText>
 						<textField>
-							<reportElement x="194" y="20" width="338" height="20" uuid="b106859c-f821-41fa-ad39-c5dda1d4ab71"/>
+							<reportElement positionType="Float" x="194" y="0" width="338" height="20" uuid="b106859c-f821-41fa-ad39-c5dda1d4ab71"/>
 							<textElement verticalAlignment="Middle">
 								<paragraph leftIndent="5"/>
 							</textElement>
@@ -338,8 +373,8 @@
 		</band>
 		<band height="116">
 			<staticText>
-				<reportElement mode="Opaque" x="18" y="0" width="195" height="20" forecolor="#0058B6" backcolor="#FFFFFF" uuid="9d06f016-1af0-4ee0-a0a8-ecd73281b2fe"/>
-				<textElement textAlignment="Left" verticalAlignment="Middle" rotation="None" markup="none">
+				<reportElement positionType="Float" mode="Opaque" x="18" y="0" width="195" height="20" forecolor="#0058B6" backcolor="#FFFFFF" uuid="9d06f016-1af0-4ee0-a0a8-ecd73281b2fe"/>
+				<textElement textAlignment="Left" verticalAlignment="Bottom" rotation="None" markup="none">
 					<font fontName="SansSerif" size="10" isBold="true" isItalic="false" isUnderline="false" isStrikeThrough="false" pdfEncoding="Cp1252" isPdfEmbedded="false"/>
 					<paragraph lineSpacing="Single" leftIndent="5"/>
 				</textElement>

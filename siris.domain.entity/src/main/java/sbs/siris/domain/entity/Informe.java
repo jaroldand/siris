@@ -13,6 +13,8 @@ public class Informe extends BaseEntity {
     private Integer idEvento;
 
     private String tipEvento;
+    
+    private String descTipEvento;
 
     private String isEventoSeg;
     
@@ -343,6 +345,14 @@ public class Informe extends BaseEntity {
 
 	public void setEventoFinDesc(String eventoFinDesc) {
 		this.eventoFinDesc = eventoFinDesc;
+	}
+	
+	public String getDescTipEvento() {
+		return descTipEvento;
+	}
+
+	public void setDescTipEvento(String descTipEvento) {
+		this.descTipEvento = descTipEvento;
 	}
 
     @Override

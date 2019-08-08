@@ -1,7 +1,6 @@
 package sbs.siris.domain.entity;
 
 import java.io.UnsupportedEncodingException;
-import java.nio.charset.Charset;
 import java.util.Date;
 import java.util.List;
 
@@ -17,6 +16,7 @@ import sbs.siris.cross.resources.DiccionarioValor;
 import sbs.siris.cross.resources.TipoValor;
 import sbs.siris.data.FileMapper;
 import sbs.siris.domain.base.BaseDomain;
+import sbs.siris.domain.entity.base.BaseParam;
 
 
 
@@ -81,6 +81,13 @@ public class FileDomain extends BaseDomain<File> {
 	public Long registrarConstanciaPDFFile(String user, byte[] constanciaPDF, int idEvento, Date fechaIniInterrupcion) {
 		
 		File documento = new File();
+		
+		BaseParam<File> param = new BaseParam<File>();
+		documento.setIdEntidad(idEvento);
+		documento.setIdTabla(DiccionarioValor.SIRIS_EVENTO);
+		documento.setAuditUserMod(user);
+		param.setEntity(documento);
+		mapper.inactivateFileByEntidad(param);
 		
 		Evento event = eventoDomain.obtenerEventoById(idEvento);
 		

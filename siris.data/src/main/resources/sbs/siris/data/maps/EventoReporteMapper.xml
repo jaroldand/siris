@@ -30,7 +30,11 @@
   
   <resultMap type="java.lang.String" id="AnioResultMap"> 
 	  <result property="" column="ANIO"/> 
-  </resultMap> 
+  </resultMap>
+  
+  <resultMap type="java.lang.String" id="DiffEvalResultMap"> 
+	  <result property="" column="DIFF"/> 
+  </resultMap>
   
   <select id="validarEventos" statementType="CALLABLE" parameterType="sbs.siris.domain.entity.base.BaseParam">
   		{ call Pkg_Siris_Evento_Reporte.Pr_Valida_Eventos(
@@ -99,6 +103,14 @@
   	<select id="obtenerAniosHist" statementType="CALLABLE" parameterType="sbs.siris.domain.entity.base.BaseParam">
   		{ call Pkg_Siris_Evento_Reporte.Pr_Get_Anios(
 		  	#{list,mode=OUT,jdbcType=CURSOR,resultMap=AnioResultMap}
+		  )
+		}
+  	</select>
+  	
+  	<select id="obtenerDiffEval" statementType="CALLABLE" parameterType="sbs.siris.domain.entity.base.BaseParam">
+  		{ call Pkg_Siris_Intranet.Pr_Obtener_Diff_Eval(
+  			#{key,jdbcType=NUMERIC,mode=IN},
+		  	#{list,mode=OUT,jdbcType=CURSOR,resultMap=DiffEvalResultMap}
 		  )
 		}
   	</select>

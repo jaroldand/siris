@@ -32,6 +32,7 @@ var app = new Vue({
 			success : function(data) {
 				console.log(data);
 				self.anios_hist = data;
+				self.anios_hist.push( jbase.prop.valor_todos );
 				
 				self.model.anio_select = data[0];
 				
@@ -43,6 +44,8 @@ var app = new Vue({
 						console.log("historico data!");
 						console.log(data);
 						self.model.list_events_hist = data;
+						
+						self.update_pagination = true;
 					}
 				});
 			}
@@ -52,6 +55,12 @@ var app = new Vue({
     },
     
     methods: {
+    	showModuleForm: function(page, id_event) {
+    		var self = this;
+    		
+    		flujoRegistro.setStep(page+"/"+id_event,'00');
+    		
+    	},
     	load_data: function() {
     		
     	},
@@ -63,8 +72,6 @@ var app = new Vue({
 			jajax.apiAuthGet({
 				url : url_enviar,
 				success : function(data) {
-					console.log("historico data!");
-					console.log(data);
 					
 					jbase.wait(false);
 					self.update_pagination = true;
@@ -98,7 +105,7 @@ var app = new Vue({
     mounted: function() {
     	
     	$("#app").show();
-    	
+    	/*
     	$('#myTable').pageMe({
 			pagerSelector:'#myPager',
 			activeColor: 'blue',
@@ -107,7 +114,7 @@ var app = new Vue({
 			showPrevNext:true,
 			hidePageNumbers:false,
 			perPage:10
-		});
+		});*/
     }
 
 });

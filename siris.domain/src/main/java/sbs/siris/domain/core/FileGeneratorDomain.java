@@ -37,6 +37,7 @@ public class FileGeneratorDomain {
         parametros.getInforme().setContactoCorreo(parametros.getCorreoInforme().getDesCorreo());//paso temporal del correo del informe
         informeLista.add(parametros.getInforme());
         
+        reporte.setTipEvento(parametros.getInforme().getTipEvento());
         reporte.setInforme(informeLista);
         
         reporte.setImpacto(parametros.getImpacto());

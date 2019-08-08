@@ -25,4 +25,6 @@ public interface EventoReporteMapper {
 	void eliminarEventoReporte(BaseParam<Evento> param);
 	
 	void obtenerAniosHist(BaseParam<String> param);
+	
+	void obtenerDiffEval(BaseParam<String> param);
 }

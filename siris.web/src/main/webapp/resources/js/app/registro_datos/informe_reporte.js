@@ -35,6 +35,7 @@ var app = new Vue({
     	
     	is_evento_ciber : false,
     	is_upload_open : false,
+    	is_otro_evento : false,
     	
     	impacto_load : {
     		financiero: {},
@@ -46,8 +47,6 @@ var app = new Vue({
     	
         model: {
         	idEvento : jbase.prop.id_evento,
-        	
-        	is_otro_evento : false,
         	
         	productos : [],
         	servicios : [],
@@ -326,12 +325,17 @@ var app = new Vue({
     	"model.informe.tipEvento": function() {
     		
     		this.is_evento_ciber = false;
-    		this.model.is_otro_evento = false;
+    		this.is_otro_evento = false;
     		
     		if(this.model.informe.tipEvento === jbase.prop.tip_evento_003000){
     			this.is_evento_ciber = true;
+    			this.model.informe.descTipEvento = null;
     		} else if(this.model.informe.tipEvento === jbase.prop.tip_evento_003009){
-    			this.model.is_otro_evento = true;
+    			this.is_otro_evento = true;
+    			this.model.informe.eventoSegBol = false;
+    		} else{
+    			this.model.informe.eventoSegBol = false;
+    			this.model.informe.descTipEvento = null;
     		}
         },
         "model.informe.eventoSegBol": function() {
@@ -558,7 +562,6 @@ var app = new Vue({
      	enviar_informe: function(evt) {
      		var self = this;
      		var is_no_valid = false;
-     		
      		$('#regiones_interrup').addClass("send_required");
      		$( '#canal_interrup' ).next().find('> .ms-options > ul').find('input').each(function() {
 				var $this = $(this);
@@ -1086,13 +1089,27 @@ var app = new Vue({
             		
             		} else {//marca la opcion Ninguno
             			
+            			var checkeados = [];
             			$( '#canal_interrup' ).next().find('> .ms-options > ul').find('input').each(function() {
                 		    var $this = $(this);
                 		    
                 		    if($this.prop('value') !== thisOpt.val()){
                 		    	$this.prop('disabled', false);
                 		    }
+                		    
+                		    
+                		    checkeados.push({
+            		    		name: $this.prop('title'),
+            		    		value: $this.prop('value'),
+            		    		checked: false,
+            		    		attributes : {
+            		    			disabled: false
+            		    		}
+                		    });
+                		    
             			});
+            			
+            			$('#canal_interrup').multiselect( 'loadOptions', checkeados);
             			
             			$('#regiones_interrup').multiselect('disable', false);
             			$('#can_nor_interrup').multiselect('disable', false);

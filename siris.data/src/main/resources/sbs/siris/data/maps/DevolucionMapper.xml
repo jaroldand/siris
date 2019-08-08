@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="sbs.siris.data.DevolucionMapper">
+  <resultMap id="DevolucionResultMap" type="sbs.siris.domain.entity.Devolucion">
+    <id column="ID_DEVOLUCION" jdbcType="NUMERIC" property="idDevolucion" />
+    <result column="ID_EVENTO" jdbcType="NUMERIC" property="idEvento" />
+    <result column="MOTIVO" jdbcType="VARCHAR" property="motivo" />
+    <result column="FECHA_DEVOLUCION" jdbcType="TIMESTAMP" property="fechaDevolucion" />
+    <result column="IND_ACTIVO" jdbcType="NUMERIC" property="indActivo" />
+    <result column="AUDIT_USER_CREA" jdbcType="VARCHAR" property="auditUserCrea" />
+    <result column="AUDIT_FEC_CREA" jdbcType="TIMESTAMP" property="auditFecCrea" />
+    <result column="AUDIT_USER_MOD" jdbcType="VARCHAR" property="auditUserMod" />
+    <result column="AUDIT_FEC_MOD" jdbcType="TIMESTAMP" property="auditFecMod" />
+  </resultMap>
+  
+  
+  <select id="selectList" statementType="CALLABLE" parameterType="sbs.siris.domain.entity.base.BaseParam">
+		{
+		  call Pkg_Siris_Mantenimiento.Pr_Devolucion_GetByEvent(
+			#{key,jdbcType=NUMERIC},
+			#{list,mode=OUT,jdbcType=CURSOR,resultMap=DevolucionResultMap}
+		  )
+		}
+  </select>
+  
+</mapper>

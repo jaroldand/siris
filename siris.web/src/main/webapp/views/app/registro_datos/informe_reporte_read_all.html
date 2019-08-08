@@ -36,7 +36,7 @@
 
     <div class="content">    
         <div class="col-md-12">
-         <fieldset><legend>Confirmación de Envío</legend>
+         <fieldset><legend>Histórico</legend>
             <div class="row sbs-rectangle">
 	         <div class="card-body">
 	         	 <div class="alert alert-secondary">
@@ -115,9 +115,9 @@
                         
                         
                         <div class="col-md-3"></div>
-                        <div class="col-md-9" v-show="model.is_otro_evento">
-                       		<div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label">
-                                   <input class="mdl-textfield__input" type="text" id="det_tipo_evento" name="det_tipo_evento">
+                        <div class="col-md-9" v-show="is_otro_evento">
+                       		<div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label is-disabled" v-bind:class="{ 'is-dirty': (model.informe.descTipEvento ? true : false) }">
+                                   <input class="mdl-textfield__input" type="text" id="det_tipo_evento" name="det_tipo_evento" v-model="model.informe.descTipEvento" disabled="disabled">
                                    <label class="mdl-textfield__label" for="det_tipo_evento">Detalle del tipo de evento</label>
                             </div>
                        	</div>
@@ -700,6 +700,107 @@
            		</div>
            		
            		
+           		<div class="alert alert-secondary" >
+           			<div class="row">
+           				<div class="col-md-12"><p>Evaluación</p></div>
+           				
+           				<div class="col-md-5">
+                        	<p>1. El informe fue enviado {{model.eval_diff}} días luego de la ocurrencia del evento.</p>
+                       	</div>
+                       	<div class="col-md-7">
+                       		<div class="mdl-selectfield mdl-js-selectfield mdl-selectfield--floating-label is-disabled" v-bind:class="{ 'is-dirty': (model.evaluacion.eval014000.respEvaluacion ? true : false) }">
+                               <select id="question1" name="question1" class="mdl-selectfield__select" disabled="disabled" v-model="model.evaluacion.eval014000.respEvaluacion">
+	                                <option v-for="obj in eval_question1" v-bind:value="obj.key">
+                                        {{ obj.value }}
+                                    </option>
+	                            </select>
+                               <div class="mdl-selectfield__icon"><i class="fas fa-sort-down"></i></div>
+                               <label class="mdl-selectfield__label" for="question1">Evaluación</label>
+                           </div>
+                       	</div>
+                       	
+                       	<div class="col-md-5">
+                        	<p>2. ¿Las medidas tomadas para superar el evento fueron razonables?</p>
+                       	</div>
+                       	<div class="col-md-7">
+                       		<div class="mdl-selectfield mdl-js-selectfield mdl-selectfield--floating-label is-disabled" v-bind:class="{ 'is-dirty': (model.evaluacion.eval014001.respEvaluacion ? true : false) }">
+                               <select id="question2" name="question2" class="mdl-selectfield__select" disabled="disabled" v-model="model.evaluacion.eval014001.respEvaluacion">
+	                                <option v-for="obj in eval_others" v-bind:value="obj.key">
+                                        {{ obj.value }}
+                                    </option>
+	                            </select>
+                               <div class="mdl-selectfield__icon"><i class="fas fa-sort-down"></i></div>
+                               <label class="mdl-selectfield__label" for="question2">Evaluación</label>
+                           </div>
+                       	</div>
+                       	
+                       	<div class="col-md-5">
+                        	<p>3. ¿Los planes de acción posteriores al evento son razonables?</p>
+                       	</div>
+                       	<div class="col-md-7">
+                       		<div class="mdl-selectfield mdl-js-selectfield mdl-selectfield--floating-label is-disabled" v-bind:class="{ 'is-dirty': (model.evaluacion.eval014002.respEvaluacion ? true : false) }">
+                               <select id="question3" name="question3" class="mdl-selectfield__select" disabled="disabled" v-model="model.evaluacion.eval014002.respEvaluacion">
+	                                <option v-for="obj in eval_others" v-bind:value="obj.key">
+                                        {{ obj.value }}
+                                    </option>
+	                            </select>
+                               <div class="mdl-selectfield__icon"><i class="fas fa-sort-down"></i></div>
+                               <label class="mdl-selectfield__label" for="question3">Evaluación</label>
+                           </div>
+                       	</div>
+                       	
+                       	<div class="col-md-5">
+                        	<p>4. ¿Requiere tomar acciones adicionales?</p>
+                       	</div>
+                       	<div class="col-md-7">
+                       		<div class="mdl-selectfield mdl-js-selectfield mdl-selectfield--floating-label is-disabled" v-bind:class="{ 'is-dirty': (model.evaluacion.eval014003.respEvaluacion ? true : false) }">
+                               <select id="question4" name="question4" class="mdl-selectfield__select" disabled="disabled" v-model="model.evaluacion.eval014003.respEvaluacion">
+	                                <option v-for="obj in eval_others" v-bind:value="obj.key">
+                                        {{ obj.value }}
+                                    </option>
+	                            </select>
+                               <div class="mdl-selectfield__icon"><i class="fas fa-sort-down"></i></div>
+                               <label class="mdl-selectfield__label" for="question4">Evaluación</label>
+                           </div>
+                       	</div>
+                       	
+                       	<div class="col-md-12">
+                        	<p>5. Describir las acciones ejecutadas: Precisar si se emitió comentario o se requirió información a través de Oficio/correo/llamada telefónica u otro.</p>
+                       	</div>
+                       	<div class="col-md-12">
+		           			<div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label is-disabled" v-bind:class="{ 'is-dirty': (model.evaluacion.eval014004.respEvaluacion ? true : false) }">
+							    <textarea class="mdl-textfield__input" type="text" rows= "3" id="question5" maxlength="800" disabled="disabled" v-model="model.evaluacion.eval014004.respEvaluacion"></textarea>
+							</div>
+						</div>
+						
+						<div class="col-md-12">
+                        	<p>6. Comentarios adicionales (opcional)</p>
+                       	</div>
+                       	<div class="col-md-12">
+		           			<div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label is-disabled" v-bind:class="{ 'is-dirty': (model.evaluacion.eval014005.respEvaluacion ? true : false) }">
+							    <textarea class="mdl-textfield__input" type="text" rows= "3" id="question6" maxlength="800" disabled="disabled" v-model="model.evaluacion.eval014005.respEvaluacion"></textarea>
+							</div>
+						</div>
+           				
+           			</div>
+           		</div>
+           		
+           		
+           		<div class="alert alert-secondary" v-show="model.devolucion.idDevolucion ? true : false">
+           			<div class="row">
+           				<div class="col-md-12"><p>Devolución</p></div>
+           				<div class="col-md-12">
+                        	<p>Mensaje de Devolución</p>
+                       	</div>
+                       	<div class="col-md-12">
+		           			<div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label is-disabled" v-bind:class="{ 'is-dirty': (model.devolucion.motivo ? true : false) }">
+							    <textarea class="mdl-textfield__input" type="text" rows= "3" id="devolucion" maxlength="800" disabled="disabled" v-model="model.devolucion.motivo"></textarea>
+							</div>
+						</div>
+           				
+           			</div>
+           		</div>
+           		
 	         </div>
           </div>
          </fieldset>
@@ -709,16 +810,9 @@
          <div class="form-group row"></div>
         
         <div class="form-group row">
-           	<div class="offset-md-3 col-md-3">
-            </div>
-            <div class="col-md-3">
-                 <a href="javascript:void(0)" class="btn btn-block mdl-button mdl-js-button mdl-button--raised mdl-button--colored mdl-js-ripple-effect sbs-submit" @click.exact="descargar_constancia">
-                     <span><i class="fas fa-download"></i>Descargar</span>
-                 </a>
-            </div>
-            <div class="col-md-3">
+            <div class="offset-md-9 col-md-3">
                 <a href="javascript:void(0)" class="btn btn-block mdl-button mdl-js-button mdl-button--raised mdl-button--colored mdl-js-ripple-effect sbs-submit" @click.exact="regresar">
-                    <span><i class="fas fa-window-close"></i>Regresar a Bandeja</span>
+                    <span><i class="fas fa-window-close"></i>Regresar</span>
                 </a>
             </div>
 	    </div>

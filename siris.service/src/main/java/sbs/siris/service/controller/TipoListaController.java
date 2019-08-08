@@ -44,4 +44,18 @@ public class TipoListaController extends BaseController<TipoLista, String> {
 			return new ResponseEntity<List<ClaveValor>>(((TipoListaDomain) domain).obtenerImpactosInterrupcion(), HttpStatus.OK);
 		});
 	}
+	
+	@GetMapping("/question1")
+	public DeferredResult<ResponseEntity<List<ClaveValor>>> obtenerEvalQuestions1() {
+		return AsyncResult.Call(() -> {
+			return new ResponseEntity<List<ClaveValor>>(((TipoListaDomain) domain).obtenerPreguntaEvaluacion1(), HttpStatus.OK);
+		});
+	}
+	
+	@GetMapping("/question_otros")
+	public DeferredResult<ResponseEntity<List<ClaveValor>>> obtenerEvalQuestionsOtros() {
+		return AsyncResult.Call(() -> {
+			return new ResponseEntity<List<ClaveValor>>(((TipoListaDomain) domain).obtenerPreguntaEvaluacionOtros(), HttpStatus.OK);
+		});
+	}
 }
