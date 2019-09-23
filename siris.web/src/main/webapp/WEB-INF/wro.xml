@@ -93,6 +93,8 @@
 	<group name="js_app_tablero">
 		<js>/resources/js/pagination.js</js>
 		<js>/resources/js/app/registro_datos/tablero_registro.js</js>
+		
+		<js>/resources/js/tooltipster/tooltipster.bundle.min.js</js>
 	</group>
 	
 	<group name="js_app_historico">
@@ -133,7 +135,9 @@
 	<!-- ================================== -->
 	<!-- ================================== -->
 	<!-- FIN: INTERRUPCIONES  -->
-	
+	<group name="css_tablero_registro">
+		<css>/resources/css/tooltipster/tooltipster.bundle.min.css</css>
+	</group>
 	
 
 </groups>

@@ -2,7 +2,7 @@
 <jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="reportePerfil" pageWidth="595" pageHeight="842" columnWidth="555" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20" uuid="2b66c828-28a1-4206-abbd-7b1cc4babeaf">
 	<property name="ireport.zoom" value="1.5000000000000002"/>
 	<property name="ireport.x" value="0"/>
-	<property name="ireport.y" value="245"/>
+	<property name="ireport.y" value="1747"/>
 	<style name="table">
 		<box>
 			<pen lineWidth="0.0" lineColor="#000000"/>
@@ -327,7 +327,7 @@
 			<printWhenExpression><![CDATA["003009".equals( $F{tipEvento} )]]></printWhenExpression>
 			<componentElement>
 				<reportElement positionType="Float" stretchType="RelativeToBandHeight" x="18" y="0" width="532" height="20" isRemoveLineWhenBlank="true" uuid="8c48db45-3e5b-4d9c-849d-2e08d4afa155"/>
-				<jr:list xmlns:jr="http://jasperreports.sourceforge.net/jasperreports/components" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports/components http://jasperreports.sourceforge.net/xsd/components.xsd">
+				<jr:list xmlns:jr="http://jasperreports.sourceforge.net/jasperreports/components" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports/components http://jasperreports.sourceforge.net/xsd/components.xsd" printOrder="Vertical">
 					<datasetRun subDataset="informe" uuid="9b6cf744-3f38-496f-bb80-8dd3a6ea5b9d">
 						<dataSourceExpression><![CDATA[new net.sf.jasperreports.engine.data.JRBeanCollectionDataSource($F{informe})]]></dataSourceExpression>
 					</datasetRun>
@@ -347,7 +347,7 @@
 			<printWhenExpression><![CDATA["003000".equals( $F{tipEvento} )]]></printWhenExpression>
 			<componentElement>
 				<reportElement positionType="Float" stretchType="RelativeToBandHeight" x="18" y="0" width="532" height="20" isRemoveLineWhenBlank="true" uuid="0bd52af7-962c-4163-94b2-849d94605123"/>
-				<jr:list xmlns:jr="http://jasperreports.sourceforge.net/jasperreports/components" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports/components http://jasperreports.sourceforge.net/xsd/components.xsd">
+				<jr:list xmlns:jr="http://jasperreports.sourceforge.net/jasperreports/components" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports/components http://jasperreports.sourceforge.net/xsd/components.xsd" printOrder="Vertical">
 					<datasetRun subDataset="informe" uuid="093f50ff-0f4b-47b2-81d2-c7b211b04173">
 						<dataSourceExpression><![CDATA[new net.sf.jasperreports.engine.data.JRBeanCollectionDataSource($F{informe})]]></dataSourceExpression>
 					</datasetRun>
@@ -592,7 +592,7 @@
 				</jr:list>
 			</componentElement>
 		</band>
-		<band height="74">
+		<band height="74" splitType="Prevent">
 			<staticText>
 				<reportElement mode="Opaque" x="18" y="0" width="100" height="20" forecolor="#0058B6" backcolor="#FFFFFF" uuid="e25b46cd-70c3-4382-9f01-b965356c150c"/>
 				<textElement textAlignment="Left" verticalAlignment="Middle" rotation="None" markup="none">
@@ -690,7 +690,7 @@
 				</jr:table>
 			</componentElement>
 		</band>
-		<band height="48">
+		<band height="48" splitType="Prevent">
 			<staticText>
 				<reportElement mode="Opaque" x="18" y="0" width="100" height="20" forecolor="#0058B6" backcolor="#FFFFFF" uuid="1e18102e-225a-4ea5-b82c-c3dca8866f5f"/>
 				<textElement textAlignment="Left" verticalAlignment="Middle" rotation="None" markup="none">
@@ -739,7 +739,7 @@
 				</jr:table>
 			</componentElement>
 		</band>
-		<band height="46">
+		<band height="46" splitType="Prevent">
 			<staticText>
 				<reportElement mode="Opaque" x="18" y="0" width="100" height="20" forecolor="#0058B6" backcolor="#FFFFFF" uuid="b9831421-6bed-457e-b56b-b6738b618521"/>
 				<textElement textAlignment="Left" verticalAlignment="Middle" rotation="None" markup="none">
@@ -790,7 +790,7 @@
 				</jr:table>
 			</componentElement>
 		</band>
-		<band height="44">
+		<band height="44" splitType="Prevent">
 			<staticText>
 				<reportElement mode="Opaque" x="18" y="0" width="100" height="20" forecolor="#0058B6" backcolor="#FFFFFF" uuid="ad841dcf-683b-4cd3-a36c-6a4d366e8c05"/>
 				<textElement textAlignment="Left" verticalAlignment="Middle" rotation="None" markup="none">
@@ -839,7 +839,7 @@
 				</jr:table>
 			</componentElement>
 		</band>
-		<band height="78">
+		<band height="78" splitType="Prevent">
 			<componentElement>
 				<reportElement positionType="Float" x="14" y="7" width="536" height="68" isPrintWhenDetailOverflows="true" uuid="323d0170-5b9a-49a5-98d0-0eaa7b0e61c6"/>
 				<jr:list xmlns:jr="http://jasperreports.sourceforge.net/jasperreports/components" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports/components http://jasperreports.sourceforge.net/xsd/components.xsd" printOrder="Vertical">
@@ -872,7 +872,7 @@
 				</jr:list>
 			</componentElement>
 		</band>
-		<band height="54">
+		<band height="54" splitType="Prevent">
 			<componentElement>
 				<reportElement positionType="Float" x="14" y="0" width="536" height="49" isPrintWhenDetailOverflows="true" uuid="55bdeb4a-29d9-42e1-a4c8-63cd94a83f50"/>
 				<jr:list xmlns:jr="http://jasperreports.sourceforge.net/jasperreports/components" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports/components http://jasperreports.sourceforge.net/xsd/components.xsd" printOrder="Vertical">
@@ -896,7 +896,7 @@
 				</jr:list>
 			</componentElement>
 		</band>
-		<band height="66">
+		<band height="66" splitType="Prevent">
 			<componentElement>
 				<reportElement positionType="Float" x="14" y="6" width="536" height="53" isPrintWhenDetailOverflows="true" uuid="ce2f5f1a-9a50-4f7a-bb9c-490c66c2610c"/>
 				<jr:list xmlns:jr="http://jasperreports.sourceforge.net/jasperreports/components" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports/components http://jasperreports.sourceforge.net/xsd/components.xsd" printOrder="Vertical">
@@ -920,9 +920,9 @@
 				</jr:list>
 			</componentElement>
 		</band>
-		<band height="145">
+		<band height="145" splitType="Prevent">
 			<staticText>
-				<reportElement positionType="Float" mode="Opaque" x="14" y="0" width="215" height="20" isPrintWhenDetailOverflows="true" forecolor="#0058B6" backcolor="#FFFFFF" uuid="d1cbcf85-e88f-4258-8e59-24694c07a488"/>
+				<reportElement positionType="Float" mode="Opaque" x="14" y="0" width="463" height="20" isPrintWhenDetailOverflows="true" forecolor="#0058B6" backcolor="#FFFFFF" uuid="d1cbcf85-e88f-4258-8e59-24694c07a488"/>
 				<textElement textAlignment="Left" verticalAlignment="Middle" rotation="None" markup="none">
 					<font fontName="SansSerif" size="10" isBold="true" isItalic="false" isUnderline="false" isStrikeThrough="false" pdfEncoding="Cp1252" isPdfEmbedded="false"/>
 					<paragraph lineSpacing="Single" leftIndent="5"/>
@@ -1324,7 +1324,7 @@ estratégico
 				</jr:list>
 			</componentElement>
 		</band>
-		<band height="53">
+		<band height="53" splitType="Prevent">
 			<componentElement>
 				<reportElement positionType="Float" x="14" y="0" width="536" height="50" isPrintWhenDetailOverflows="true" uuid="8f0445f2-e18f-414b-9670-e2cc6ad89ba2"/>
 				<jr:list xmlns:jr="http://jasperreports.sourceforge.net/jasperreports/components" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports/components http://jasperreports.sourceforge.net/xsd/components.xsd" printOrder="Vertical">
@@ -1351,7 +1351,7 @@ tomadas durante el evento
 				</jr:list>
 			</componentElement>
 		</band>
-		<band height="47">
+		<band height="47" splitType="Prevent">
 			<staticText>
 				<reportElement mode="Opaque" x="16" y="1" width="298" height="20" forecolor="#0058B6" backcolor="#FFFFFF" uuid="3c9a11ab-30a2-4226-9306-ad49762c43f8"/>
 				<textElement textAlignment="Left" verticalAlignment="Middle" rotation="None" markup="none">
@@ -1408,7 +1408,7 @@ tomadas durante el evento
 				</jr:table>
 			</componentElement>
 		</band>
-		<band height="26">
+		<band height="26" splitType="Prevent">
 			<staticText>
 				<reportElement mode="Opaque" x="18" y="0" width="100" height="20" forecolor="#0058B6" backcolor="#FFFFFF" uuid="1297cce9-05dd-4254-8bd4-1b9c9edc0c58"/>
 				<textElement textAlignment="Left" verticalAlignment="Middle" rotation="None" markup="none">
@@ -1457,7 +1457,7 @@ tomadas durante el evento
 				</jr:table>
 			</componentElement>
 		</band>
-		<band height="29">
+		<band height="29" splitType="Prevent">
 			<staticText>
 				<reportElement mode="Opaque" x="18" y="0" width="100" height="20" forecolor="#0058B6" backcolor="#FFFFFF" uuid="5d1079f9-95c9-467d-af9b-8a4c265cb260"/>
 				<textElement textAlignment="Left" verticalAlignment="Middle" rotation="None" markup="none">
@@ -1506,7 +1506,7 @@ tomadas durante el evento
 				</jr:table>
 			</componentElement>
 		</band>
-		<band height="27">
+		<band height="27" splitType="Prevent">
 			<staticText>
 				<reportElement mode="Opaque" x="18" y="0" width="100" height="20" forecolor="#0058B6" backcolor="#FFFFFF" uuid="cec5bd5f-76f3-4f25-b448-c0cbc2dae00c"/>
 				<textElement textAlignment="Left" verticalAlignment="Middle" rotation="None" markup="none">
@@ -1555,7 +1555,7 @@ tomadas durante el evento
 				</jr:table>
 			</componentElement>
 		</band>
-		<band height="48">
+		<band height="48" splitType="Prevent">
 			<staticText>
 				<reportElement mode="Opaque" x="18" y="0" width="511" height="20" forecolor="#0058B6" backcolor="#FFFFFF" uuid="5cf89a98-ef8e-4703-b69e-2f152ec6288f"/>
 				<textElement textAlignment="Left" verticalAlignment="Middle" rotation="None" markup="none">
@@ -1690,7 +1690,7 @@ implementación]]></text>
 				</jr:table>
 			</componentElement>
 		</band>
-		<band height="56">
+		<band height="56" splitType="Prevent">
 			<componentElement>
 				<reportElement positionType="Float" x="16" y="0" width="534" height="50" isPrintWhenDetailOverflows="true" uuid="6731db49-8a5f-47b7-a253-1cc6e52d1a06"/>
 				<jr:list xmlns:jr="http://jasperreports.sourceforge.net/jasperreports/components" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports/components http://jasperreports.sourceforge.net/xsd/components.xsd" printOrder="Vertical">
@@ -1714,7 +1714,7 @@ implementación]]></text>
 				</jr:list>
 			</componentElement>
 		</band>
-		<band height="33">
+		<band height="33" splitType="Prevent">
 			<componentElement>
 				<reportElement x="16" y="0" width="534" height="27" uuid="6c1e5c25-1a76-45ae-be65-8c628fb48612"/>
 				<jr:list xmlns:jr="http://jasperreports.sourceforge.net/jasperreports/components" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports/components http://jasperreports.sourceforge.net/xsd/components.xsd" printOrder="Vertical">
@@ -1741,7 +1741,7 @@ implementación]]></text>
 				</jr:list>
 			</componentElement>
 		</band>
-		<band height="124">
+		<band height="124" splitType="Prevent">
 			<componentElement>
 				<reportElement x="16" y="0" width="534" height="115" uuid="1fc1ece3-268e-4376-adad-b0c77d9ab8f1"/>
 				<jr:list xmlns:jr="http://jasperreports.sourceforge.net/jasperreports/components" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports/components http://jasperreports.sourceforge.net/xsd/components.xsd" printOrder="Vertical">
@@ -1882,7 +1882,4 @@ implementación]]></text>
 			</componentElement>
 		</band>
 	</detail>
-	<lastPageFooter>
-		<band height="33"/>
-	</lastPageFooter>
 </jasperReport>

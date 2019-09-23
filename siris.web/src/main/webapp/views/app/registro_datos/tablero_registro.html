@@ -36,7 +36,8 @@
         			
         			<div class="md-table">
                             <div class="md-table-content">
-                                <table class="mdl-data-table mdl-js-data-table mdl-shadow--2dp responsive-table" id="myTable">
+                                <!-- table class="mdl-data-table mdl-js-data-table mdl-shadow--2dp responsive-table" id="myTable"-->
+                                <table class="mdl-data-table mdl-js-data-table mdl-shadow--2dp" style="width: 100%;table-layout: fixed;" id="myTable">
                                 	<thead>
                                         <tr>
                                             <th class="mdl-data-table__cell--non-numeric">Código</th>
@@ -49,7 +50,13 @@
                                     <tbody>
                                     	<tr v-for="item in model.bandeja">
                                     		<td class="mdl-data-table__cell--non-numeric">{{item.codigo}}</td>
-                                    		<td class="mdl-data-table__cell--non-numeric">{{item.descCortaEvento}}</td>
+                                    		<td class="mdl-data-table__cell--non-numeric">
+                                    			<div style="text-overflow: ellipsis;overflow: hidden;white-space: nowrap">
+                                    				<div v-bind:title="item.descCortaEvento" class="tipsbs" v-bind:id="item.idEvento + 'tipsbs'">
+                                    					{{item.descCortaEvento}}
+                                    				</div>
+                                    			</div>
+                                    		</td>
                                     		<td class="mdl-data-table__cell--non-numeric">{{item.fechaEventoBandeja}}</td>
                                     		<td class="mdl-data-table__cell--non-numeric">
                                     			<div>
@@ -85,5 +92,5 @@
 </div>
 
 <js layout:fragment="scripts"> <script th:src="@{/resources/bundle/js_app_tablero.js}"></script> </js>
-
+<link rel="stylesheet" th:href="@{/resources/bundle/css_tablero_registro.css}">
 <div th:replace="base/_sys.footer :: footer" />

@@ -70,12 +70,37 @@ var app = new Vue({
     			showPrevNext:true,
     			hidePageNumbers:false,
     			perPage:10
-    		  });
+    		});
+    		
+    		this.model.bandeja.forEach(
+        		/*function(e){
+        			$("#"+ e.idEvento + "tipsbs").tooltip({ content : e.descCortaEvento });
+        		}*/
+				function(e){
+        			$("#"+ e.idEvento + "tipsbs").tooltipster({
+        			       maxWidth: 500,
+        			       side: 'bottom',
+        			       contentAsHTML: 'true'
+        			    });
+        		}
+	        );
     		
     		this.update_pagination = false;
     	}
     },
     mounted: function() {
+    	/*
+    	var tooltips = $( ".tipsbs" ).tooltip({
+    		position: {
+    			my: "left top",
+    			track:true,
+    			trackTooltip:true,
+    			at: "right+5 top-5",
+    			collision: "none",
+    			trackOrigin: true
+    		}
+    	});*/
+    	
         $("#app").show();
         /*
         $('#myTable').pageMe({

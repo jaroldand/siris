@@ -375,7 +375,11 @@ var app = new Vue({
         		
         		
         		if( fecha1.isValid() && fecha2.isValid() && hora1.isValid() && hora2.isValid() ){
-        			var diff = fecha2.diff(fecha1, 'h'); // Diff in hours
+        			
+        			var fechaIni = moment( $('#fecha_ini_interrup').val() + " " + $('#hora_ini_interrup').val(), "DD/MM/YYYY HH:mm");
+        			var fechaFin = moment( $('#fecha_fin_interrup').val() + " " + $('#hora_fin_interrup').val(), "DD/MM/YYYY HH:mm");
+        			
+        			var diff = fechaFin.diff(fechaIni, 'h'); // Diff in hours
         			
         			if(diff < 0){
         				jnoty.showMessage(jnoty.typeMessage.warning, "Verifique las fechas de interrupción!", 2000);
@@ -656,7 +660,10 @@ var app = new Vue({
     		
     		
     		if( fecha1.isValid() && fecha2.isValid() && hora1.isValid() && hora2.isValid() ){
-    			var diff = fecha2.diff(fecha1, 'h'); // Diff in hours
+    			var fechaIni = moment( $('#fecha_ini_interrup').val() + " " + $('#hora_ini_interrup').val(), "DD/MM/YYYY HH:mm");
+    			var fechaFin = moment( $('#fecha_fin_interrup').val() + " " + $('#hora_fin_interrup').val(), "DD/MM/YYYY HH:mm");
+    			
+    			var diff = fechaFin.diff(fechaIni, 'h'); // Diff in hours
     			
     			$("#fecha_ini_interrup").parent().removeClass("is-invalid");
 				$("#fecha_fin_interrup").parent().removeClass("is-invalid");
@@ -893,7 +900,7 @@ var app = new Vue({
     	calcularTotalHoras: function() {
     		var self = this;
     		
-    		if(self.model.informe.eventoFinBol !== true){
+    		if(self.model.informe.eventoFinBol != true){
     			console.log("calcularHoras");
     			
     			var fecha1 = moment( $('#fecha_ini_interrup').val(), "DD/MM/YYYY");
@@ -905,7 +912,10 @@ var app = new Vue({
         		
         		if( fecha1.isValid() && fecha2.isValid() && hora1.isValid() && hora2.isValid() ){
         			
-        			var diff = fecha2.diff(fecha1, 'h'); // Diff in hours
+        			var fechaIni = moment( $('#fecha_ini_interrup').val() + " " + $('#hora_ini_interrup').val(), "DD/MM/YYYY HH:mm");
+        			var fechaFin = moment( $('#fecha_fin_interrup').val() + " " + $('#hora_fin_interrup').val(), "DD/MM/YYYY HH:mm");
+        			
+        			var diff = fechaFin.diff(fechaIni, 'h'); // Diff in hours
         			
         			if(diff < 0){
         				
