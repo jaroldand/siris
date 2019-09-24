@@ -99,6 +99,8 @@
 	
 	<group name="js_app_historico">
 		<js>/resources/js/app/registro_datos/historico.js</js>
+		
+		<js>/resources/js/tooltipster/tooltipster.bundle.min.js</js>
 	</group>
 	<group name="js_app_valida_reporte">
 		<js>/resources/js/app/registro_datos/valida_reporte.js</js>
@@ -109,6 +111,8 @@
 		
 		<js>/resources/js/mask/imask.js</js>
 		<js>/resources/js/mask/moment.min.js</js>
+		
+		<js>/resources/js/tooltipster/tooltipster.bundle.min.js</js>
 	</group>
 	<group name="js_app_informe_constancia">
 		<js>/resources/js/jquery.multiselect.js</js>
@@ -138,6 +142,11 @@
 	<group name="css_tablero_registro">
 		<css>/resources/css/tooltipster/tooltipster.bundle.min.css</css>
 	</group>
+	<group name="css_informe_reporte">
+		<css>/resources/css/tooltipster/tooltipster.bundle.min.css</css>
+	</group>
+	<group name="css_historico">
+		<css>/resources/css/tooltipster/tooltipster.bundle.min.css</css>
+	</group>
 	
-
 </groups>

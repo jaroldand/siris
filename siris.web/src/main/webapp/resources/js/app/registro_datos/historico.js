@@ -67,6 +67,8 @@ var app = new Vue({
     	obtenerHistoricoAnio: function() {
     		var self = this;
     		
+    		$(".tipsbs").tooltipster('destroy');
+    		
     		jbase.wait(true);
     		var url_enviar = jbase.getStringReplaced(jbase.urls.search_evento_hist, [jbase.prop.id_ent_vig, self.model.anio_select]);
 			jajax.apiAuthGet({
@@ -74,9 +76,10 @@ var app = new Vue({
 				success : function(data) {
 					
 					jbase.wait(false);
-					self.update_pagination = true;
 					
 					self.model.list_events_hist = data;
+					
+					self.update_pagination = true;
 				}
 			});
     		
@@ -97,6 +100,18 @@ var app = new Vue({
     			hidePageNumbers:false,
     			perPage:10
     		  });
+    		
+    		this.model.list_events_hist.forEach(
+    				function(e){
+						
+	        			$("#"+ e.idEvento + "tipsbs").tooltipster({
+	        			       maxWidth: 500,
+	        			       side: 'bottom',
+	        			       content : e.descCortaEvento,
+	        			       contentAsHTML: 'true'
+	        			    });
+	        		}
+	        );
     		
     		this.update_pagination = false;
     	}

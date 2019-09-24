@@ -1,6 +1,8 @@
 var app = new Vue({
     el: "#app",
     data: {
+    	update_pagination: false,
+    	
     	reporte_active : true,//para el menu
     	historic_active : false,//para el menu
     	
@@ -306,6 +308,8 @@ var app = new Vue({
 				});
 				
 				//fin apiAuthGet - load data
+		    	
+		    	self.update_pagination = true;//para actualizar los tooltips en la grilla
 			}
 		});
     	
@@ -379,7 +383,7 @@ var app = new Vue({
         			var fechaIni = moment( $('#fecha_ini_interrup').val() + " " + $('#hora_ini_interrup').val(), "DD/MM/YYYY HH:mm");
         			var fechaFin = moment( $('#fecha_fin_interrup').val() + " " + $('#hora_fin_interrup').val(), "DD/MM/YYYY HH:mm");
         			
-        			var diff = fechaFin.diff(fechaIni, 'h'); // Diff in hours
+        			var diff = fechaFin.diff(fechaIni, 'h', true); // Diff in hours
         			
         			if(diff < 0){
         				jnoty.showMessage(jnoty.typeMessage.warning, "Verifique las fechas de interrupción!", 2000);
@@ -531,8 +535,13 @@ var app = new Vue({
     		
     		$("#"+fecha).val("");
     		$("#"+fecha).parent().removeClass( "is-dirty" );
+    		
+    		$(".tipsbs").tooltipster('destroy');
+    		
+    		self.update_pagination = true;
     	},
     	remove_plan_accion: function(evt, name_table, index){
+    		$(".tipsbs").tooltipster('destroy');
     		//remove values table
     		var self = this;
     		
@@ -546,6 +555,8 @@ var app = new Vue({
     			self.model[name_table][key].tbl_index = k;
     			k++;
 			});
+    		
+    		self.update_pagination = true;
     	},
     	calculaHoras: function() {
     		var self = this;
@@ -663,7 +674,7 @@ var app = new Vue({
     			var fechaIni = moment( $('#fecha_ini_interrup').val() + " " + $('#hora_ini_interrup').val(), "DD/MM/YYYY HH:mm");
     			var fechaFin = moment( $('#fecha_fin_interrup').val() + " " + $('#hora_fin_interrup').val(), "DD/MM/YYYY HH:mm");
     			
-    			var diff = fechaFin.diff(fechaIni, 'h'); // Diff in hours
+    			var diff = fechaFin.diff(fechaIni, 'h', true); // Diff in hours
     			
     			$("#fecha_ini_interrup").parent().removeClass("is-invalid");
 				$("#fecha_fin_interrup").parent().removeClass("is-invalid");
@@ -915,7 +926,7 @@ var app = new Vue({
         			var fechaIni = moment( $('#fecha_ini_interrup').val() + " " + $('#hora_ini_interrup').val(), "DD/MM/YYYY HH:mm");
         			var fechaFin = moment( $('#fecha_fin_interrup').val() + " " + $('#hora_fin_interrup').val(), "DD/MM/YYYY HH:mm");
         			
-        			var diff = fechaFin.diff(fechaIni, 'h'); // Diff in hours
+        			var diff = fechaFin.diff(fechaIni, 'h', true); // Diff in hours
         			
         			if(diff < 0){
         				
@@ -925,6 +936,10 @@ var app = new Vue({
                 		jnoty.showMessage(jnoty.typeMessage.warning, "Verifique las fechas ingresadas!", 2000);
                 		
         			}else{
+        				
+        				diff = diff.toString(); //If it's not already a String
+        				diff = diff.slice(0, (diff.indexOf("."))+3);
+        				
         				$('#tiempo_interrup').val(diff);
                 		this.model.informe.totalInterrupcion = diff;
         			}
@@ -996,6 +1011,23 @@ var app = new Vue({
     	
     	if(self.tiempo_interrup_render){
     		self.tiempo_interrup_render = false;
+    	}
+    	
+    	if(this.update_pagination){
+    		
+    		this.model.planAccion.forEach(
+				function(e){
+        			$("#"+ e.tbl_index + "tipsbs").tooltipster({
+        			       maxWidth: 500,
+        			       side: 'bottom',
+        			       content : e.descPlan,
+        			       contentAsHTML: 'true'
+        			    });
+        		}
+	        );
+    		
+    		this.update_pagination = false;
+    		
     	}
     },
     

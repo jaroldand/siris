@@ -625,7 +625,8 @@
 						<div class="col-md-12">
 							<div class="md-table">
                                   <div class="md-table-content">
-                                      <table class="mdl-data-table mdl-js-data-table mdl-shadow--2dp">
+                                      <!-- table class="mdl-data-table mdl-js-data-table mdl-shadow--2dp" -->
+                                      <table class="mdl-data-table mdl-js-data-table mdl-shadow--2dp" style="width: 100%;table-layout: fixed;" id="myTable">
                                       	<thead>
                                               <tr>
                                                   <th class="mdl-data-table__cell--non-numeric">N°</th>
@@ -637,7 +638,14 @@
                                           <tbody>
                                            	<tr v-for="item in model.planAccion">
                                           		<td class="mdl-data-table__cell--non-numeric">{{item.tbl_index}}</td>
-                                          		<td class="mdl-data-table__cell--non-numeric">{{item.descPlan}}</td>
+                                          		<!-- td class="mdl-data-table__cell--non-numeric">{{item.descPlan}}</td -->
+                                          		<td class="mdl-data-table__cell--non-numeric">
+	                                    			<div style="text-overflow: ellipsis;overflow: hidden;white-space: nowrap">
+	                                    				<div v-bind:title="item.descPlan" class="tipsbs" v-bind:id="item.tbl_index + 'tipsbs'">
+	                                    					{{item.descPlan}}
+	                                    				</div>
+	                                    			</div>
+	                                    		</td>
                                           		<td class="mdl-data-table__cell--non-numeric">{{item.areaResp}}</td>
                                           		<td class="mdl-data-table__cell--non-numeric">{{item.fecImplementacionStr}}</td>
                                           	
@@ -773,5 +781,6 @@
 </div>
 
 <js layout:fragment="scripts"> <script th:src="@{/resources/bundle/js_app_informe_reporte.js}"></script></js>
+<link rel="stylesheet" th:href="@{/resources/bundle/css_informe_reporte.css}">
 
 <div th:replace="base/_sys.footer :: footer" />
