@@ -55,14 +55,20 @@ var app = new Vue({
     },
     
     methods: {
+    	load_data: function() {
+    		
+    	},
     	showModuleForm: function(page, id_event) {
     		var self = this;
     		
     		flujoRegistro.setStep(page+"/"+id_event,'00');
     		
     	},
-    	load_data: function() {
-    		
+    	descargar: function(_idDocumento) {
+    		jbase.wait(true);
+    		var urlinvokeDownload = jbase.getStringReplaced(jbase.urls.download_file_adic, [_idDocumento]);
+			$("<iframe style='display: none' src='"+urlinvokeDownload+"'></iframe>").appendTo("body");
+			jbase.wait(false);
     	},
     	obtenerHistoricoAnio: function() {
     		var self = this;

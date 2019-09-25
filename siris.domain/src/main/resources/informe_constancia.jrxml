@@ -2,7 +2,7 @@
 <jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="reportePerfil" pageWidth="595" pageHeight="842" columnWidth="555" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20" uuid="2b66c828-28a1-4206-abbd-7b1cc4babeaf">
 	<property name="ireport.zoom" value="1.5000000000000002"/>
 	<property name="ireport.x" value="0"/>
-	<property name="ireport.y" value="240"/>
+	<property name="ireport.y" value="0"/>
 	<style name="table">
 		<box>
 			<pen lineWidth="0.0" lineColor="#000000"/>
@@ -122,7 +122,7 @@
 		<band height="14" splitType="Stretch"/>
 	</columnHeader>
 	<detail>
-		<band height="167">
+		<band height="164">
 			<staticText>
 				<reportElement mode="Opaque" x="24" y="0" width="100" height="20" forecolor="#0058B6" backcolor="#FFFFFF" uuid="925ca090-90ac-49f6-af14-21bdf8a50b07"/>
 				<textElement textAlignment="Left" verticalAlignment="Middle" rotation="None" markup="none">
@@ -241,7 +241,7 @@
 				</jr:list>
 			</componentElement>
 			<componentElement>
-				<reportElement positionType="Float" x="24" y="140" width="522" height="20" uuid="d344debd-3a11-4204-a94c-6d7c728fd91e"/>
+				<reportElement positionType="Float" x="24" y="120" width="522" height="20" uuid="d344debd-3a11-4204-a94c-6d7c728fd91e"/>
 				<jr:list xmlns:jr="http://jasperreports.sourceforge.net/jasperreports/components" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports/components http://jasperreports.sourceforge.net/xsd/components.xsd" printOrder="Vertical">
 					<datasetRun subDataset="validaciones" uuid="a373c1c6-95e7-4372-93b2-80850db2291e">
 						<dataSourceExpression><![CDATA[new net.sf.jasperreports.engine.data.JRBeanCollectionDataSource($F{validaciones})]]></dataSourceExpression>
@@ -268,7 +268,7 @@
 				</jr:list>
 			</componentElement>
 			<componentElement>
-				<reportElement positionType="Float" x="24" y="120" width="522" height="20" uuid="d344debd-3a11-4204-a94c-6d7c728fd91e"/>
+				<reportElement positionType="Float" x="24" y="140" width="522" height="20" uuid="d344debd-3a11-4204-a94c-6d7c728fd91e"/>
 				<jr:list xmlns:jr="http://jasperreports.sourceforge.net/jasperreports/components" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports/components http://jasperreports.sourceforge.net/xsd/components.xsd" printOrder="Vertical">
 					<datasetRun subDataset="validaciones" uuid="46381458-2b4c-45df-b33a-8ebcdc6a6a8a">
 						<dataSourceExpression><![CDATA[new net.sf.jasperreports.engine.data.JRBeanCollectionDataSource($F{validaciones})]]></dataSourceExpression>
@@ -444,7 +444,7 @@
 							<textElement verticalAlignment="Middle">
 								<paragraph leftIndent="5"/>
 							</textElement>
-							<text><![CDATA[Tiempo de interupción]]></text>
+							<text><![CDATA[Tiempo de interrupción]]></text>
 						</staticText>
 						<textField>
 							<reportElement positionType="Float" mode="Opaque" x="132" y="0" width="178" height="20" forecolor="#0058B6" backcolor="#D9D9D9" uuid="6bff6540-8696-4bd5-ab8b-1ec4e9e23f9e"/>
@@ -578,7 +578,7 @@
 								<font fontName="SansSerif" size="10" isBold="true" isItalic="false" isUnderline="false" isStrikeThrough="false" pdfEncoding="Cp1252" isPdfEmbedded="false"/>
 								<paragraph lineSpacing="Single" leftIndent="5"/>
 							</textElement>
-							<text><![CDATA[3. Menor tiempo objetivo de interupción del producto/proceso/canal interrumpido
+							<text><![CDATA[3. Menor tiempo objetivo de interrupción del producto/proceso/canal interrumpido
 
 ]]></text>
 						</staticText>
@@ -1563,7 +1563,7 @@ tomadas durante el evento
 					<font fontName="SansSerif" size="10" isBold="true" isItalic="false" isUnderline="false" isStrikeThrough="false" pdfEncoding="Cp1252" isPdfEmbedded="false"/>
 					<paragraph lineSpacing="Single" leftIndent="5"/>
 				</textElement>
-				<text><![CDATA[10. Planes de acción orientados a reducir la posibilidad de ocurrendia de eventos
+				<text><![CDATA[10. Planes de acción orientados a reducir la posibilidad de ocurrencia de eventos
       de similares características]]></text>
 			</staticText>
 			<componentElement>

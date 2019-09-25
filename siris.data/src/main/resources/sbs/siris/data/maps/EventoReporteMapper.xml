@@ -12,6 +12,7 @@
 	<result property="descEstado" column="DESC_ESTADO" />  
 	<result property="isEditar" column="EDITAR" />
 	<result property="isEliminar" column="ELIMINAR" />
+	<result property="idFileHistorico" column="ID_FILE_HISTORICO" />
   </resultMap>
   
   <resultMap id="FileResultsMap" type="sbs.siris.domain.entity.File">

@@ -15,6 +15,7 @@ public class BandejaDTO implements Serializable {
 	private String descEstado;
 	private String isEditar;
 	private String isEliminar;
+	private Long idFileHistorico;
 	
 	public String getCodigo() {
 		return codigo;
@@ -69,6 +70,12 @@ public class BandejaDTO implements Serializable {
 	}
 	public void setFechaEnvio(String fechaEnvio) {
 		this.fechaEnvio = fechaEnvio;
+	}
+	public Long getIdFileHistorico() {
+		return idFileHistorico;
+	}
+	public void setIdFileHistorico(Long idFileHistorico) {
+		this.idFileHistorico = idFileHistorico;
 	}
 	
 }
