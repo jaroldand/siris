@@ -168,6 +168,12 @@ window.jbase = window.jbase || {};
 		});
 		return valid;
 	};
+	
+	$b.redondear = function(valor, digits) {
+		 var re = new RegExp("(\\d+\\.\\d{" + digits + "})(\\d)"),
+	        m = valor.toString().match(re);
+	    return m ? parseFloat(m[1]) : valor.valueOf();
+	};
 
 	$b.disableToggle = function(css_required) {
 		$("[class*='" + css_required + "']").each(function() {

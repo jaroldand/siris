@@ -174,7 +174,7 @@
                        	</div>
                        	<div class="col-md-3">
                       		<div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label" v-bind:class="{ 'is-dirty': (model.informe.menorInterrupcion ? true : false) }">
-                                  <input class="mdl-textfield__input decimal send_required" type="text" id="menor_time_interrup" name="menor_time_interrup" maxlength="10" v-model="model.informe.menorInterrupcion">
+                                  <input class="mdl-textfield__input decimal send_required" type="text" id="menor_time_interrup" name="menor_time_interrup" maxlength="8" v-model="model.informe.menorInterrupcion">
                                   <label class="mdl-textfield__label" for="menor_time_interrup">Total Horas:</label>
                             </div>
                       	</div>
@@ -409,7 +409,7 @@
            				</div>
            				<div class="col-md-4">
                      		<div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label" v-bind:class="{ 'is-dirty': (impacto_load.financiero.impactoDetail ? true : false) }">
-                                  <input class="mdl-textfield__input decimal" type="text" id="imp_finan_interrup" name="imp_finan_interrup" v-model="impacto_load.financiero.impactoDetail">
+                                  <input class="mdl-textfield__input decimal" type="text" id="imp_finan_interrup" name="imp_finan_interrup" v-model="impacto_load.financiero.impactoDetail" maxlength="10">
                                   <label class="mdl-textfield__label" for="imp_finan_interrup">S/. Impactos</label>
                             </div>
            				</div>

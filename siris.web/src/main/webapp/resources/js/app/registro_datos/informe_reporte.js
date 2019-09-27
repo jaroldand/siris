@@ -927,7 +927,6 @@ var app = new Vue({
         			var fechaFin = moment( $('#fecha_fin_interrup').val() + " " + $('#hora_fin_interrup').val(), "DD/MM/YYYY HH:mm");
         			
         			var diff = fechaFin.diff(fechaIni, 'h', true); // Diff in hours
-        			
         			if(diff < 0){
         				
         				$('#tiempo_interrup').val("");
@@ -936,11 +935,7 @@ var app = new Vue({
                 		jnoty.showMessage(jnoty.typeMessage.warning, "Verifique las fechas ingresadas!", 2000);
                 		
         			}else{
-        				
-        				diff = diff.toString(); //If it's not already a String
-        				diff = diff.slice(0, (diff.indexOf("."))+3);
-        				
-        				$('#tiempo_interrup').val(diff);
+        				$('#tiempo_interrup').val(jbase.redondear(diff, 2));
                 		this.model.informe.totalInterrupcion = diff;
         			}
         		}
