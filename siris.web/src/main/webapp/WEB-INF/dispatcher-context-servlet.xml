@@ -15,6 +15,7 @@
         http://www.springframework.org/schema/util/spring-util.xsd">
 
 	<context:component-scan base-package="sbs.siris.web.controller.**" />
+	<context:property-placeholder location="classpath:urlBase.properties"/>
 
 	<mvc:annotation-driven />
 	<mvc:resources mapping="/views/pub/global/**" location="/public/" />
@@ -70,7 +71,7 @@
 		<security:intercept-url pattern="/**" access="hasRole('ROLE_ADMIN')" requires-channel="any" /> <!-- isAnonymous() | permitAll | denyAll -->
 
 		<!-- <security:form-login login-page="http://localhost:9080/sgc.web/sgc_web/login/" /> -->
-		<security:form-login login-page="http://localhost:9080/siris.web/logout" /> <!-- CAMBIAR EN PASE A PRODUCCIÓN --> 
+		<security:form-login login-page="${url_timeout}" /> <!-- CAMBIAR EN PASE A PRODUCCIÓN --> 
         <!--  <security:form-login login-page="https://coopac.sbs.gob.pe/auth.web/"/>  -->
 	
 	</security:http>

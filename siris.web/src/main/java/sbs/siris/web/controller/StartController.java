@@ -109,7 +109,7 @@ public class StartController {
 			if(session != null) {
 				session.invalidate();
 			}
-			url = Setup.getValueKey("urlBase.properties", "url_coopac_login_menu");
+			url = Setup.getValueKey("urlBase.properties", "url_login_menu");
 			return "redirect:" + url + "/menu.jsp";
 		});
 	}
@@ -132,7 +132,9 @@ public class StartController {
 	public DeferredResult<String> timeout(HttpServletRequest request,HttpServletResponse response) {
 		return AsyncResult.Call(() -> {
 			HttpSession session = request.getSession(false);
-			session.invalidate();			
+			if(session != null) {
+				session.invalidate();
+			}			
 			return "/pub/logout.html";
 		});
 

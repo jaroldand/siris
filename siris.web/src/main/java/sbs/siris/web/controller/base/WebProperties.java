@@ -39,5 +39,5 @@ public class WebProperties {
 	public static final String PUB_DATOS_REPRESENTANTE_VALIDATELFAFIJTAMA =  Setup.getValueKey(MENSAJE_PROPERTIES_FILE, "pub.datos_representante.validaTelfAFijTama");
 	public static final String PUB_ERROR_SGTE =  Setup.getValueKey(MENSAJE_PROPERTIES_FILE, "pub.error_sgte");
 	
-	public static final String URL_LOGIN_BASE = Setup.getValueKey(URL_PROPERTIES_FILE, "url_coopac_login_menu");
+	public static final String URL_LOGIN_BASE = Setup.getValueKey(URL_PROPERTIES_FILE, "url_login_menu");
 }

@@ -27,7 +27,7 @@ public class HelperController {
 	public final static String FORMAT_DATE = Setup.getValueKeySys("KeyFormatDate");
 	public final static String KEY_FRASE = "OK";
 	public final static RestTemplate REST_TEMPLATE = new RestTemplate();
-	public final static String URL_COOPAC_USUARIO = Setup.getValueKey("urlBase.properties", "url_coopac_login");
+	
 	public final static Long TIMEOUT_TOKEN = Setup.getValueKeySys("KeyTimeoutToken", Long.class);
 
 	public static String getCodUser() {

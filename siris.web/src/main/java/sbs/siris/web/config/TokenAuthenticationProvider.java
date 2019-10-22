@@ -33,14 +33,7 @@ public class TokenAuthenticationProvider implements AuthenticationProvider {
 			List<GrantedAuthority> grantedAuths = new ArrayList<>();
 
 			if (!username.equals(HelperController.USER_NONE)) {
-				/*String urlUsuarioLogin = HelperController.URL_COOPAC_USUARIO + username + "?token="
-						+ Base64.getUrlEncoder().encodeToString(AesCustom.encriptarAes(HelperController.KEY_FRASE, HelperController.KEY_PUBLIC).getBytes());
-
-				UsuarioLogin usuarioLogin = HelperController.REST_TEMPLATE.getForObject(urlUsuarioLogin, UsuarioLogin.class);
-
-				if (usuarioLogin == null)
-					throw new DisabledException("El usuario no existe.");*/
-
+				
 		        UsuarioSession usuarioSession = (UsuarioSession) auth.getPrincipal();
 		        
 		        if (usuarioSession == null)
