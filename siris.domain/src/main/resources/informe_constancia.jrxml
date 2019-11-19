@@ -2,7 +2,7 @@
 <jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="reportePerfil" pageWidth="595" pageHeight="842" columnWidth="555" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20" uuid="2b66c828-28a1-4206-abbd-7b1cc4babeaf">
 	<property name="ireport.zoom" value="1.5000000000000002"/>
 	<property name="ireport.x" value="0"/>
-	<property name="ireport.y" value="1099"/>
+	<property name="ireport.y" value="379"/>
 	<style name="table">
 		<box>
 			<pen lineWidth="0.0" lineColor="#000000"/>
@@ -392,7 +392,7 @@
 					</datasetRun>
 					<jr:listContents height="85" width="494">
 						<staticText>
-							<reportElement positionType="Float" mode="Opaque" x="0" y="0" width="132" height="20" forecolor="#FFFFFF" backcolor="#226FE1" uuid="9b11d91b-78e3-491f-b6bf-a345287467fd"/>
+							<reportElement positionType="Float" mode="Opaque" x="0" y="0" width="166" height="20" forecolor="#FFFFFF" backcolor="#226FE1" uuid="9b11d91b-78e3-491f-b6bf-a345287467fd"/>
 							<box>
 								<pen lineWidth="1.0"/>
 								<topPen lineWidth="1.0"/>
@@ -406,7 +406,7 @@
 							<text><![CDATA[Inicio de la interrupción]]></text>
 						</staticText>
 						<staticText>
-							<reportElement positionType="Float" mode="Opaque" x="0" y="20" width="132" height="20" forecolor="#FFFFFF" backcolor="#226FE1" uuid="286497be-33f7-4400-a2a7-23dfa057235a"/>
+							<reportElement positionType="Float" mode="Opaque" x="0" y="20" width="166" height="20" forecolor="#FFFFFF" backcolor="#226FE1" uuid="286497be-33f7-4400-a2a7-23dfa057235a"/>
 							<box>
 								<pen lineWidth="1.0"/>
 								<topPen lineWidth="1.0"/>
@@ -420,7 +420,7 @@
 							<text><![CDATA[Evento aún no termina]]></text>
 						</staticText>
 						<staticText>
-							<reportElement positionType="Float" mode="Opaque" x="0" y="40" width="132" height="20" forecolor="#FFFFFF" backcolor="#226FE1" uuid="49b8a642-d2aa-4866-981a-e654390b5625"/>
+							<reportElement positionType="Float" mode="Opaque" x="0" y="40" width="166" height="20" forecolor="#FFFFFF" backcolor="#226FE1" uuid="49b8a642-d2aa-4866-981a-e654390b5625"/>
 							<box>
 								<pen lineWidth="1.0"/>
 								<topPen lineWidth="1.0"/>
@@ -434,7 +434,7 @@
 							<text><![CDATA[Fin de la interrupción]]></text>
 						</staticText>
 						<staticText>
-							<reportElement positionType="Float" mode="Opaque" x="0" y="60" width="132" height="20" forecolor="#FFFFFF" backcolor="#226FE1" uuid="90c2a5bc-8c70-408c-88d3-9db35984acb7"/>
+							<reportElement positionType="Float" mode="Opaque" x="0" y="60" width="166" height="20" forecolor="#FFFFFF" backcolor="#226FE1" uuid="90c2a5bc-8c70-408c-88d3-9db35984acb7"/>
 							<box>
 								<pen lineWidth="1.0"/>
 								<topPen lineWidth="1.0"/>
@@ -445,10 +445,10 @@
 							<textElement verticalAlignment="Middle">
 								<paragraph leftIndent="5"/>
 							</textElement>
-							<text><![CDATA[Tiempo de interrupción]]></text>
+							<text><![CDATA[Tiempo de interupción (horas)]]></text>
 						</staticText>
 						<textField>
-							<reportElement positionType="Float" mode="Opaque" x="132" y="0" width="178" height="20" forecolor="#0058B6" backcolor="#D9D9D9" uuid="6bff6540-8696-4bd5-ab8b-1ec4e9e23f9e"/>
+							<reportElement positionType="Float" mode="Opaque" x="166" y="0" width="144" height="20" forecolor="#0058B6" backcolor="#D9D9D9" uuid="6bff6540-8696-4bd5-ab8b-1ec4e9e23f9e"/>
 							<box>
 								<pen lineWidth="1.0" lineColor="#FFFFFF"/>
 								<topPen lineWidth="1.0" lineColor="#FFFFFF"/>
@@ -462,7 +462,7 @@
 							<textFieldExpression><![CDATA[$F{fecIniInterrupcionStr}]]></textFieldExpression>
 						</textField>
 						<textField>
-							<reportElement positionType="Float" mode="Opaque" x="132" y="20" width="362" height="20" forecolor="#0058B6" backcolor="#D9D9D9" uuid="520da167-9d75-4ba8-8857-be2e03d2a277"/>
+							<reportElement positionType="Float" mode="Opaque" x="166" y="20" width="328" height="20" forecolor="#0058B6" backcolor="#D9D9D9" uuid="520da167-9d75-4ba8-8857-be2e03d2a277"/>
 							<box>
 								<pen lineWidth="1.0" lineColor="#FFFFFF"/>
 								<topPen lineWidth="1.0" lineColor="#FFFFFF"/>
@@ -476,7 +476,7 @@
 							<textFieldExpression><![CDATA[$F{eventoFinDesc}]]></textFieldExpression>
 						</textField>
 						<textField isBlankWhenNull="true">
-							<reportElement positionType="Float" mode="Opaque" x="132" y="40" width="178" height="20" forecolor="#0058B6" backcolor="#D9D9D9" uuid="e593336b-9784-4e6e-b04b-f2f19d20f6b1"/>
+							<reportElement positionType="Float" mode="Opaque" x="166" y="40" width="144" height="20" forecolor="#0058B6" backcolor="#D9D9D9" uuid="e593336b-9784-4e6e-b04b-f2f19d20f6b1"/>
 							<box>
 								<pen lineWidth="1.0" lineColor="#FFFFFF"/>
 								<topPen lineWidth="1.0" lineColor="#FFFFFF"/>
@@ -490,7 +490,7 @@
 							<textFieldExpression><![CDATA[$F{fecFinInterrupcionStr}]]></textFieldExpression>
 						</textField>
 						<textField isBlankWhenNull="true">
-							<reportElement positionType="Float" mode="Opaque" x="132" y="60" width="362" height="20" forecolor="#0058B6" backcolor="#D9D9D9" uuid="caaa58a1-8812-4b11-9542-1e6a6c35d200"/>
+							<reportElement positionType="Float" mode="Opaque" x="166" y="60" width="328" height="20" forecolor="#0058B6" backcolor="#D9D9D9" uuid="caaa58a1-8812-4b11-9542-1e6a6c35d200"/>
 							<box>
 								<pen lineWidth="1.0" lineColor="#FFFFFF"/>
 								<topPen lineWidth="1.0" lineColor="#FFFFFF"/>
@@ -973,7 +973,7 @@
 							<textFieldExpression><![CDATA[$F{descripcion}]]></textFieldExpression>
 						</textField>
 						<staticText>
-							<reportElement positionType="Float" stretchType="RelativeToTallestObject" mode="Opaque" x="368" y="0" width="49" height="20" isRemoveLineWhenBlank="true" isPrintWhenDetailOverflows="true" forecolor="#FFFFFF" backcolor="#226FE1" uuid="15c00321-de22-4a3e-bf1e-a86f5adfbb38">
+							<reportElement positionType="Float" stretchType="RelativeToTallestObject" mode="Opaque" x="368" y="0" width="72" height="20" isRemoveLineWhenBlank="true" isPrintWhenDetailOverflows="true" forecolor="#FFFFFF" backcolor="#226FE1" uuid="15c00321-de22-4a3e-bf1e-a86f5adfbb38">
 								<printWhenExpression><![CDATA[$F{tipoImpacto}.equals( "009000" )]]></printWhenExpression>
 							</reportElement>
 							<box>
@@ -987,10 +987,10 @@
 								<font fontName="SansSerif" size="10" isBold="false" isItalic="false" isUnderline="false" isStrikeThrough="false" pdfEncoding="Cp1252" isPdfEmbedded="false"/>
 								<paragraph lineSpacing="Single" leftIndent="5"/>
 							</textElement>
-							<text><![CDATA[Impacto]]></text>
+							<text><![CDATA[Impacto (S/)]]></text>
 						</staticText>
 						<textField isStretchWithOverflow="true" pattern="" isBlankWhenNull="true">
-							<reportElement positionType="Float" stretchType="RelativeToTallestObject" mode="Opaque" x="417" y="0" width="117" height="20" isPrintWhenDetailOverflows="true" forecolor="#0058B6" backcolor="#D9D9D9" uuid="fe9c1d18-3411-491a-8fb3-77ea76331bde">
+							<reportElement positionType="Float" stretchType="RelativeToTallestObject" mode="Opaque" x="440" y="0" width="94" height="20" isPrintWhenDetailOverflows="true" forecolor="#0058B6" backcolor="#D9D9D9" uuid="fe9c1d18-3411-491a-8fb3-77ea76331bde">
 								<printWhenExpression><![CDATA[$F{tipoImpacto}.equals( "009000" )]]></printWhenExpression>
 							</reportElement>
 							<box>
@@ -1051,7 +1051,7 @@
 							<textFieldExpression><![CDATA[$F{descripcion}]]></textFieldExpression>
 						</textField>
 						<staticText>
-							<reportElement positionType="Float" stretchType="RelativeToTallestObject" mode="Opaque" x="368" y="0" width="49" height="20" isRemoveLineWhenBlank="true" isPrintWhenDetailOverflows="true" forecolor="#FFFFFF" backcolor="#226FE1" uuid="e7ea5813-51ed-46d2-a2a4-c6c9577ea26b">
+							<reportElement positionType="Float" stretchType="RelativeToTallestObject" mode="Opaque" x="368" y="0" width="72" height="20" isRemoveLineWhenBlank="true" isPrintWhenDetailOverflows="true" forecolor="#FFFFFF" backcolor="#226FE1" uuid="e7ea5813-51ed-46d2-a2a4-c6c9577ea26b">
 								<printWhenExpression><![CDATA[$F{tipoImpacto}.equals( "009001" )]]></printWhenExpression>
 							</reportElement>
 							<box>
@@ -1068,7 +1068,7 @@
 							<text><![CDATA[Impacto]]></text>
 						</staticText>
 						<textField isStretchWithOverflow="true" pattern="" isBlankWhenNull="true">
-							<reportElement positionType="Float" stretchType="RelativeToTallestObject" mode="Opaque" x="417" y="0" width="117" height="20" isPrintWhenDetailOverflows="true" forecolor="#0058B6" backcolor="#D9D9D9" uuid="d53f0e72-5a01-4f1f-ae9f-d71421cd7007">
+							<reportElement positionType="Float" stretchType="RelativeToTallestObject" mode="Opaque" x="440" y="0" width="94" height="20" isPrintWhenDetailOverflows="true" forecolor="#0058B6" backcolor="#D9D9D9" uuid="d53f0e72-5a01-4f1f-ae9f-d71421cd7007">
 								<printWhenExpression><![CDATA[$F{tipoImpacto}.equals( "009001" )]]></printWhenExpression>
 							</reportElement>
 							<box>
@@ -1130,7 +1130,7 @@ colaboradores]]></text>
 							<textFieldExpression><![CDATA[$F{descripcion}]]></textFieldExpression>
 						</textField>
 						<staticText>
-							<reportElement positionType="Float" stretchType="RelativeToTallestObject" mode="Opaque" x="368" y="0" width="49" height="30" isRemoveLineWhenBlank="true" isPrintWhenDetailOverflows="true" forecolor="#FFFFFF" backcolor="#226FE1" uuid="ac799e08-c89e-49c5-a935-eb3f329b2556">
+							<reportElement positionType="Float" stretchType="RelativeToTallestObject" mode="Opaque" x="368" y="0" width="72" height="30" isRemoveLineWhenBlank="true" isPrintWhenDetailOverflows="true" forecolor="#FFFFFF" backcolor="#226FE1" uuid="ac799e08-c89e-49c5-a935-eb3f329b2556">
 								<printWhenExpression><![CDATA[$F{tipoImpacto}.equals( "009002" )]]></printWhenExpression>
 							</reportElement>
 							<box>
@@ -1147,7 +1147,7 @@ colaboradores]]></text>
 							<text><![CDATA[Impacto]]></text>
 						</staticText>
 						<textField isStretchWithOverflow="true" pattern="" isBlankWhenNull="true">
-							<reportElement positionType="Float" stretchType="RelativeToTallestObject" mode="Opaque" x="417" y="0" width="117" height="30" isPrintWhenDetailOverflows="true" forecolor="#0058B6" backcolor="#D9D9D9" uuid="0cabe41a-195d-4a8a-abf3-c795bd198605">
+							<reportElement positionType="Float" stretchType="RelativeToTallestObject" mode="Opaque" x="440" y="0" width="94" height="30" isPrintWhenDetailOverflows="true" forecolor="#0058B6" backcolor="#D9D9D9" uuid="0cabe41a-195d-4a8a-abf3-c795bd198605">
 								<printWhenExpression><![CDATA[$F{tipoImpacto}.equals( "009002" )]]></printWhenExpression>
 							</reportElement>
 							<box>
@@ -1208,7 +1208,7 @@ colaboradores]]></text>
 							<textFieldExpression><![CDATA[$F{descripcion}]]></textFieldExpression>
 						</textField>
 						<staticText>
-							<reportElement positionType="Float" stretchType="RelativeToTallestObject" mode="Opaque" x="368" y="0" width="49" height="20" isRemoveLineWhenBlank="true" isPrintWhenDetailOverflows="true" forecolor="#FFFFFF" backcolor="#226FE1" uuid="e8a4a871-b197-4856-8928-b40ba5d1ecef">
+							<reportElement positionType="Float" stretchType="RelativeToTallestObject" mode="Opaque" x="368" y="0" width="72" height="20" isRemoveLineWhenBlank="true" isPrintWhenDetailOverflows="true" forecolor="#FFFFFF" backcolor="#226FE1" uuid="e8a4a871-b197-4856-8928-b40ba5d1ecef">
 								<printWhenExpression><![CDATA[$F{tipoImpacto}.equals( "009003" )]]></printWhenExpression>
 							</reportElement>
 							<box>
@@ -1225,7 +1225,7 @@ colaboradores]]></text>
 							<text><![CDATA[Impacto]]></text>
 						</staticText>
 						<textField isStretchWithOverflow="true" pattern="" isBlankWhenNull="true">
-							<reportElement positionType="Float" stretchType="RelativeToTallestObject" mode="Opaque" x="417" y="0" width="117" height="20" isPrintWhenDetailOverflows="true" forecolor="#0058B6" backcolor="#D9D9D9" uuid="f447a6a6-1d28-43a8-ad7e-39e17ecff474">
+							<reportElement positionType="Float" stretchType="RelativeToTallestObject" mode="Opaque" x="440" y="0" width="94" height="20" isPrintWhenDetailOverflows="true" forecolor="#0058B6" backcolor="#D9D9D9" uuid="f447a6a6-1d28-43a8-ad7e-39e17ecff474">
 								<printWhenExpression><![CDATA[$F{tipoImpacto}.equals( "009003" )]]></printWhenExpression>
 							</reportElement>
 							<box>
@@ -1289,7 +1289,7 @@ estratégico
 							<textFieldExpression><![CDATA[$F{descripcion}]]></textFieldExpression>
 						</textField>
 						<staticText>
-							<reportElement positionType="Float" stretchType="RelativeToTallestObject" mode="Opaque" x="368" y="0" width="49" height="30" isRemoveLineWhenBlank="true" isPrintWhenDetailOverflows="true" forecolor="#FFFFFF" backcolor="#226FE1" uuid="bb288a93-a73a-41c5-9ef4-5a35dd9d0c33">
+							<reportElement positionType="Float" stretchType="RelativeToTallestObject" mode="Opaque" x="368" y="0" width="72" height="30" isRemoveLineWhenBlank="true" isPrintWhenDetailOverflows="true" forecolor="#FFFFFF" backcolor="#226FE1" uuid="bb288a93-a73a-41c5-9ef4-5a35dd9d0c33">
 								<printWhenExpression><![CDATA[$F{tipoImpacto}.equals( "009004" )]]></printWhenExpression>
 							</reportElement>
 							<box>
@@ -1306,7 +1306,7 @@ estratégico
 							<text><![CDATA[Impacto]]></text>
 						</staticText>
 						<textField isStretchWithOverflow="true" pattern="" isBlankWhenNull="true">
-							<reportElement positionType="Float" stretchType="RelativeToTallestObject" mode="Opaque" x="417" y="0" width="117" height="30" isPrintWhenDetailOverflows="true" forecolor="#0058B6" backcolor="#D9D9D9" uuid="fb6b44b1-f367-4e83-8e07-f4bf8da4d5b4">
+							<reportElement positionType="Float" stretchType="RelativeToTallestObject" mode="Opaque" x="440" y="0" width="94" height="30" isPrintWhenDetailOverflows="true" forecolor="#0058B6" backcolor="#D9D9D9" uuid="fb6b44b1-f367-4e83-8e07-f4bf8da4d5b4">
 								<printWhenExpression><![CDATA[$F{tipoImpacto}.equals( "009004" )]]></printWhenExpression>
 							</reportElement>
 							<box>

@@ -537,11 +537,13 @@ var app = new Vue({
     		$("#"+fecha).parent().removeClass( "is-dirty" );
     		
     		$(".tipsbs").tooltipster('destroy');
+    		$(".tipsbs1").tooltipster('destroy');
     		
     		self.update_pagination = true;
     	},
     	remove_plan_accion: function(evt, name_table, index){
     		$(".tipsbs").tooltipster('destroy');
+    		$(".tipsbs1").tooltipster('destroy');
     		//remove values table
     		var self = this;
     		
@@ -936,7 +938,7 @@ var app = new Vue({
                 		
         			}else{
         				$('#tiempo_interrup').val(jbase.redondear(diff, 2));
-                		this.model.informe.totalInterrupcion = diff;
+                		this.model.informe.totalInterrupcion = jbase.redondear(diff, 2);
         			}
         		}
     			
@@ -1018,6 +1020,12 @@ var app = new Vue({
         			       content : e.descPlan,
         			       contentAsHTML: 'true'
         			    });
+        			$("#"+ e.tbl_index + "tipsbs1").tooltipster({
+     			       maxWidth: 500,
+     			       side: 'bottom',
+     			       content : e.areaResp,
+     			       contentAsHTML: 'true'
+     			    });
         		}
 	        );
     		

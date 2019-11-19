@@ -36,13 +36,31 @@
 
     <div class="content">    
         <div class="col-md-12">
+        <div class="form-group row">
+           	<div class="offset-md-3 col-md-3">
+                 <a href="javascript:void(0)" class="btn btn-block mdl-button mdl-js-button mdl-button--raised mdl-button--colored mdl-js-ripple-effect sbs-submit" @click.exact="confirmar">
+                     <span><i class="fas fa-save"></i>Guardar</span>
+                 </a>
+            </div>
+            <div class="col-md-3">
+                 <a href="javascript:void(0)" class="btn btn-block mdl-button mdl-js-button mdl-button--raised mdl-button--colored mdl-js-ripple-effect sbs-submit" @click.exact="enviar">
+                     <span><i class="fas fa-share-alt-square"></i>Enviar</span>
+                 </a>
+            </div>
+            <div class="col-md-3">
+                <a href="javascript:void(0)" class="btn btn-block mdl-button mdl-js-button mdl-button--raised mdl-button--colored mdl-js-ripple-effect sbs-submit" @click.exact="cancelar">
+                    <span><i class="fas fa-window-close"></i>Cancelar</span>
+                </a>
+            </div>
+	    </div>
+        
          <fieldset><legend>B. Informe de Interrupción</legend>
             <div class="row sbs-rectangle">
 	         <div class="card-body">
 		         <div class="alert alert-secondary">
 		         	<div class="row">
 		         		<div class="col-md-3">
-                        	<p>1. Tipo de evento:<br/><sub>*Marcar el evento que origina la interrupción.</sub></p>
+                        	<p>1. Tipo de evento:<br/></p>
                        	</div>
 		         		<div class="col-md-9">
 		           			<div class="mdl-selectfield mdl-js-selectfield mdl-selectfield--floating-label" v-bind:class="{ 'is-dirty': (model.informe.tipEvento ? true : false) }">
@@ -52,7 +70,7 @@
                                         </option>
 	                                </select>
 	                               <div class="mdl-selectfield__icon"><i class="fas fa-sort-down"></i></div>
-	                               <label class="mdl-selectfield__label" for="tipo_documento">Tipo de evento:</label>
+	                               <label class="mdl-selectfield__label" for="tipo_documento">Seleccionar el tipo de evento:</label>
 	                        </div>
                         </div>
                        	<div class="col-md-3"></div>
@@ -66,7 +84,7 @@
                         <div class="col-md-3"></div>
                         <div class="col-md-9" v-show="is_otro_evento">
                        		<div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label" v-bind:class="{ 'is-dirty': (model.informe.descTipEvento ? true : false) }">
-                                   <input class="mdl-textfield__input" type="text" id="det_tipo_evento" name="det_tipo_evento" v-model="model.informe.descTipEvento">
+                                   <input class="mdl-textfield__input" type="text" id="det_tipo_evento" name="det_tipo_evento" v-model="model.informe.descTipEvento" maxlength="140">
                                    <label class="mdl-textfield__label" for="det_tipo_evento">Detalle del tipo de evento</label>
                             </div>
                        	</div>
@@ -220,7 +238,7 @@
 		         		<div class="col-md-2"><p>4.2 Productos</p></div>
 		         		<div class="col-md-4">
 		         			<div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label">
-                                  <input class="mdl-textfield__input required_afec_prod" type="text" id="product_interrup" name="product_interrup" v-model="producto_temp">
+                                  <input class="mdl-textfield__input required_afec_prod" type="text" id="product_interrup" name="product_interrup" v-model="producto_temp" maxlength="80">
                                   <label class="mdl-textfield__label" for="product_interrup">Productos</label>
                             </div>
 		         		</div>
@@ -268,7 +286,7 @@
                         <div class="col-md-2"><p>4.3 Servicios</p></div>
 		         		<div class="col-md-4">
 		         			<div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label">
-                                  <input class="mdl-textfield__input required_afec_serv" type="text" id="servicios_interrup" name="servicios_interrup" v-model="servicio_temp">
+                                  <input class="mdl-textfield__input required_afec_serv" type="text" id="servicios_interrup" name="servicios_interrup" v-model="servicio_temp" maxlength="80">
                                   <label class="mdl-textfield__label" for="servicios_interrup">Servicios</label>
                             </div>
 		         		</div>
@@ -314,7 +332,7 @@
                         <div class="col-md-2"><p>4.4 Procesos</p></div>
 		         		<div class="col-md-4">
 		         			<div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label">
-                                  <input class="mdl-textfield__input required_afec_proc" type="text" id="procesos_interrup" name="procesos_interrup" v-model="proceso_temp">
+                                  <input class="mdl-textfield__input required_afec_proc" type="text" id="procesos_interrup" name="procesos_interrup" v-model="proceso_temp" maxlength="80">
                                   <label class="mdl-textfield__label" for="procesos_interrup">Procesos</label>
                             </div>
 		         		</div>
@@ -599,7 +617,7 @@
            				</div>
            				<div class="col-md-4">
            					<div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label">
-                                <input class="mdl-textfield__input required_plan_acc" type="text" id="area_resp_temp" v-model="area_resp_temp" maxlength="20">
+                                <input class="mdl-textfield__input required_plan_acc" type="text" id="area_resp_temp" v-model="area_resp_temp" maxlength="60">
                                 <label class="mdl-textfield__label" for="area_resp">Área Responsable</label>
                             </div>
            				</div>
@@ -646,7 +664,14 @@
 	                                    				</div>
 	                                    			</div>
 	                                    		</td>
-                                          		<td class="mdl-data-table__cell--non-numeric">{{item.areaResp}}</td>
+                                          		<!-- td class="mdl-data-table__cell--non-numeric">{{item.areaResp}}</td -->
+                                          		<td class="mdl-data-table__cell--non-numeric">
+	                                    			<div style="text-overflow: ellipsis;overflow: hidden;white-space: nowrap">
+	                                    				<div v-bind:title="item.areaResp" class="tipsbs1" v-bind:id="item.tbl_index + 'tipsbs1'">
+	                                    					{{item.areaResp}}
+	                                    				</div>
+	                                    			</div>
+	                                    		</td>
                                           		<td class="mdl-data-table__cell--non-numeric">{{item.fecImplementacionStr}}</td>
                                           	
                                                 <td class="mdl-data-table__cell--non-numeric" width="10px">
@@ -681,14 +706,23 @@
 						
 						<div class="col-md-2"></div>
 						<div class="col-md-4" v-if="is_upload_open === true">
-		           			<div class="mdl-textfield mdl-js-textfield mdl-textfield--file mdl-textfield--floating-label">
+		           			<div class="mdl-textfield mdl-js-textfield mdl-textfield--file mdl-textfield--floating-label" v-bind:class="{ 'is-dirty': (model.informe.fileComentAdic ? true : false) }">
                               	<input class="mdl-textfield__input" type="text" id="mdr_upload" readonly>
-                                <label class="mdl-textfield__label" for="mdr_upload">Adjuntar Archivo</label>
+                                <label class="mdl-textfield__label" for="mdr_upload">Archivo máximo: 5MB. Tipos: .pdf .doc .docx</label>
                                 <div class="mdl-button mdl-js-button mdl-button--raised mdl-button--colored mdl-button--file sbs-button-standard">
 										Adjuntar <input type="file" onclick="this.value=null;" id="mdr_fileDoc" ref="mdr_fileDoc" v-on:change="handleFileUpload()"/>
 								</div>
                             </div>
 						</div>
+						<div class="col-md-1" v-if="is_upload_open === true && model.informe.fileComentAdic">
+							<div class="mdl-textfield mdl-js-textfield mdl-textfield--file mdl-textfield--floating-label">
+								<div class="mdl-button mdl-js-button mdl-button--raised mdl-button--colored mdl-button--file sbs-button-standard">
+										Eliminar <input type="button" v-on:click="deleteUpload()" />
+								</div>
+								<input class="mdl-textfield__input" type="text" style="width: 0px;">
+							</div>
+						</div>
+						
 						<div class="col-md-4" v-if="is_upload_open === false">
 							<a href="javascript:void(0)" @click.exact="descargar(model.informe.fileComentAdic)">{{model.informe.nameFileComentAdic}}</a>
 							-
@@ -725,25 +759,25 @@
            				<div class="col-md-3">
                        		<div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label" v-bind:class="{ 'is-dirty': (model.informe.contactoNomb ? true : false) }">
                                    <input class="mdl-textfield__input send_required" type="text" id="nombre_interrup" name="nombre_interrup" v-model="model.informe.contactoNomb" maxlength="50">
-                                   <label class="mdl-textfield__label" for="nombre_interrup">Nombre *:</label>
+                                   <label class="mdl-textfield__label" for="nombre_interrup">Nombre:</label>
                                </div>
                        	</div>
                        	<div class="col-md-3">
                        		<div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label" v-bind:class="{ 'is-dirty': (model.informe.contactoCargo ? true : false) }">
                                    <input class="mdl-textfield__input send_required" type="text" id="cargo_interrup" name="cargo_interrup" v-model="model.informe.contactoCargo" maxlength="50">
-                                   <label class="mdl-textfield__label" for="cargo_interrup">Cargo *:</label>
+                                   <label class="mdl-textfield__label" for="cargo_interrup">Cargo:</label>
                                </div>
                        	</div>
                        	<div class="col-md-3">
                        		<div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label" v-bind:class="{ 'is-dirty': (model.informe.contactoTelef ? true : false) }">
                                    <input class="mdl-textfield__input positive-integer send_required" type="text" id="tel_interrup" name="tel_interrup" v-model="model.informe.contactoTelef" maxlength="10">
-                                   <label class="mdl-textfield__label" for="tel_interrup">Teléfono *:</label>
+                                   <label class="mdl-textfield__label" for="tel_interrup">Teléfono:</label>
                                </div>
                        	</div>
                        	<div class="col-md-3">
                        		<div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label" v-bind:class="{ 'is-dirty': (model.correoInforme.desCorreo ? true : false) }">
                                    <input class="mdl-textfield__input send_required" type="text" id="mail_interrup" name="mail_interrup" v-model="model.correoInforme.desCorreo" maxlength="50">
-                                   <label class="mdl-textfield__label" for="mail_interrup">Correo *:</label>
+                                   <label class="mdl-textfield__label" for="mail_interrup">Correo:</label>
                                </div>
                        	</div>
            				
@@ -759,23 +793,7 @@
         
          <div class="form-group row"></div>
         
-        <div class="form-group row">
-           	<div class="offset-md-3 col-md-3">
-                 <a href="javascript:void(0)" class="btn btn-block mdl-button mdl-js-button mdl-button--raised mdl-button--colored mdl-js-ripple-effect sbs-submit" @click.exact="confirmar">
-                     <span><i class="fas fa-save"></i>Guardar</span>
-                 </a>
-            </div>
-            <div class="col-md-3">
-                 <a href="javascript:void(0)" class="btn btn-block mdl-button mdl-js-button mdl-button--raised mdl-button--colored mdl-js-ripple-effect sbs-submit" @click.exact="enviar">
-                     <span><i class="fas fa-share-alt-square"></i>Enviar</span>
-                 </a>
-            </div>
-            <div class="col-md-3">
-                <a href="javascript:void(0)" class="btn btn-block mdl-button mdl-js-button mdl-button--raised mdl-button--colored mdl-js-ripple-effect sbs-submit" @click.exact="cancelar">
-                    <span><i class="fas fa-window-close"></i>Cancelar</span>
-                </a>
-            </div>
-	    </div>
+        
         
     </div>
 </div>
