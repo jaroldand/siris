@@ -38,7 +38,7 @@ window.jnoty = window.jnoty
 
 			var showMessage = function(type, message, timer, modal) {
 				message = getMessageValid(message);
-
+				
 				var n = noty({
 					text : message,
 					type : type,
@@ -51,6 +51,24 @@ window.jnoty = window.jnoty
 					timeout : timer ? timer : 5000,
 					modal : modal ? modal : false,
 					progressBar : true
+				});
+			};
+			
+			var showStickyMessage = function(type, message, modal) {
+				message = getMessageValid(message);
+				
+				var n = noty({
+					text : message,
+					type : type,
+					dismissQueue : true,
+					layout : "topCenter",
+					theme : "bootstrapTheme",
+					closeWith : [ "button", "click" ],
+					maxVisible : 5,
+					template : "<div class='noty_message'><div class='noty_close'/><p class='noty_text'></p></div>",
+					timeout : false,
+					modal : modal ? modal : false,
+					progressBar : false
 				});
 			};
 
@@ -158,6 +176,7 @@ window.jnoty = window.jnoty
 
 			return {
 				showMessage : showMessage,
+				showStickyMessage : showStickyMessage,
 				error : error,
 				warning : warning,
 				information : information,

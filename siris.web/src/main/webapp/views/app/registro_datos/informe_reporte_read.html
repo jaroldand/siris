@@ -73,11 +73,43 @@
                         
 		           	</div>
 		         </div>
+		         
+		         <div class="alert alert-secondary" >
+	           		<div class="row">
+	           			<div class="col-md-12"><p>2. Detalle del evento de interrupción</p></div>
+	           			
+	           			
+	           			<div class="col-md-2"><p>2.1. Descripción corta del evento</p></div>
+	           			<div class="col-md-10">
+		           			<div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label is-disabled" v-bind:class="{ 'is-dirty': (model.informe.descCortaEvento ? true : false) }">
+							    <textarea class="mdl-textfield__input send_required" type="text" rows= "3" id="desc_interrup" v-model="model.informe.descCortaEvento" maxlength="250" disabled="disabled"></textarea>
+							    <label class="mdl-textfield__label" for="desc_interrup">Descripción corta del evento</label>
+							</div>
+						</div>
+	           			
+	           			
+	           			<div class="col-md-2"><p>2.2. Descripción detallada del evento</p></div>
+	           			<div class="col-md-10">
+		           			<div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label is-disabled" v-bind:class="{ 'is-dirty': (model.informe.descEvento ? true : false) }">
+							    <textarea class="mdl-textfield__input send_required" type="text" rows= "3" id="desc_det_interrup" v-model="model.informe.descEvento" maxlength="800" disabled="disabled"></textarea>
+							    <label class="mdl-textfield__label" for="desc_det_interrup">Descripción detallada del evento</label>
+							</div>
+						</div>
+						
+						<div class="col-md-2"><p>2.3. Causas de la interrupción</p></div>
+           				<div class="col-md-10">
+		           			<div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label is-disabled" v-bind:class="{ 'is-dirty': (model.informe.causaInterrupcion ? true : false) }">
+							    <textarea class="mdl-textfield__input send_required" type="text" rows= "3" id="causa_interrup" v-model="model.informe.causaInterrupcion" maxlength="800" disabled="disabled"></textarea>
+							    <label class="mdl-textfield__label" for="causa_interrup">Descripción de las causas de la interrupción (Precisar detalles técnicos, de aplicar).</label>
+							</div>
+						</div>
+	           		</div>
+	           	</div>
 	           	
 	           	<div class="alert alert-secondary" >
 	           			<div class="row">
 			         		<div class="col-md-12">
-	                        	<p>2. Tiempos de interrupción</p>
+	                        	<p>3. Tiempos de interrupción</p>
 	                       	</div>
 	                       	
 	                       	<div class="col-md-1"></div>
@@ -163,7 +195,7 @@
 	           	<div class="alert alert-secondary">
 	           		<div class="row">
 		         		<div class="col-md-5">
-                        	<p>3. Menor tiempo objetivo de interupción del producto/proceso/canal interrumpido</p>
+                        	<p>4. Menor tiempo objetivo de interupción del producto/proceso/canal interrumpido</p>
                        	</div>
                        	<div class="col-md-3">
                       		<div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label is-disabled" v-bind:class="{ 'is-dirty': (model.informe.menorInterrupcion ? true : false) }">
@@ -177,9 +209,9 @@
 	           	
 	           	<div class="alert alert-secondary" >
 	           		<div class="row">
-		         		<div class="col-md-12"><p>4. Afectación</p></div>
+		         		<div class="col-md-12"><p>5. Afectación</p></div>
 		         		
-		         		<div class="col-md-12"><p>4.1 Canales de atención</p></div>
+		         		<div class="col-md-12"><p>5.1 Canales de atención</p></div>
 		         		
 		         		
 		         		<div class="col-md-2 my-auto">
@@ -210,7 +242,7 @@
 	                        </div>
 		         		</div>
 		         		
-		         		<div class="col-md-2"><p>4.2 Productos</p></div>
+		         		<div class="col-md-2"><p>5.2 Productos</p></div>
                         <div class="col-md-10"></div>
                         
                         <div class="col-md-2"></div>
@@ -243,7 +275,7 @@
                         </div>
                         
                         
-                        <div class="col-md-2"><p>4.3 Servicios</p></div>
+                        <div class="col-md-2"><p>5.3 Servicios</p></div>
                         <div class="col-md-10"></div>
                         
                         <div class="col-md-2"></div>
@@ -274,7 +306,7 @@
                         </div>
                         
                         
-                        <div class="col-md-2"><p>4.4 Procesos</p></div>
+                        <div class="col-md-2"><p>5.4 Procesos</p></div>
                         <div class="col-md-10"></div>
                         
                         <div class="col-md-2"></div>
@@ -307,44 +339,8 @@
 	           	</div>
 	           	
 	           	<div class="alert alert-secondary" >
-	           		<div class="row">
-	           			<div class="col-md-12"><p>5. Descripción de evento</p></div>
-	           			
-	           			
-	           			<div class="col-md-2"><p>5.1. Descripción corta del evento</p></div>
-	           			<div class="col-md-10">
-		           			<div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label is-disabled" v-bind:class="{ 'is-dirty': (model.informe.descCortaEvento ? true : false) }">
-							    <textarea class="mdl-textfield__input send_required" type="text" rows= "3" id="desc_interrup" v-model="model.informe.descCortaEvento" maxlength="250" disabled="disabled"></textarea>
-							    <label class="mdl-textfield__label" for="desc_interrup">Descripción corta del evento</label>
-							</div>
-						</div>
-	           			
-	           			
-	           			<div class="col-md-2"><p>5.2. Descripción detallada del evento</p></div>
-	           			<div class="col-md-10">
-		           			<div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label is-disabled" v-bind:class="{ 'is-dirty': (model.informe.descEvento ? true : false) }">
-							    <textarea class="mdl-textfield__input send_required" type="text" rows= "3" id="desc_det_interrup" v-model="model.informe.descEvento" maxlength="800" disabled="disabled"></textarea>
-							    <label class="mdl-textfield__label" for="desc_det_interrup">Descripción detallada del evento</label>
-							</div>
-						</div>
-	           		</div>
-	           	</div>
-	           	
-	           	<div class="alert alert-secondary" >
            			<div class="row">
-           				<div class="col-md-2"><p>6. Causas de la interrupción</p></div>
-           				<div class="col-md-10">
-		           			<div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label is-disabled" v-bind:class="{ 'is-dirty': (model.informe.causaInterrupcion ? true : false) }">
-							    <textarea class="mdl-textfield__input send_required" type="text" rows= "3" id="causa_interrup" v-model="model.informe.causaInterrupcion" maxlength="800" disabled="disabled"></textarea>
-							    <label class="mdl-textfield__label" for="causa_interrup">Descripción de las causas de la interrupción (Precisar detalles técnicos, de aplicar).</label>
-							</div>
-						</div>
-           			</div>
-	           	</div>
-	           	
-	           	<div class="alert alert-secondary" >
-           			<div class="row">
-           				<div class="col-md-12"><p>7. Principales impactos de la interrupción</p></div>
+           				<div class="col-md-12"><p>6. Principales impactos de la interrupción</p></div>
            				
            				<div class="col-md-2"></div>
            				<div class="col-md-1"><p>Financiero</p>
@@ -459,7 +455,7 @@
            		
            		<div class="alert alert-secondary" >
            			<div class="row">
-           				<div class="col-md-4"><p>8. Descripción de medidas y acciones tomadas durante el evento</p></div>
+           				<div class="col-md-4"><p>7. Descripción de medidas y acciones tomadas durante el evento</p></div>
            				<div class="col-md-8">
 		           			<div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label is-disabled" v-bind:class="{ 'is-dirty': (model.informe.descAcciones ? true : false) }">
 							    <textarea class="mdl-textfield__input send_required" type="text" rows= "3" id="acc_interrup" v-model="model.informe.descAcciones" maxlength="800" disabled="disabled"></textarea>
@@ -473,7 +469,7 @@
 	           	
 	           	<div class="alert alert-secondary" >
            			<div class="row">
-           				<div class="col-md-12"><p>9. Situación del evento en la fecha de envío del reporte final</p></div>
+           				<div class="col-md-12"><p>8. Situación del evento en la fecha de envío del reporte final</p></div>
            				
            				
            				<div class="col-md-2"><p>Canales</p></div>
@@ -536,7 +532,7 @@
            		
            		<div class="alert alert-secondary" >
            			<div class="row">
-           				<div class="col-md-12"><p>10. Planes de acción orientados a reducir la posibilidad de ocurrendia de eventos de similares características</p></div>
+           				<div class="col-md-12"><p>9. Planes de acción orientados a reducir la posibilidad de ocurrendia de eventos de similares características</p></div>
            				
 						
 						<div class="col-md-12">
@@ -576,7 +572,7 @@
            		
            		<div class="alert alert-secondary" >
            			<div class="row">
-           				<div class="col-md-2"><p>11. Comentarios adicionales</p></div>
+           				<div class="col-md-2"><p>10. Comentarios adicionales</p></div>
            				<div class="col-md-10">
 		           			<div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label is-disabled" v-bind:class="{ 'is-dirty': (model.informe.comentAdic ? true : false) }">
 							    <textarea class="mdl-textfield__input send_required" type="text" rows= "3" id="comment_adic_interrup" v-model="model.informe.comentAdic" maxlength="800" disabled="disabled"></textarea>
@@ -600,7 +596,7 @@
            		
            		<div class="alert alert-secondary" >
            			<div class="row">
-           				<div class="col-md-4"><p>12. Fecha de envío de reporte inicial al buzón continuidad@sbs.gob.pe</p></div>
+           				<div class="col-md-4"><p>11. Fecha de envío de reporte inicial al buzón continuidad@sbs.gob.pe</p></div>
            				<div class="col-md-4">
 	           				<div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label md-datepicker is-disabled" v-bind:class="{ 'is-dirty': (model.informe.fecEnvioRepInicial ? true : false) }">
 	                            <input type="text" id="fecha_envio_interrup" name="fecha_envio_interrup" class="mdl-textfield__input datetimepicker-input sbs-date send_required" data-target="#fecha_envio_interrup" disabled="disabled"/>
@@ -618,7 +614,7 @@
            		
            		<div class="alert alert-secondary" >
            			<div class="row">
-           				<div class="col-md-12"><p>13. Datos de contacto</p></div>
+           				<div class="col-md-12"><p>12. Datos de contacto</p></div>
            				
            				<div class="col-md-3">
                        		<div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label is-disabled" v-bind:class="{ 'is-dirty': (model.informe.contactoNomb ? true : false) }">

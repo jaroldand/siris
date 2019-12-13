@@ -240,8 +240,6 @@ window.jbase = window.jbase || {};
 		}
 	$b.allowExtension = {	    
 		pdf: { type: null, name: "pdf" },
-		doc: { type: null, name: "doc" },
-		docx: { type: null, name: "docx" },
 		xls: { type: null, name: "xls" },
 		xlsx: { type: null, name: "xlsx" },
 		ppt: { type: null, name: "ppt" },

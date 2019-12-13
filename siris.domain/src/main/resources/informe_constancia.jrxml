@@ -2,7 +2,7 @@
 <jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="reportePerfil" pageWidth="595" pageHeight="842" columnWidth="555" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20" uuid="2b66c828-28a1-4206-abbd-7b1cc4babeaf">
 	<property name="ireport.zoom" value="1.5000000000000002"/>
 	<property name="ireport.x" value="0"/>
-	<property name="ireport.y" value="379"/>
+	<property name="ireport.y" value="2006"/>
 	<style name="table">
 		<box>
 			<pen lineWidth="0.0" lineColor="#000000"/>
@@ -373,6 +373,87 @@
 				</jr:list>
 			</componentElement>
 		</band>
+		<band height="78" splitType="Prevent">
+			<componentElement>
+				<reportElement positionType="Float" x="14" y="7" width="536" height="68" isPrintWhenDetailOverflows="true" uuid="323d0170-5b9a-49a5-98d0-0eaa7b0e61c6"/>
+				<jr:list xmlns:jr="http://jasperreports.sourceforge.net/jasperreports/components" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports/components http://jasperreports.sourceforge.net/xsd/components.xsd" printOrder="Vertical">
+					<datasetRun subDataset="informe" uuid="5228a821-7bae-4847-a50b-afd4d104a1ed">
+						<dataSourceExpression><![CDATA[new net.sf.jasperreports.engine.data.JRBeanCollectionDataSource($F{informe})]]></dataSourceExpression>
+					</datasetRun>
+					<jr:listContents height="68" width="536">
+						<staticText>
+							<reportElement mode="Opaque" x="0" y="0" width="532" height="20" isPrintWhenDetailOverflows="true" forecolor="#0058B6" uuid="d3c2312e-e4c4-40ec-96a6-f0c40c7ee2c3"/>
+							<textElement verticalAlignment="Middle">
+								<font isBold="true"/>
+								<paragraph leftIndent="5"/>
+							</textElement>
+							<text><![CDATA[2. Descripción de evento]]></text>
+						</staticText>
+						<staticText>
+							<reportElement positionType="Float" mode="Opaque" x="0" y="20" width="223" height="20" isPrintWhenDetailOverflows="true" forecolor="#0058B6" backcolor="#FFFFFF" uuid="7066a837-e82e-4ff8-b883-4d5a6d8ca496"/>
+							<textElement textAlignment="Left" verticalAlignment="Middle" rotation="None" markup="none">
+								<font fontName="SansSerif" size="10" isBold="true" isItalic="false" isUnderline="false" isStrikeThrough="false" pdfEncoding="Cp1252" isPdfEmbedded="false"/>
+								<paragraph lineSpacing="Single" leftIndent="5"/>
+							</textElement>
+							<text><![CDATA[2.1. Descripción corta del evento]]></text>
+						</staticText>
+						<textField isStretchWithOverflow="true">
+							<reportElement positionType="Float" x="223" y="20" width="309" height="46" isPrintWhenDetailOverflows="true" uuid="0cda6d4c-ee57-47a4-9aad-faf175530dce"/>
+							<textElement verticalAlignment="Top"/>
+							<textFieldExpression><![CDATA[$F{descCortaEvento}]]></textFieldExpression>
+						</textField>
+					</jr:listContents>
+				</jr:list>
+			</componentElement>
+		</band>
+		<band height="54" splitType="Prevent">
+			<componentElement>
+				<reportElement positionType="Float" x="14" y="3" width="536" height="49" isPrintWhenDetailOverflows="true" uuid="55bdeb4a-29d9-42e1-a4c8-63cd94a83f50"/>
+				<jr:list xmlns:jr="http://jasperreports.sourceforge.net/jasperreports/components" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports/components http://jasperreports.sourceforge.net/xsd/components.xsd" printOrder="Vertical">
+					<datasetRun subDataset="informe" uuid="6902e40e-c466-490e-8285-d65ddbb15fad">
+						<dataSourceExpression><![CDATA[new net.sf.jasperreports.engine.data.JRBeanCollectionDataSource($F{informe})]]></dataSourceExpression>
+					</datasetRun>
+					<jr:listContents height="49" width="536">
+						<staticText>
+							<reportElement positionType="Float" mode="Opaque" x="0" y="0" width="223" height="20" isPrintWhenDetailOverflows="true" forecolor="#0058B6" backcolor="#FFFFFF" uuid="80c79add-b3f1-4ae1-9254-cefe4f1b3d47"/>
+							<textElement textAlignment="Left" verticalAlignment="Middle" rotation="None" markup="none">
+								<font fontName="SansSerif" size="10" isBold="true" isItalic="false" isUnderline="false" isStrikeThrough="false" pdfEncoding="Cp1252" isPdfEmbedded="false"/>
+								<paragraph lineSpacing="Single" leftIndent="5"/>
+							</textElement>
+							<text><![CDATA[2.2. Descripción detallada del evento]]></text>
+						</staticText>
+						<textField isStretchWithOverflow="true">
+							<reportElement positionType="Float" x="223" y="0" width="309" height="46" isPrintWhenDetailOverflows="true" uuid="fdf6d30d-3797-42ee-9545-ec9e0168887b"/>
+							<textFieldExpression><![CDATA[$F{descEvento}]]></textFieldExpression>
+						</textField>
+					</jr:listContents>
+				</jr:list>
+			</componentElement>
+		</band>
+		<band height="66" splitType="Prevent">
+			<componentElement>
+				<reportElement positionType="Float" x="14" y="6" width="536" height="53" isPrintWhenDetailOverflows="true" uuid="ce2f5f1a-9a50-4f7a-bb9c-490c66c2610c"/>
+				<jr:list xmlns:jr="http://jasperreports.sourceforge.net/jasperreports/components" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports/components http://jasperreports.sourceforge.net/xsd/components.xsd" printOrder="Vertical">
+					<datasetRun subDataset="informe" uuid="c2617f4b-cda2-47bb-9cf8-e8689478ac8c">
+						<dataSourceExpression><![CDATA[new net.sf.jasperreports.engine.data.JRBeanCollectionDataSource($F{informe})]]></dataSourceExpression>
+					</datasetRun>
+					<jr:listContents height="53" width="536">
+						<staticText>
+							<reportElement positionType="Float" mode="Opaque" x="0" y="0" width="223" height="20" isPrintWhenDetailOverflows="true" forecolor="#0058B6" backcolor="#FFFFFF" uuid="2f5d4020-d6a5-45bc-9ee4-18a721155ad3"/>
+							<textElement textAlignment="Left" verticalAlignment="Middle" rotation="None" markup="none">
+								<font fontName="SansSerif" size="10" isBold="true" isItalic="false" isUnderline="false" isStrikeThrough="false" pdfEncoding="Cp1252" isPdfEmbedded="false"/>
+								<paragraph lineSpacing="Single" leftIndent="5"/>
+							</textElement>
+							<text><![CDATA[2.3. Causas de la interrupción]]></text>
+						</staticText>
+						<textField isStretchWithOverflow="true">
+							<reportElement positionType="Float" x="223" y="0" width="309" height="46" isPrintWhenDetailOverflows="true" uuid="4d73d54c-a985-497c-8ee6-1b0d512a869e"/>
+							<textFieldExpression><![CDATA[$F{causaInterrupcion}]]></textFieldExpression>
+						</textField>
+					</jr:listContents>
+				</jr:list>
+			</componentElement>
+		</band>
 		<band height="116">
 			<staticText>
 				<reportElement positionType="Float" mode="Opaque" x="18" y="0" width="195" height="20" forecolor="#0058B6" backcolor="#FFFFFF" uuid="9d06f016-1af0-4ee0-a0a8-ecd73281b2fe"/>
@@ -380,7 +461,7 @@
 					<font fontName="SansSerif" size="10" isBold="true" isItalic="false" isUnderline="false" isStrikeThrough="false" pdfEncoding="Cp1252" isPdfEmbedded="false"/>
 					<paragraph lineSpacing="Single" leftIndent="5"/>
 				</textElement>
-				<text><![CDATA[2. Tiempos de interrupción
+				<text><![CDATA[3. Tiempos de interrupción
 
 ]]></text>
 			</staticText>
@@ -579,7 +660,7 @@
 								<font fontName="SansSerif" size="10" isBold="true" isItalic="false" isUnderline="false" isStrikeThrough="false" pdfEncoding="Cp1252" isPdfEmbedded="false"/>
 								<paragraph lineSpacing="Single" leftIndent="5"/>
 							</textElement>
-							<text><![CDATA[3. Menor tiempo objetivo de interrupción del producto/proceso/canal interrumpido
+							<text><![CDATA[4. Menor tiempo objetivo de interrupción del producto/proceso/canal interrumpido
 
 ]]></text>
 						</staticText>
@@ -601,7 +682,7 @@
 					<font fontName="SansSerif" size="10" isBold="true" isItalic="false" isUnderline="false" isStrikeThrough="false" pdfEncoding="Cp1252" isPdfEmbedded="false"/>
 					<paragraph lineSpacing="Single" leftIndent="5"/>
 				</textElement>
-				<text><![CDATA[4. Afectación]]></text>
+				<text><![CDATA[5. Afectación]]></text>
 			</staticText>
 			<staticText>
 				<reportElement mode="Opaque" x="18" y="20" width="263" height="20" forecolor="#0058B6" backcolor="#FFFFFF" uuid="92a54f0d-4153-4d91-9aec-34296faa9d8b"/>
@@ -609,7 +690,7 @@
 					<font fontName="SansSerif" size="10" isBold="true" isItalic="false" isUnderline="false" isStrikeThrough="false" pdfEncoding="Cp1252" isPdfEmbedded="false"/>
 					<paragraph lineSpacing="Single" leftIndent="5"/>
 				</textElement>
-				<text><![CDATA[4.1 Canales de atención
+				<text><![CDATA[5.1 Canales de atención
 
 ]]></text>
 			</staticText>
@@ -699,7 +780,7 @@
 					<font fontName="SansSerif" size="10" isBold="true" isItalic="false" isUnderline="false" isStrikeThrough="false" pdfEncoding="Cp1252" isPdfEmbedded="false"/>
 					<paragraph lineSpacing="Single" leftIndent="5"/>
 				</textElement>
-				<text><![CDATA[4.2 Productos]]></text>
+				<text><![CDATA[5.2 Productos]]></text>
 			</staticText>
 			<componentElement>
 				<reportElement key="table 1" x="18" y="20" width="494" height="18" uuid="aae1ed40-a9e7-4cbb-9d64-45a48e9d3ac1"/>
@@ -748,7 +829,7 @@
 					<font fontName="SansSerif" size="10" isBold="true" isItalic="false" isUnderline="false" isStrikeThrough="false" pdfEncoding="Cp1252" isPdfEmbedded="false"/>
 					<paragraph lineSpacing="Single" leftIndent="5"/>
 				</textElement>
-				<text><![CDATA[4.3 Servicios
+				<text><![CDATA[5.3 Servicios
 
 ]]></text>
 			</staticText>
@@ -799,7 +880,7 @@
 					<font fontName="SansSerif" size="10" isBold="true" isItalic="false" isUnderline="false" isStrikeThrough="false" pdfEncoding="Cp1252" isPdfEmbedded="false"/>
 					<paragraph lineSpacing="Single" leftIndent="5"/>
 				</textElement>
-				<text><![CDATA[4.4 Procesos]]></text>
+				<text><![CDATA[5.4 Procesos]]></text>
 			</staticText>
 			<componentElement>
 				<reportElement key="table 1" x="18" y="20" width="494" height="19" uuid="c4286d12-d9b0-4f48-b54e-7f5faea65cb0"/>
@@ -841,87 +922,7 @@
 				</jr:table>
 			</componentElement>
 		</band>
-		<band height="78" splitType="Prevent">
-			<componentElement>
-				<reportElement positionType="Float" x="14" y="7" width="536" height="68" isPrintWhenDetailOverflows="true" uuid="323d0170-5b9a-49a5-98d0-0eaa7b0e61c6"/>
-				<jr:list xmlns:jr="http://jasperreports.sourceforge.net/jasperreports/components" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports/components http://jasperreports.sourceforge.net/xsd/components.xsd" printOrder="Vertical">
-					<datasetRun subDataset="informe" uuid="5228a821-7bae-4847-a50b-afd4d104a1ed">
-						<dataSourceExpression><![CDATA[new net.sf.jasperreports.engine.data.JRBeanCollectionDataSource($F{informe})]]></dataSourceExpression>
-					</datasetRun>
-					<jr:listContents height="68" width="536">
-						<staticText>
-							<reportElement mode="Opaque" x="0" y="0" width="532" height="20" isPrintWhenDetailOverflows="true" forecolor="#0058B6" uuid="d3c2312e-e4c4-40ec-96a6-f0c40c7ee2c3"/>
-							<textElement verticalAlignment="Middle">
-								<font isBold="true"/>
-								<paragraph leftIndent="5"/>
-							</textElement>
-							<text><![CDATA[5. Descripción de evento]]></text>
-						</staticText>
-						<staticText>
-							<reportElement positionType="Float" mode="Opaque" x="0" y="20" width="223" height="20" isPrintWhenDetailOverflows="true" forecolor="#0058B6" backcolor="#FFFFFF" uuid="7066a837-e82e-4ff8-b883-4d5a6d8ca496"/>
-							<textElement textAlignment="Left" verticalAlignment="Middle" rotation="None" markup="none">
-								<font fontName="SansSerif" size="10" isBold="true" isItalic="false" isUnderline="false" isStrikeThrough="false" pdfEncoding="Cp1252" isPdfEmbedded="false"/>
-								<paragraph lineSpacing="Single" leftIndent="5"/>
-							</textElement>
-							<text><![CDATA[5.1. Descripción corta del evento]]></text>
-						</staticText>
-						<textField isStretchWithOverflow="true">
-							<reportElement positionType="Float" x="223" y="20" width="309" height="46" isPrintWhenDetailOverflows="true" uuid="0cda6d4c-ee57-47a4-9aad-faf175530dce"/>
-							<textElement verticalAlignment="Top"/>
-							<textFieldExpression><![CDATA[$F{descCortaEvento}]]></textFieldExpression>
-						</textField>
-					</jr:listContents>
-				</jr:list>
-			</componentElement>
-		</band>
-		<band height="54" splitType="Prevent">
-			<componentElement>
-				<reportElement positionType="Float" x="14" y="3" width="536" height="49" isPrintWhenDetailOverflows="true" uuid="55bdeb4a-29d9-42e1-a4c8-63cd94a83f50"/>
-				<jr:list xmlns:jr="http://jasperreports.sourceforge.net/jasperreports/components" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports/components http://jasperreports.sourceforge.net/xsd/components.xsd" printOrder="Vertical">
-					<datasetRun subDataset="informe" uuid="6902e40e-c466-490e-8285-d65ddbb15fad">
-						<dataSourceExpression><![CDATA[new net.sf.jasperreports.engine.data.JRBeanCollectionDataSource($F{informe})]]></dataSourceExpression>
-					</datasetRun>
-					<jr:listContents height="49" width="536">
-						<staticText>
-							<reportElement positionType="Float" mode="Opaque" x="0" y="0" width="223" height="20" isPrintWhenDetailOverflows="true" forecolor="#0058B6" backcolor="#FFFFFF" uuid="80c79add-b3f1-4ae1-9254-cefe4f1b3d47"/>
-							<textElement textAlignment="Left" verticalAlignment="Middle" rotation="None" markup="none">
-								<font fontName="SansSerif" size="10" isBold="true" isItalic="false" isUnderline="false" isStrikeThrough="false" pdfEncoding="Cp1252" isPdfEmbedded="false"/>
-								<paragraph lineSpacing="Single" leftIndent="5"/>
-							</textElement>
-							<text><![CDATA[5.2. Descripción detallada del evento]]></text>
-						</staticText>
-						<textField isStretchWithOverflow="true">
-							<reportElement positionType="Float" x="223" y="0" width="309" height="46" isPrintWhenDetailOverflows="true" uuid="fdf6d30d-3797-42ee-9545-ec9e0168887b"/>
-							<textFieldExpression><![CDATA[$F{descEvento}]]></textFieldExpression>
-						</textField>
-					</jr:listContents>
-				</jr:list>
-			</componentElement>
-		</band>
-		<band height="66" splitType="Prevent">
-			<componentElement>
-				<reportElement positionType="Float" x="14" y="6" width="536" height="53" isPrintWhenDetailOverflows="true" uuid="ce2f5f1a-9a50-4f7a-bb9c-490c66c2610c"/>
-				<jr:list xmlns:jr="http://jasperreports.sourceforge.net/jasperreports/components" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports/components http://jasperreports.sourceforge.net/xsd/components.xsd" printOrder="Vertical">
-					<datasetRun subDataset="informe" uuid="c2617f4b-cda2-47bb-9cf8-e8689478ac8c">
-						<dataSourceExpression><![CDATA[new net.sf.jasperreports.engine.data.JRBeanCollectionDataSource($F{informe})]]></dataSourceExpression>
-					</datasetRun>
-					<jr:listContents height="53" width="536">
-						<staticText>
-							<reportElement positionType="Float" mode="Opaque" x="0" y="0" width="223" height="20" isPrintWhenDetailOverflows="true" forecolor="#0058B6" backcolor="#FFFFFF" uuid="2f5d4020-d6a5-45bc-9ee4-18a721155ad3"/>
-							<textElement textAlignment="Left" verticalAlignment="Middle" rotation="None" markup="none">
-								<font fontName="SansSerif" size="10" isBold="true" isItalic="false" isUnderline="false" isStrikeThrough="false" pdfEncoding="Cp1252" isPdfEmbedded="false"/>
-								<paragraph lineSpacing="Single" leftIndent="5"/>
-							</textElement>
-							<text><![CDATA[6. Causas de la interrupción]]></text>
-						</staticText>
-						<textField isStretchWithOverflow="true">
-							<reportElement positionType="Float" x="223" y="0" width="309" height="46" isPrintWhenDetailOverflows="true" uuid="4d73d54c-a985-497c-8ee6-1b0d512a869e"/>
-							<textFieldExpression><![CDATA[$F{causaInterrupcion}]]></textFieldExpression>
-						</textField>
-					</jr:listContents>
-				</jr:list>
-			</componentElement>
-		</band>
+		
 		<band height="145" splitType="Prevent">
 			<staticText>
 				<reportElement positionType="Float" mode="Opaque" x="14" y="0" width="463" height="20" isPrintWhenDetailOverflows="true" forecolor="#0058B6" backcolor="#FFFFFF" uuid="d1cbcf85-e88f-4258-8e59-24694c07a488"/>
@@ -929,7 +930,7 @@
 					<font fontName="SansSerif" size="10" isBold="true" isItalic="false" isUnderline="false" isStrikeThrough="false" pdfEncoding="Cp1252" isPdfEmbedded="false"/>
 					<paragraph lineSpacing="Single" leftIndent="5"/>
 				</textElement>
-				<text><![CDATA[7. Principales impactos de la interrupción]]></text>
+				<text><![CDATA[6. Principales impactos de la interrupción]]></text>
 			</staticText>
 			<componentElement>
 				<reportElement positionType="Float" x="16" y="20" width="534" height="20" isPrintWhenDetailOverflows="true" uuid="bba2fd7a-3b4b-47f4-bdbe-630f270869a5"/>
@@ -1340,7 +1341,7 @@ estratégico
 								<font fontName="SansSerif" size="10" isBold="true" isItalic="false" isUnderline="false" isStrikeThrough="false" pdfEncoding="Cp1252" isPdfEmbedded="false"/>
 								<paragraph lineSpacing="Single" leftIndent="5"/>
 							</textElement>
-							<text><![CDATA[8. Descripción de medidas y acciones
+							<text><![CDATA[7. Descripción de medidas y acciones
 tomadas durante el evento
 
 ]]></text>
@@ -1360,7 +1361,7 @@ tomadas durante el evento
 					<font fontName="SansSerif" size="10" isBold="true" isItalic="false" isUnderline="false" isStrikeThrough="false" pdfEncoding="Cp1252" isPdfEmbedded="false"/>
 					<paragraph lineSpacing="Single" leftIndent="5"/>
 				</textElement>
-				<text><![CDATA[9. Situación del evento en la fecha de envío del reporte final]]></text>
+				<text><![CDATA[8. Situación del evento en la fecha de envío del reporte final]]></text>
 			</staticText>
 			<staticText>
 				<reportElement mode="Opaque" x="18" y="21" width="100" height="20" forecolor="#0058B6" backcolor="#FFFFFF" uuid="75c49211-b7ce-493e-af51-f691d72be072"/>
@@ -1564,7 +1565,7 @@ tomadas durante el evento
 					<font fontName="SansSerif" size="10" isBold="true" isItalic="false" isUnderline="false" isStrikeThrough="false" pdfEncoding="Cp1252" isPdfEmbedded="false"/>
 					<paragraph lineSpacing="Single" leftIndent="5"/>
 				</textElement>
-				<text><![CDATA[10. Planes de acción orientados a reducir la posibilidad de ocurrencia de eventos
+				<text><![CDATA[9. Planes de acción orientados a reducir la posibilidad de ocurrencia de eventos
       de similares características]]></text>
 			</staticText>
 			<componentElement>
@@ -1707,9 +1708,9 @@ implementación]]></text>
 								<font fontName="SansSerif" size="10" isBold="true" isItalic="false" isUnderline="false" isStrikeThrough="false" pdfEncoding="Cp1252" isPdfEmbedded="false"/>
 								<paragraph lineSpacing="Single" leftIndent="5"/>
 							</textElement>
-							<text><![CDATA[11. Comentarios adicionales]]></text>
+							<text><![CDATA[10. Comentarios adicionales]]></text>
 						</staticText>
-						<textField isStretchWithOverflow="true">
+						<textField isStretchWithOverflow="true" pattern="" isBlankWhenNull="true">
 							<reportElement positionType="Float" x="192" y="0" width="338" height="39" isPrintWhenDetailOverflows="true" uuid="e7361530-db8f-40c3-8e53-c9aa9e1aec81"/>
 							<textFieldExpression><![CDATA[$F{comentAdic}]]></textFieldExpression>
 						</textField>
@@ -1731,7 +1732,7 @@ implementación]]></text>
 								<font fontName="SansSerif" size="10" isBold="true" isItalic="false" isUnderline="false" isStrikeThrough="false" pdfEncoding="Cp1252" isPdfEmbedded="false"/>
 								<paragraph lineSpacing="Single" leftIndent="5"/>
 							</textElement>
-							<text><![CDATA[12. Fecha de envío de reporte inicial al buzón continuidad@sbs.gob.pe]]></text>
+							<text><![CDATA[11. Fecha de envío de reporte inicial al buzón continuidad@sbs.gob.pe]]></text>
 						</staticText>
 						<textField>
 							<reportElement x="20" y="20" width="177" height="20" uuid="61f16589-dc1d-4248-ae52-fedd379787b8"/>
@@ -1758,7 +1759,7 @@ implementación]]></text>
 								<font fontName="SansSerif" size="10" isBold="true" isItalic="false" isUnderline="false" isStrikeThrough="false" pdfEncoding="Cp1252" isPdfEmbedded="false"/>
 								<paragraph lineSpacing="Single" leftIndent="5"/>
 							</textElement>
-							<text><![CDATA[13. Datos de contacto]]></text>
+							<text><![CDATA[12. Datos de contacto]]></text>
 						</staticText>
 						<staticText>
 							<reportElement mode="Opaque" x="0" y="31" width="69" height="20" forecolor="#FFFFFF" backcolor="#226FE1" uuid="e3b953be-b4e3-44ff-83ff-e103d4872917"/>

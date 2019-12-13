@@ -660,7 +660,7 @@ var app = new Vue({
      		
      		
      		if(is_no_valid){
-     			jnoty.showMessage(jnoty.typeMessage.warning, "Complete la información requerida!", 2000);
+     			jnoty.showStickyMessage(jnoty.typeMessage.warning, "Complete la información requerida!", false);
 				return false;
      		}
      		
@@ -690,6 +690,27 @@ var app = new Vue({
     				$("#hora_fin_interrup").parent().addClass("is-invalid");
     				
     				jnoty.showMessage(jnoty.typeMessage.warning, "Verifique las fechas de interrupción ingresadas!", 2000);
+    				return false;
+    			}
+    		}
+    		
+    		var fecha_1 = moment( $('#fecha_ini_interrup').val(), "DD/MM/YYYY");
+    		var fecha_2 = moment( $('#fecha_envio_interrup').val(), "DD/MM/YYYY");
+    		
+    		if( fecha_1.isValid() && fecha_2.isValid() ){
+    			var fecha1Ini = moment( $('#fecha_ini_interrup').val(), "DD/MM/YYYY");
+    			var fecha2Fin = moment( $('#fecha_envio_interrup').val(), "DD/MM/YYYY");
+    			
+    			var diff = fecha2Fin.diff(fecha1Ini, 'h', true); // Diff in hours
+    			
+    			$("#fecha_ini_interrup").parent().removeClass("is-invalid");
+				$("#fecha_envio_interrup").parent().removeClass("is-invalid");
+    			
+    			if(diff < 0){
+    				$("#fecha_ini_interrup").parent().addClass("is-invalid");
+    				$("#fecha_envio_interrup").parent().addClass("is-invalid");
+    				
+    				jnoty.showMessage(jnoty.typeMessage.warning, "La fecha de inicio de interrupción no puede ser mayor a la fecha de envío de interrupción!", 2000);
     				return false;
     			}
     		}
