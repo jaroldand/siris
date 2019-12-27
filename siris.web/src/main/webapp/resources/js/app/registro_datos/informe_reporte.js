@@ -590,7 +590,7 @@ var app = new Vue({
 			});
      		
      		
-     		if( !(self.model.productos && self.model.productos.length > 0) ){
+     		/*if( !(self.model.productos && self.model.productos.length > 0) ){
      			
      			$("#product_interrup").val("");
      			jbase.validRegistro("required_afec_prod");
@@ -609,7 +609,7 @@ var app = new Vue({
      			$("#procesos_interrup").val("");
      			jbase.validRegistro("required_afec_proc");
      			is_no_valid = true;
-     		}
+     		}*/
      		
      		
      		if( !(self.model.planAccion && self.model.planAccion.length > 0) ){
