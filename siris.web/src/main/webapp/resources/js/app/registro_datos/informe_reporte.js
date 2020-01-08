@@ -109,6 +109,29 @@ var app = new Vue({
 				$("#fecha_envio_interrup").val(self.model.informe.fecEnvioRepInicial);				
 				
 				$("#fecha_ini_interrup").val(self.model.informe.fecIniInterrupcion);
+				var fecha1 = moment( $('#fecha_ini_interrup').val(), "DD/MM/YYYY");
+				
+				if( fecha1.isValid() ){
+	    			$("#fecha_impl_tmp").datetimepicker('destroy');
+	    			$("#fecha_impl_tmp").datetimepicker({
+	    				format : "L",
+	    				locale : "es",
+	    				minDate : fecha1,
+	    				timeZone: 'Europe/London',
+	    				sideBySide : true
+	    			});
+	    			
+	    			$("#fecha_fin_interrup").datetimepicker('destroy');
+	    			$("#fecha_fin_interrup").datetimepicker({
+	    				format : "L",
+	    				locale : "es",
+	    				maxDate : 'now',
+	    				minDate : fecha1,
+	    				timeZone: 'Europe/London',
+	    				sideBySide : true
+	    			});
+	    		}
+				
 				$("#fecha_fin_interrup").val(self.model.informe.fecFinInterrupcion);
 				
 				$("#hora_ini_interrup").val(self.model.informe.horIniInterrupcion);
@@ -715,6 +738,22 @@ var app = new Vue({
     			}
     		}
     		
+    		//validamos la fecha de impl de plan de acción debería ser mayor a la fecha de inicio de interrup.
+    		for (var i = 0; i < self.model.planAccion.length; i++) {
+    			
+    			var fechaIni = moment( $('#fecha_ini_interrup').val(), "DD/MM/YYYY");
+    			var fechaFin = moment( self.model.planAccion[i].fecImplementacionStr, "DD/MM/YYYY");
+    			
+    			var diff = fechaFin.diff(fechaIni, 'h', true); // Diff in hours
+    			
+    			if(diff < 0){
+    				$("#fecha_impl_tmp").parent().addClass("is-invalid");
+    				
+    				jnoty.showMessage(jnoty.typeMessage.warning, "La fecha de implementación de planes de acción debería ser siempre mayores que la fecha de inicio de interrupción!", 2000);
+    				return false;
+    			}
+    		}
+    		
     		$("#mail_interrup").parent().removeClass("is-invalid");
     		if( !jbase.isValidEmail(self.model.correoInforme.desCorreo) ){
     			$("#mail_interrup").parent().addClass("is-invalid");
@@ -931,35 +970,74 @@ var app = new Vue({
     		jnoty.confirm("Se adjuntará el archivo al reporte ¿Desea continuar?", function () {self.uploadFile(file_upload); } );
     		
     	},
-    	calcularTotalHoras: function() {
+    	calcularTotalHoras: function(id_component) {
     		var self = this;
+    		
+    		var fecha1 = moment( $('#fecha_ini_interrup').val(), "DD/MM/YYYY");
+    		var hora1 = moment( jbase.isEmptyString($('#hora_ini_interrup').val()) || $('#hora_ini_interrup').val().length != 5 ? "90:90" : $('#hora_ini_interrup').val(), "HH:mm");
+    		
+    		if( fecha1.isValid() ){
+    			$("#fecha_impl_tmp").datetimepicker('destroy');
+    			$("#fecha_impl_tmp").datetimepicker({
+    				format : "L",
+    				locale : "es",
+    				minDate : fecha1,
+    				timeZone: 'Europe/London',
+    				sideBySide : true
+    			});
+    			
+    			$("#fecha_fin_interrup").datetimepicker('destroy');
+    			$("#fecha_fin_interrup").datetimepicker({
+    				format : "L",
+    				locale : "es",
+    				maxDate : 'now',
+    				minDate : fecha1,
+    				timeZone: 'Europe/London',
+    				sideBySide : true
+    			});
+    		}
     		
     		if(self.model.informe.eventoFinBol != true){
     			console.log("calcularHoras");
     			
-    			var fecha1 = moment( $('#fecha_ini_interrup').val(), "DD/MM/YYYY");
-    			var hora1 = moment( jbase.isEmptyString($('#hora_ini_interrup').val()) ? "90:90" : $('#hora_ini_interrup').val(), "HH:mm");
-    			
         		var fecha2 = moment( $('#fecha_fin_interrup').val(), "DD/MM/YYYY");
-        		var hora2 = moment( jbase.isEmptyString($('#hora_fin_interrup').val()) ? "90:90" : $('#hora_fin_interrup').val(), "HH:mm");
+        		var hora2 = moment( jbase.isEmptyString($('#hora_fin_interrup').val()) || $('#hora_fin_interrup').val().length != 5 ? "90:90" : $('#hora_fin_interrup').val(), "HH:mm");
         		
+        		$('#tiempo_interrup').val("");
+        		this.model.informe.totalInterrupcion = null;
         		
         		if( fecha1.isValid() && fecha2.isValid() && hora1.isValid() && hora2.isValid() ){
         			
         			var fechaIni = moment( $('#fecha_ini_interrup').val() + " " + $('#hora_ini_interrup').val(), "DD/MM/YYYY HH:mm");
         			var fechaFin = moment( $('#fecha_fin_interrup').val() + " " + $('#hora_fin_interrup').val(), "DD/MM/YYYY HH:mm");
         			
-        			var diff = fechaFin.diff(fechaIni, 'h', true); // Diff in hours
-        			if(diff < 0){
-        				
-        				$('#tiempo_interrup').val("");
-                		this.model.informe.totalInterrupcion = null;
-        				
-                		jnoty.showMessage(jnoty.typeMessage.warning, "Verifique las fechas ingresadas!", 2000);
-                		
-        			}else{
-        				$('#tiempo_interrup').val(jbase.redondear(diff, 2));
-                		this.model.informe.totalInterrupcion = jbase.redondear(diff, 2);
+        			var fechaIniValid = moment(new Date(), 'DD/MM/YYYY HH:mm').diff(fechaIni, 'h', true) > 0 ? true : false;//verificamos que la fecha hora no supere a la actual
+        			var fechaFinValid = moment(new Date(), 'DD/MM/YYYY HH:mm').diff(fechaFin, 'h', true) > 0 ? true : false;//verificamos que la fecha hora no supere a la actual
+        			
+        			if( !fechaIniValid ){
+        				$('#hora_ini_interrup').val("");
+        			}
+        			if( !fechaFinValid ){
+        				$('#hora_fin_interrup').val("");
+        			}
+        			
+        			if( fechaIniValid && fechaFinValid ){
+        				var diff = fechaFin.diff(fechaIni, 'h', true); // Diff in hours
+            			
+            			if(diff < 0){
+            				
+            				$('#tiempo_interrup').val("");
+                    		this.model.informe.totalInterrupcion = null;
+            				
+                    		jnoty.showMessage(jnoty.typeMessage.warning, "Verifique las fechas ingresadas!", 2000);
+                    		$('#'+id_component).val("");
+            			}else{
+            				$('#tiempo_interrup').val(jbase.redondear(diff, 2));
+                    		this.model.informe.totalInterrupcion = jbase.redondear(diff, 2);
+            			}
+        			}
+        			else{
+        				jnoty.showMessage(jnoty.typeMessage.warning, "La fecha y hora no puede ser mayor que la fecha y hora actual!", 2000);
         			}
         		}
     			
@@ -1191,6 +1269,7 @@ var app = new Vue({
     	jbase.positive_integer();//positive-integer
     	
     	jbase.formatDate(true);
+    	jbase.customFormatDate(true, '.sbs-date-nomaxdate');
     	
     	$("#app").show();
     }

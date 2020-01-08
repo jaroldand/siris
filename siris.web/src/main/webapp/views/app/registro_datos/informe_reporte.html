@@ -137,7 +137,7 @@
 	                       	<div class="col-md-1">Día: </div>
 	                       	<div class="col-md-3">
 	                       		<div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label md-datepicker" v-bind:class="{ 'is-dirty': (model.informe.fecIniInterrupcion ? true : false) }">
-                                    <input type="text" id="fecha_ini_interrup" name="fecha_ini_interrup" class="mdl-textfield__input datetimepicker-input sbs-date send_required" data-target="#fecha_ini_interrup" v-on:blur="calculaHoras()"/>
+                                    <input type="text" id="fecha_ini_interrup" name="fecha_ini_interrup" class="mdl-textfield__input datetimepicker-input sbs-date send_required" data-target="#fecha_ini_interrup" v-on:blur="calcularTotalHoras('fecha_ini_interrup')"/>
                                     <label class="mdl-textfield__label" for="fecha_ini_interrup">Día</label>
                                     <div class="mdl-button mdl-button--primary mdl-button--icon mdl-button--date" data-target="#fecha_ini_interrup" data-toggle="datetimepicker">
                                         <i class="fas fa-calendar-alt"></i>
@@ -148,7 +148,7 @@
 	                       	<div class="col-md-1">Hora:</div>
 	                       	<div class="col-md-3">
 	                       		<div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label" v-bind:class="{ 'is-dirty': (model.informe.horIniInterrupcion ? true : false) }">
-                                    <input class="mdl-textfield__input send_required" type="text" id="hora_ini_interrup" name="hora_ini_interrup" v-on:blur="calculaHoras()">
+                                    <input class="mdl-textfield__input send_required" type="text" id="hora_ini_interrup" name="hora_ini_interrup" v-on:blur="calcularTotalHoras('hora_ini_interrup')">
                                     <label class="mdl-textfield__label" for="hora_ini_interrup">Hora Formato 24h (HH:mm)</label>
                                 </div>
 	                       	</div>
@@ -174,7 +174,7 @@
 			                       	<div class="col-md-1">Día: </div>
 			                       	<div class="col-md-3">
 			                       		<div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label md-datepicker" v-bind:class="{ 'is-disabled': (model.informe.eventoFinBol === true), 'is-dirty': (model.informe.fecFinInterrupcion ? true : false) }">
-		                                    <input type="text" id="fecha_fin_interrup" name="fecha_fin_interrup" class="mdl-textfield__input datetimepicker-input sbs-date" data-target="#fecha_fin_interrup" :disabled="model.informe.eventoFinBol === true" v-on:blur="calculaHoras()" v-bind:class="{ 'send_required': (model.informe.eventoFinBol === false) }"/>
+		                                    <input type="text" id="fecha_fin_interrup" name="fecha_fin_interrup" class="mdl-textfield__input datetimepicker-input sbs-date" data-target="#fecha_fin_interrup" :disabled="model.informe.eventoFinBol === true" v-on:blur="calcularTotalHoras('fecha_fin_interrup')" v-bind:class="{ 'send_required': (model.informe.eventoFinBol === false) }"/>
 		                                    <label class="mdl-textfield__label" for="fecha_fin_interrup">Día</label>
 		                                    <div class="mdl-button mdl-button--primary mdl-button--icon mdl-button--date" data-target="#fecha_fin_interrup" data-toggle="datetimepicker">
 		                                        <i class="fas fa-calendar-alt"></i>
@@ -184,7 +184,7 @@
 			                       	<div class="col-md-1">Hora: </div>
 			                       	<div class="col-md-3">
 			                       		<div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label" v-bind:class="{ 'is-disabled': (model.informe.eventoFinBol === true), 'is-dirty': (model.informe.horFinInterrupcion ? true : false) }">
-		                                    <input class="mdl-textfield__input" type="text" id="hora_fin_interrup" name="hora_fin_interrup" :disabled="model.informe.eventoFinBol === true" v-on:blur="calculaHoras()" v-bind:class="{ 'send_required': (model.informe.eventoFinBol === false) }">
+		                                    <input class="mdl-textfield__input" type="text" id="hora_fin_interrup" name="hora_fin_interrup" :disabled="model.informe.eventoFinBol === true" v-on:blur="calcularTotalHoras('hora_fin_interrup')" v-bind:class="{ 'send_required': (model.informe.eventoFinBol === false) }">
 		                                    <label class="mdl-textfield__label" for="hora_fin_interrup">Hora Formato 24h (HH:mm)</label>
 		                                </div>
 			                       	</div>
@@ -198,19 +198,19 @@
 			                        	<p>c) Tiempo de interupción</p>
 			                       	</div>
 			                       	<div class="col-md-4">
-			                       		<div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label" v-bind:class="{ 'is-disabled': (model.informe.eventoFinBol === true) , 'is-dirty': (model.informe.totalInterrupcion ? true : false) }">
-		                                    <input class="mdl-textfield__input decimal" type="text" id="tiempo_interrup" name="tiempo_interrup" :disabled="model.informe.eventoFinBol === true" v-model="model.informe.totalInterrupcion" maxlength="10" v-bind:class="{ 'send_required': (model.informe.eventoFinBol === false) }">
+			                       		<div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label" v-bind:class="{ 'is-disabled': true , 'is-dirty': (model.informe.totalInterrupcion ? true : false) }">
+		                                    <input class="mdl-textfield__input" type="text" id="tiempo_interrup" name="tiempo_interrup" :disabled="true" v-model="model.informe.totalInterrupcion" maxlength="10" v-bind:class="{ 'send_required': (model.informe.eventoFinBol === false) }">
 		                                    <label class="mdl-textfield__label" for="tiempo_interrup">Total Horas:</label>
 		                                </div>
 			                       	</div>
-			                       	<div class="col-md-1">
+			                       	<!-- div class="col-md-1">
 			                            <a href="javascript:void(0)" class="btn btn-block mdl-button mdl-js-button mdl-button--raised mdl-button--colored mdl-js-ripple-effect sbs-button-standard" id="calcularHoras"
 			                            	:disabled="model.informe.eventoFinBol === true" @click.exact="calcularTotalHoras()">
 			                                <span>Calcular</span>
 			                            </a>
 			                            <span class="mdl-tooltip mdl-tooltip--large mdl-tooltip--top" for="calcularHoras">Ingresar el inicio y fin de las fechas y horas de interrupción</span>
 			                        </div>
-			                       	<div class="col-md-3"></div>
+			                       	<div class="col-md-3"></div-->
 		                       	</div>
 		                    </div>
 	                       	
@@ -619,7 +619,7 @@
            				</div>
            				<div class="col-md-3">
 	           				<div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label md-datepicker">
-	                            <input type="text" id="fecha_impl_tmp" name="fecha_impl_tmp" class="mdl-textfield__input datetimepicker-input sbs-date required_plan_acc" data-target="#fecha_impl_tmp"/>
+	                            <input type="text" id="fecha_impl_tmp" name="fecha_impl_tmp" class="mdl-textfield__input datetimepicker-input sbs-date-nomaxdate required_plan_acc" data-target="#fecha_impl_tmp"/>
 	                            <label class="mdl-textfield__label" for="fecha_impl_tmp">Fecha de implementación</label>
 	                            <div class="mdl-button mdl-button--primary mdl-button--icon mdl-button--date" data-target="#fecha_impl_tmp" data-toggle="datetimepicker">
 	                                <i class="fas fa-calendar-alt"></i>
@@ -704,7 +704,7 @@
 						<div class="col-md-4" v-if="is_upload_open === true">
 		           			<div class="mdl-textfield mdl-js-textfield mdl-textfield--file mdl-textfield--floating-label" v-bind:class="{ 'is-dirty': (model.informe.fileComentAdic ? true : false) }">
                               	<input class="mdl-textfield__input" type="text" id="mdr_upload" readonly>
-                                <label class="mdl-textfield__label" for="mdr_upload">Archivo máximo: 5MB. Tipos: .xls .ppt .pdf .zip</label>
+                                <label class="mdl-textfield__label" for="mdr_upload">Adjuntar</label>
                                 <div class="mdl-button mdl-js-button mdl-button--raised mdl-button--colored mdl-button--file sbs-button-standard">
 										Adjuntar <input type="file" onclick="this.value=null;" id="mdr_fileDoc" ref="mdr_fileDoc" v-on:change="handleFileUpload()"/>
 								</div>
@@ -789,9 +789,25 @@
          
         </div>
         
-         <div class="form-group row"></div>
+        <div class="form-group row"></div>
         
-        
+        <div class="form-group row">
+           	<div class="offset-md-3 col-md-3">
+                 <a href="javascript:void(0)" class="btn btn-block mdl-button mdl-js-button mdl-button--raised mdl-button--colored mdl-js-ripple-effect sbs-submit" @click.exact="confirmar">
+                     <span><i class="fas fa-save"></i>Guardar</span>
+                 </a>
+            </div>
+            <div class="col-md-3">
+                 <a href="javascript:void(0)" class="btn btn-block mdl-button mdl-js-button mdl-button--raised mdl-button--colored mdl-js-ripple-effect sbs-submit" @click.exact="enviar">
+                     <span><i class="fas fa-share-alt-square"></i>Enviar</span>
+                 </a>
+            </div>
+            <div class="col-md-3">
+                <a href="javascript:void(0)" class="btn btn-block mdl-button mdl-js-button mdl-button--raised mdl-button--colored mdl-js-ripple-effect sbs-submit" @click.exact="cancelar">
+                    <span><i class="fas fa-window-close"></i>Cancelar</span>
+                </a>
+            </div>
+	    </div>
         
     </div>
 </div>

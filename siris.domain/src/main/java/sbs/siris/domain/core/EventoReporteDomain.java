@@ -331,14 +331,17 @@ public class EventoReporteDomain {
 		/* Inicio save informe */
 		Informe informe = parametros.getInforme();
 		
+		informe.setFecIniInterrupcion(null);
 		if( !StringUtils.isEmpty(informe.getFecIniInterrupcionStr()) ) {
 			informe.setFecIniInterrupcion(  DateTime.dateFromString(informe.getFecIniInterrupcionStr(), "dd/MM/yyyy") );
 		}
 		
+		informe.setFecFinInterrupcion(null);
 		if( !StringUtils.isEmpty(informe.getFecFinInterrupcionStr()) ) {
 			informe.setFecFinInterrupcion(  DateTime.dateFromString(informe.getFecFinInterrupcionStr(), "dd/MM/yyyy") );
 		}
 		
+		informe.setFecEnvioRepInicial(null);
 		if( !StringUtils.isEmpty(informe.getFecEnvioRepInicialStr()) ) {
 			informe.setFecEnvioRepInicial(  DateTime.dateFromString(informe.getFecEnvioRepInicialStr(), "dd/MM/yyyy") );
 		}
