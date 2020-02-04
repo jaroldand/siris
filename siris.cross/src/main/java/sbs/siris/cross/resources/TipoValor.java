@@ -43,4 +43,8 @@ public class TipoValor {
 	public static final String SIRIS_FILE_TIP_DOCUMENTO_DOCUMENTO_ADJUNTO_DE_ACCIONES_EN_INFORME = Setup.getValueKey(TIPO_PROPERTY, "siris_file.tip_documento.documento_adjunto_de_acciones_en_informe");
 	
 	public static final String SIRIS_CORREO_TIP_CORREO_CORREO_INFORME = Setup.getValueKey(TIPO_PROPERTY, "siris_correo.tip_correo.correo_informe");
+	
+	public static final String SIRIS_SITUACION_TIPO_SITUACION_OPERANDO_BAJO_CONDICIONES_NORMALES = Setup.getValueKey(TIPO_PROPERTY, "siris_situacion.tipo_situacion.operando_bajo_condiciones_normales");
+	
+	public static final String SIRIS_UBIGEO_COD_UBIGEO_NIVEL_NACIONAL = Setup.getValueKey(TIPO_PROPERTY, "siris_ubigeo.cod_ubigeo.nivel_nacional");
 }

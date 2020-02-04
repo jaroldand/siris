@@ -43,6 +43,10 @@ public class TipoListaDomain extends BaseDomain<TipoLista> {
 		
 		return param.getList();
 	}
+	
+	public List<ClaveValor> situacion() {
+		return listaPorGrupo(GrupoValor.SIRIS_SITUACION);
+	}
 
 	public List<ClaveValor> tiposValidacion() {
 		return listaPorGrupo(GrupoValor.SIRIS_VALIDACION_TIPO_VALIDACION);

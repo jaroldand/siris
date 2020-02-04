@@ -8,6 +8,7 @@ import sbs.siris.domain.entity.Correo;
 import sbs.siris.domain.entity.Impacto;
 import sbs.siris.domain.entity.Informe;
 import sbs.siris.domain.entity.PlanAccion;
+import sbs.siris.domain.entity.Situacion;
 
 public class EventoReporteDTO implements Serializable {
 
@@ -17,6 +18,9 @@ public class EventoReporteDTO implements Serializable {
 	private Informe informe;
 	private List<Canales> canales;
 	private List<Canales> canalesActivos;
+	
+	private List<Situacion> situacion;
+	private List<Situacion> situacionActivos;
 	
 	private List<Impacto> impacto;
 	
@@ -87,5 +91,21 @@ public class EventoReporteDTO implements Serializable {
 
 	public void setCorreoInforme(Correo correoInforme) {
 		this.correoInforme = correoInforme;
+	}
+
+	public List<Situacion> getSituacion() {
+		return situacion;
+	}
+
+	public void setSituacion(List<Situacion> situacion) {
+		this.situacion = situacion;
+	}
+
+	public List<Situacion> getSituacionActivos() {
+		return situacionActivos;
+	}
+
+	public void setSituacionActivos(List<Situacion> situacionActivos) {
+		this.situacionActivos = situacionActivos;
 	}
 }

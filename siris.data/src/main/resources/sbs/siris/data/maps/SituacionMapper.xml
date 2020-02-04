@@ -1,39 +1,40 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
-<mapper namespace="sbs.siris.data.ImpactoMapper">
-  <resultMap id="ImpactoResultMap" type="sbs.siris.domain.entity.Impacto">
-    <id column="ID_IMPACTO" jdbcType="NUMERIC" property="idImpacto" />
-    <result column="ID_EVENTO" jdbcType="NUMERIC" property="idEvento" />
-    <result column="TIPO_IMPACTO" jdbcType="VARCHAR" property="tipoImpacto" />
+<mapper namespace="sbs.siris.data.SituacionMapper">
+  <resultMap id="SituacionResultMap" type="sbs.siris.domain.entity.Situacion">
+    <id column="ID_SITUACION" jdbcType="NUMERIC" property="idSituacion" />
+    <result column="ID_CANALES" jdbcType="NUMERIC" property="idCanales" />
+    <result column="TIP_CANAL_GRUPO" jdbcType="VARCHAR" property="tipCanalGrupo" />
+    <result column="TIPO_SITUACION" jdbcType="VARCHAR" property="tipoSituacion" />
     <result column="DESCRIPCION" jdbcType="VARCHAR" property="descripcion" />
-    <result column="IMPACTO_DETAIL" jdbcType="VARCHAR" property="impactoDetail" />
-    <result column="IS_SELECTED" jdbcType="NUMERIC" property="indSelected" />
     <result column="IND_ACTIVO" jdbcType="NUMERIC" property="indActivo" />
+    
+    <result column="TIP_CANAL_DETALLE" jdbcType="VARCHAR" property="tipCanalDetalle" />
+    <result column="DESC_CANAL_DETALLE" jdbcType="VARCHAR" property="descCanalDetalle" />
+    <result column="DESC_TIPO_SITUACION" jdbcType="VARCHAR" property="descTipoSituacion" />
+    
     <result column="AUDIT_USER_CREA" jdbcType="VARCHAR" property="auditUserCrea" />
     <result column="AUDIT_FEC_CREA" jdbcType="TIMESTAMP" property="auditFecCrea" />
     <result column="AUDIT_USER_MOD" jdbcType="VARCHAR" property="auditUserMod" />
     <result column="AUDIT_FEC_MOD" jdbcType="TIMESTAMP" property="auditFecMod" />
   </resultMap>
   
-  
   <select id="selectList" statementType="CALLABLE" parameterType="sbs.siris.domain.entity.base.BaseParam">
 		{
-		  call Pkg_Siris_Mantenimiento.Pr_Impacto_GetByEvent(
+		  call Pkg_Siris_Mantenimiento.Pr_Situacion_GetByEvent(
 			#{entity.idEvento,jdbcType=NUMERIC},
-			#{list,mode=OUT,jdbcType=CURSOR,resultMap=ImpactoResultMap}
+			#{list,mode=OUT,jdbcType=CURSOR,resultMap=SituacionResultMap}
 		  )
 		}
   </select>
   
   <insert id="insert" statementType="CALLABLE" parameterType="sbs.siris.domain.entity.base.BaseParam">
 		{
-			 call Pkg_Siris_Mantenimiento.Pr_Impacto_Insert(
-			      #{entity.idImpacto,jdbcType=NUMERIC},
-			      #{entity.idEvento,jdbcType=NUMERIC},
-			      #{entity.tipoImpacto,jdbcType=VARCHAR},
+			 call Pkg_Siris_Mantenimiento.Pr_Situacion_Insert(
+			      #{entity.idSituacion,jdbcType=NUMERIC},
+			      #{entity.idCanales,jdbcType=NUMERIC},
+			      #{entity.tipoSituacion,jdbcType=VARCHAR},
 			      #{entity.descripcion,jdbcType=VARCHAR},
-			      #{entity.impactoDetail,jdbcType=VARCHAR},
-			      #{entity.indSelected,jdbcType=NUMERIC},
 			      #{entity.indActivo,jdbcType=NUMERIC},
 			      #{entity.auditUserCrea,jdbcType=VARCHAR},
 			      #{entity.auditFecCrea,jdbcType=TIMESTAMP},
@@ -45,13 +46,11 @@
 	
 	<update id="updateByPrimaryKey" statementType="CALLABLE" parameterType="sbs.siris.domain.entity.base.BaseParam">
 		{
-			call Pkg_Siris_Mantenimiento.Pr_Impacto_Update(
+			call Pkg_Siris_Mantenimiento.Pr_Situacion_Update(
 			  #{key,jdbcType=NUMERIC},
-			      #{entity.idEvento,jdbcType=NUMERIC},
-			      #{entity.tipoImpacto,jdbcType=VARCHAR},
+		     	#{entity.idCanales,jdbcType=NUMERIC},
+			      #{entity.tipoSituacion,jdbcType=VARCHAR},
 			      #{entity.descripcion,jdbcType=VARCHAR},
-			      #{entity.impactoDetail,jdbcType=VARCHAR},
-			      #{entity.indSelected,jdbcType=NUMERIC},
 			      #{entity.indActivo,jdbcType=NUMERIC},
 			      #{entity.auditUserMod,jdbcType=VARCHAR},
 			      #{entity.auditFecMod,jdbcType=TIMESTAMP}
@@ -60,7 +59,7 @@
 	</update>
 	
 	<select id="getSequenceLong" resultType="java.lang.Long">
-		SELECT SEQ_ID_IMPACTO.NEXTVAL FROM dual			
+		SELECT SEQ_ID_SITUACION.NEXTVAL FROM dual			
 	</select>
   
 </mapper>

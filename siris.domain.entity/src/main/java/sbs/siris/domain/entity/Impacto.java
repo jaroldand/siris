@@ -16,6 +16,10 @@ public class Impacto extends BaseEntity{
 
     private Short indActivo;
     
+    private Integer indSelected;
+    
+    private Boolean indSelectedBol;
+    
     //for reporte
     private String impactoDetailStr;
     private String labelReport;
@@ -90,6 +94,22 @@ public class Impacto extends BaseEntity{
 
 	public void setLabelReport(String labelReport) {
 		this.labelReport = labelReport;
+	}
+	
+	public Integer getIndSelected() {
+		return indSelected;
+	}
+
+	public void setIndSelected(Integer indSelected) {
+		this.indSelected = indSelected;
+	}
+	
+	public Boolean getIndSelectedBol() {
+		return indSelectedBol;
+	}
+
+	public void setIndSelectedBol(Boolean indSelectedBol) {
+		this.indSelectedBol = indSelectedBol;
 	}
 
     @Override

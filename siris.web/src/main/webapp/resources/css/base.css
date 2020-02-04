@@ -324,3 +324,7 @@ h5 {
     min-height: 1.5rem;
     padding-left: 1.5rem;
 }
+
+.seccion-invalid {
+	border-color:rgb(213, 0, 0)
+}
