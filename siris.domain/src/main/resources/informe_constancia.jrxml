@@ -2,7 +2,7 @@
 <jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="reportePerfil" pageWidth="595" pageHeight="842" columnWidth="555" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20" uuid="2b66c828-28a1-4206-abbd-7b1cc4babeaf">
 	<property name="ireport.zoom" value="1.5000000000000002"/>
 	<property name="ireport.x" value="0"/>
-	<property name="ireport.y" value="213"/>
+	<property name="ireport.y" value="305"/>
 	<style name="table">
 		<box>
 			<pen lineWidth="0.0" lineColor="#000000"/>
@@ -213,7 +213,7 @@
 								<font fontName="SansSerif" size="10" isBold="true" isItalic="false" isUnderline="false" isStrikeThrough="false" pdfEncoding="Cp1252" isPdfEmbedded="false"/>
 								<paragraph lineSpacing="Single"/>
 							</textElement>
-							<text><![CDATA[b.1) Se interrumpió más del 25% a nivel nacional o regional.]]></text>
+							<text><![CDATA[b.1) Se interrumpió más del 50% a nivel nacional o regional.]]></text>
 						</staticText>
 						<textField>
 							<reportElement positionType="Float" x="437" y="0" width="85" height="20" isRemoveLineWhenBlank="true" uuid="5487ebb9-a484-46dd-872c-4bec6b8644b4">
