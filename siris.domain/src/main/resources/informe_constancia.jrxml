@@ -2,7 +2,7 @@
 <jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="reportePerfil" pageWidth="595" pageHeight="842" columnWidth="555" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20" uuid="2b66c828-28a1-4206-abbd-7b1cc4babeaf">
 	<property name="ireport.zoom" value="1.5000000000000002"/>
 	<property name="ireport.x" value="0"/>
-	<property name="ireport.y" value="305"/>
+	<property name="ireport.y" value="118"/>
 	<style name="table">
 		<box>
 			<pen lineWidth="0.0" lineColor="#000000"/>
@@ -135,7 +135,7 @@
 		<band height="14" splitType="Stretch"/>
 	</columnHeader>
 	<detail>
-		<band height="164">
+		<band height="185">
 			<staticText>
 				<reportElement mode="Opaque" x="24" y="0" width="100" height="20" forecolor="#0058B6" backcolor="#FFFFFF" uuid="925ca090-90ac-49f6-af14-21bdf8a50b07"/>
 				<textElement textAlignment="Left" verticalAlignment="Middle" rotation="None" markup="none">
@@ -199,24 +199,25 @@
 				</jr:list>
 			</componentElement>
 			<componentElement>
-				<reportElement positionType="Float" x="24" y="60" width="522" height="20" uuid="d344debd-3a11-4204-a94c-6d7c728fd91e"/>
+				<reportElement positionType="Float" x="24" y="60" width="522" height="40" uuid="d344debd-3a11-4204-a94c-6d7c728fd91e"/>
 				<jr:list xmlns:jr="http://jasperreports.sourceforge.net/jasperreports/components" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports/components http://jasperreports.sourceforge.net/xsd/components.xsd" printOrder="Vertical">
 					<datasetRun subDataset="validaciones" uuid="f2dd59ee-aa4b-4d8f-8517-5f7c5e6c612a">
 						<dataSourceExpression><![CDATA[new net.sf.jasperreports.engine.data.JRBeanCollectionDataSource($F{validaciones})]]></dataSourceExpression>
 					</datasetRun>
-					<jr:listContents height="20" width="522">
+					<jr:listContents height="40" width="522">
 						<staticText>
-							<reportElement positionType="Float" mode="Opaque" x="0" y="0" width="437" height="20" isRemoveLineWhenBlank="true" forecolor="#0058B6" backcolor="#FFFFFF" uuid="4c91e49e-9d84-4847-92b5-0f35cd971b8d">
+							<reportElement positionType="Float" mode="Opaque" x="0" y="0" width="437" height="40" isRemoveLineWhenBlank="true" forecolor="#0058B6" backcolor="#FFFFFF" uuid="4c91e49e-9d84-4847-92b5-0f35cd971b8d">
 								<printWhenExpression><![CDATA[$F{tipoValidacion}.equals( "002002" )]]></printWhenExpression>
 							</reportElement>
 							<textElement textAlignment="Left" verticalAlignment="Middle" rotation="None" markup="none">
 								<font fontName="SansSerif" size="10" isBold="true" isItalic="false" isUnderline="false" isStrikeThrough="false" pdfEncoding="Cp1252" isPdfEmbedded="false"/>
 								<paragraph lineSpacing="Single"/>
 							</textElement>
-							<text><![CDATA[b.1) Se interrumpió más del 50% a nivel nacional o regional.]]></text>
+							<text><![CDATA[c) Al menos alguno de los canales afectados se
+    interrumpió en más del 25% a nivel nacional o regional.]]></text>
 						</staticText>
 						<textField>
-							<reportElement positionType="Float" x="437" y="0" width="85" height="20" isRemoveLineWhenBlank="true" uuid="5487ebb9-a484-46dd-872c-4bec6b8644b4">
+							<reportElement positionType="Float" x="437" y="0" width="85" height="40" isRemoveLineWhenBlank="true" uuid="5487ebb9-a484-46dd-872c-4bec6b8644b4">
 								<printWhenExpression><![CDATA[$F{tipoValidacion}.equals( "002002" )]]></printWhenExpression>
 							</reportElement>
 							<textElement verticalAlignment="Middle"/>
@@ -226,7 +227,7 @@
 				</jr:list>
 			</componentElement>
 			<componentElement>
-				<reportElement positionType="Float" x="24" y="80" width="522" height="40" uuid="d344debd-3a11-4204-a94c-6d7c728fd91e"/>
+				<reportElement positionType="Float" x="24" y="100" width="522" height="40" uuid="d344debd-3a11-4204-a94c-6d7c728fd91e"/>
 				<jr:list xmlns:jr="http://jasperreports.sourceforge.net/jasperreports/components" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports/components http://jasperreports.sourceforge.net/xsd/components.xsd" printOrder="Vertical">
 					<datasetRun subDataset="validaciones" uuid="fe931ca1-2a6f-4460-ad35-ddc33fde1377">
 						<dataSourceExpression><![CDATA[new net.sf.jasperreports.engine.data.JRBeanCollectionDataSource($F{validaciones})]]></dataSourceExpression>
@@ -240,7 +241,7 @@
 								<font fontName="SansSerif" size="10" isBold="true" isItalic="false" isUnderline="false" isStrikeThrough="false" pdfEncoding="Cp1252" isPdfEmbedded="false"/>
 								<paragraph lineSpacing="Single"/>
 							</textElement>
-							<text><![CDATA[c) La duración de la interrupción fue mayor al tiempo objetivo
+							<text><![CDATA[d) La duración de la interrupción fue mayor al tiempo objetivo
     de recuperación de los productos o servicios afectados.]]></text>
 						</staticText>
 						<textField>
@@ -254,7 +255,7 @@
 				</jr:list>
 			</componentElement>
 			<componentElement>
-				<reportElement positionType="Float" x="24" y="120" width="522" height="20" uuid="d344debd-3a11-4204-a94c-6d7c728fd91e"/>
+				<reportElement positionType="Float" x="24" y="140" width="522" height="20" uuid="d344debd-3a11-4204-a94c-6d7c728fd91e"/>
 				<jr:list xmlns:jr="http://jasperreports.sourceforge.net/jasperreports/components" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports/components http://jasperreports.sourceforge.net/xsd/components.xsd" printOrder="Vertical">
 					<datasetRun subDataset="validaciones" uuid="a373c1c6-95e7-4372-93b2-80850db2291e">
 						<dataSourceExpression><![CDATA[new net.sf.jasperreports.engine.data.JRBeanCollectionDataSource($F{validaciones})]]></dataSourceExpression>
@@ -268,7 +269,7 @@
 								<font fontName="SansSerif" size="10" isBold="true" isItalic="false" isUnderline="false" isStrikeThrough="false" pdfEncoding="Cp1252" isPdfEmbedded="false"/>
 								<paragraph lineSpacing="Single"/>
 							</textElement>
-							<text><![CDATA[d) La duración de la interrupción fue mayor que 4 horas.]]></text>
+							<text><![CDATA[e) La duración de la interrupción fue mayor que 4 horas.]]></text>
 						</staticText>
 						<textField>
 							<reportElement positionType="Float" x="437" y="0" width="85" height="20" isRemoveLineWhenBlank="true" uuid="5487ebb9-a484-46dd-872c-4bec6b8644b4">
@@ -281,7 +282,7 @@
 				</jr:list>
 			</componentElement>
 			<componentElement>
-				<reportElement positionType="Float" x="24" y="140" width="522" height="20" uuid="d344debd-3a11-4204-a94c-6d7c728fd91e"/>
+				<reportElement positionType="Float" x="24" y="160" width="522" height="20" uuid="d344debd-3a11-4204-a94c-6d7c728fd91e"/>
 				<jr:list xmlns:jr="http://jasperreports.sourceforge.net/jasperreports/components" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports/components http://jasperreports.sourceforge.net/xsd/components.xsd" printOrder="Vertical">
 					<datasetRun subDataset="validaciones" uuid="46381458-2b4c-45df-b33a-8ebcdc6a6a8a">
 						<dataSourceExpression><![CDATA[new net.sf.jasperreports.engine.data.JRBeanCollectionDataSource($F{validaciones})]]></dataSourceExpression>
@@ -295,7 +296,7 @@
 								<font fontName="SansSerif" size="10" isBold="true" isItalic="false" isUnderline="false" isStrikeThrough="false" pdfEncoding="Cp1252" isPdfEmbedded="false"/>
 								<paragraph lineSpacing="Single"/>
 							</textElement>
-							<text><![CDATA[e) Fue necesario activar el Comité de Crisis.]]></text>
+							<text><![CDATA[f) Se activó el Comité de Crisis.]]></text>
 						</staticText>
 						<textField>
 							<reportElement positionType="Float" x="437" y="0" width="85" height="20" isRemoveLineWhenBlank="true" uuid="5487ebb9-a484-46dd-872c-4bec6b8644b4">

@@ -759,7 +759,7 @@ var app = new Vue({
      		}*/
      		
      		
-     		if( !(self.model.planAccion && self.model.planAccion.length > 0) ){
+     		/*if( !(self.model.planAccion && self.model.planAccion.length > 0) ){
      			
      			$("#desc_plan_temp").val("");
      			$("#area_resp_temp").val("");
@@ -767,7 +767,7 @@ var app = new Vue({
      			
      			jbase.validRegistro("required_plan_acc");
      			is_no_valid = true;
-     		}
+     		}*/
      		
      		$('#desc_finan_interrup').removeClass("send_required");
      		$("#desc_finan_interrup").parent().removeClass("is-invalid");

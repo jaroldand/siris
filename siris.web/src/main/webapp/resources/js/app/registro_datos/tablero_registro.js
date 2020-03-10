@@ -3,6 +3,9 @@ var app = new Vue({
     el: "#app",
     data: {
     	update_pagination: false,
+    	help_guia: jbase.urls.guia,
+    	help_pf: jbase.urls.pregfrec,
+    	help_video: jbase.urls.video,
     	
     	reporte_active : true,
     	historic_active : false,
