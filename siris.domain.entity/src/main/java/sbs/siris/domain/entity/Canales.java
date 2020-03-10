@@ -17,6 +17,8 @@ public class Canales extends BaseEntity {
 
     private Short indActivo;
     
+    private Situacion situacion;
+    
     //for reportes
     private String descCanalDetalleStr;
 
@@ -82,6 +84,14 @@ public class Canales extends BaseEntity {
 
 	public void setDescCanalDetalleStr(String descCanalDetalleStr) {
 		this.descCanalDetalleStr = descCanalDetalleStr;
+	}
+	
+	public Situacion getSituacion() {
+		return situacion;
+	}
+
+	public void setSituacion(Situacion situacion) {
+		this.situacion = situacion;
 	}
 
     @Override

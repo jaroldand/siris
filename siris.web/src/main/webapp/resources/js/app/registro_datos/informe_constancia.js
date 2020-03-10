@@ -18,12 +18,19 @@ var app = new Vue({
     	//combos
     	tipos_eventos : [],
     	impactos : [],
+    	situacion : [],
     	
     	
     	//grillas y multiselect
     	productos_list : [],
     	servicios_list : [],
     	procesos_list : [],
+    	
+    	//situacion a la fecha
+    	can_nor_interrup : [],
+    	productos : [],
+    	servicios : [],
+    	procesos : [],
     	
     	//valores temporales para las grillas
     	producto_temp : null,
@@ -47,10 +54,10 @@ var app = new Vue({
     	
     	departamentros_select : [],
     	canal_interrup_select : [],
-    	canal_normal_select : [],
+    	/*canal_normal_select : [],
     	productos_select : [],
     	servicios_select : [],
-    	procesos_select : [],
+    	procesos_select : [],*/
     	
     	validacion: {
         	checkA : {},
@@ -76,6 +83,8 @@ var app = new Vue({
         	},
         	canales : [],
         	canalesActivos :[],
+        	situacion : [],
+        	situacionActivos :[],
         	impacto : [],
         	correoInforme : {}
         }
@@ -113,6 +122,14 @@ var app = new Vue({
 			}
 		});
     	
+    	//load situacion
+    	jajax.apiAuthGet({
+			url : jbase.urls.situacion,
+			success : function(data) {
+				self.situacion = data;
+			}
+		});
+    	
     	
     	var url_enviar = jbase.getStringReplaced(jbase.urls.load_reporte, [jbase.prop.id_evento]);
     	//load data
@@ -142,6 +159,9 @@ var app = new Vue({
 				self.model.canales = data.canales;
 				self.model.canalesActivos = data.canalesActivos;
 				
+				self.model.situacion = data.situacion;
+				self.model.situacionActivos = data.situacionActivos;
+				
 				self.model.planAccion = data.planAccion;
 				self.model.planAccionActivos = data.planAccionActivos;
 				
@@ -158,19 +178,28 @@ var app = new Vue({
 						k++;
 						self.model.productos.push(element);
 						//self.productos_render = true;
-						
+						/*
 						productos_load.push({
 	    		    		name: element.tipCanalDetalle,
 	    		    		value: element.tbl_index,
 	    		    		checked: element.indCondNormal === '1' ? true : false
 	        		    });
-						
-						if(element.indCondNormal === '1'){
+						*/
+						/*if(element.indCondNormal === '1'){
 							self.productos_select.push({
 		    		    		name: element.tipCanalDetalle,
 		    		    		value: element.tbl_index,
 		    		    		checked: element.indCondNormal === '1' ? true : false
 		        		    });
+						}*/
+						var obj = self.model.situacion.find(function(item) {
+							return item.idCanales == element.idCanales;
+						});
+						
+						if(obj){
+							obj.name = element.tipCanalDetalle;
+							obj.id = element.tbl_index;
+							self.productos.push(obj);
 						}
 					}
 					
@@ -179,19 +208,28 @@ var app = new Vue({
 						i++;
 						self.model.servicios.push(element);
 						//self.servicios_render = true;
-						
+						/*
 						servicios_load.push({
 	    		    		name: element.tipCanalDetalle,
 	    		    		value: element.tbl_index,
 	    		    		checked: element.indCondNormal === '1' ? true : false
 	        		    });
-						
-						if(element.indCondNormal === '1'){
+						*/
+						/*if(element.indCondNormal === '1'){
 							self.servicios_select.push({
 		    		    		name: element.tipCanalDetalle,
 		    		    		value: element.tbl_index,
 		    		    		checked: element.indCondNormal === '1' ? true : false
 		        		    });
+						}*/
+						var obj = self.model.situacion.find(function(item) {
+							return item.idCanales == element.idCanales;
+						});
+						
+						if(obj){
+							obj.name = element.tipCanalDetalle;
+							obj.id = element.tbl_index;
+							self.servicios.push(obj);
 						}
 					}
 					
@@ -200,19 +238,28 @@ var app = new Vue({
 						j++;
 						self.model.procesos.push(element);
 						//self.procesos_render = true;
-						
+						/*
 						procesos_load.push({
 	    		    		name: element.tipCanalDetalle,
 	    		    		value: element.tbl_index,
 	    		    		checked: element.indCondNormal === '1' ? true : false
-	        		    });
+	        		    });*/
 						
-						if(element.indCondNormal === '1'){
+						/*if(element.indCondNormal === '1'){
 							self.procesos_select.push({
 		    		    		name: element.tipCanalDetalle,
 		    		    		value: element.tbl_index,
 		    		    		checked: element.indCondNormal === '1' ? true : false
 		        		    });
+						}*/
+						var obj = self.model.situacion.find(function(item) {
+							return item.idCanales == element.idCanales;
+						});
+						
+						if(obj){
+							obj.name = element.tipCanalDetalle;
+							obj.id = element.tbl_index;
+							self.procesos.push(obj);
 						}
 					}
 					
@@ -224,31 +271,36 @@ var app = new Vue({
 					z++;
 				});
 				
-				
+				/*
 				$('#productos').multiselect( 'loadOptions', productos_load);
 				$('#servicios').multiselect( 'loadOptions', servicios_load);
 				$('#procesos').multiselect( 'loadOptions', procesos_load);
-				
+				*/
 				
 				data.impacto.forEach(function(element) {
 					
 					if( element.tipoImpacto === jbase.prop.tipo_impacto_financiero ){
+						element.indSelectedBol = element.indSelected == 1 ? true : false;
 						self.impacto_load.financiero = element;
 					}
 					
 					if( element.tipoImpacto === jbase.prop.tipo_impacto_reputacional ){
+						element.indSelectedBol = element.indSelected == 1 ? true : false;
 						self.impacto_load.reputacional = element;
 					}
 
 					if( element.tipoImpacto === jbase.prop.tipo_impacto_clientes_colaboradores ){
+						element.indSelectedBol = element.indSelected == 1 ? true : false;
 						self.impacto_load.clientes_colaboradores = element;
 					}
 
 					if( element.tipoImpacto === jbase.prop.tipo_impacto_regulatorio ){
+						element.indSelectedBol = element.indSelected == 1 ? true : false;
 						self.impacto_load.regulatorio = element;
 					}
 
 					if( element.tipoImpacto === jbase.prop.tipo_impacto_objetivos_estrategicos ){
+						element.indSelectedBol = element.indSelected == 1 ? true : false;
 						self.impacto_load.objetivos_estrategicos = element;
 					}
 					
@@ -285,6 +337,16 @@ var app = new Vue({
 							canal_interrup.forEach(function(item) {
 								if( element.tipCanalGrupo === jbase.prop.tipo_canales_afectados && item.value === element.tipCanalDetalle && isNinguno === "-1"){
 									
+									var obj = self.model.situacion.find(function(item) {
+										return item.idCanales == element.idCanales;
+									});
+									
+									if(obj){
+										obj.name = element.descCanalDetalle;
+										obj.id = element.tipCanalDetalle;
+										self.can_nor_interrup.push(obj);
+									}
+									
 									var _attr = { idCanales: element.idCanales };
 									item.attributes = _attr;
 									item.checked = true;
@@ -310,7 +372,7 @@ var app = new Vue({
 				    		    		}
 				        		    });
 									
-									if(element.indCondNormal === '1'){
+									/*if(element.indCondNormal === '1'){
 										self.canal_normal_select.push({
 					    		    		name: element.descCanalDetalle,
 					    		    		value: element.tipCanalDetalle,
@@ -319,7 +381,7 @@ var app = new Vue({
 					    		    			idCanales: element.idCanales
 					    		    		}
 					        		    });
-									}
+									}*/
 									
 								}
 							});
@@ -460,23 +522,28 @@ var app = new Vue({
         		this.tiempo_interrup_render = false;
     		}
     	},
-    	"impacto_load.objetivos_estrategicos.impactoDetail": function() {
-    		if(this.impacto_load.objetivos_estrategicos.impactoDetail === jbase.prop.tipo_impacto_detail_ninguno){
+    	"impacto_load.financiero.indSelectedBol": function() {
+    		if(this.impacto_load.financiero.indSelectedBol == false){
+    			this.impacto_load.financiero.descripcion = null;
+    		}
+    	},
+    	"impacto_load.objetivos_estrategicos.indSelectedBol": function() {
+    		if(this.impacto_load.objetivos_estrategicos.indSelectedBol == false){
     			this.impacto_load.objetivos_estrategicos.descripcion = null;
     		}
     	},
-    	"impacto_load.regulatorio.impactoDetail": function() {
-    		if(this.impacto_load.regulatorio.impactoDetail === jbase.prop.tipo_impacto_detail_ninguno){
+    	"impacto_load.regulatorio.indSelectedBol": function() {
+    		if(this.impacto_load.regulatorio.indSelectedBol == false){
     			this.impacto_load.regulatorio.descripcion = null;
     		}
     	},
-    	"impacto_load.clientes_colaboradores.impactoDetail": function() {
-    		if(this.impacto_load.clientes_colaboradores.impactoDetail === jbase.prop.tipo_impacto_detail_ninguno){
+    	"impacto_load.clientes_colaboradores.indSelectedBol": function() {
+    		if(this.impacto_load.clientes_colaboradores.indSelectedBol == false){
     			this.impacto_load.clientes_colaboradores.descripcion = null;
     		}
     	},
-    	"impacto_load.reputacional.impactoDetail": function() {
-    		if(this.impacto_load.reputacional.impactoDetail === jbase.prop.tipo_impacto_detail_ninguno){
+    	"impacto_load.reputacional.indSelectedBol": function() {
+    		if(this.impacto_load.reputacional.indSelectedBol == false){
     			this.impacto_load.reputacional.descripcion = null;
     		}
     	}

@@ -7,6 +7,7 @@ public class GrupoValor {
 	private static final String GRUPO_PROPERTY = "grupos.properties";
 
 	public static final String SIN_DESTINO = Setup.getValueKey(GRUPO_PROPERTY, "sin_destino");
+	public static final String SIRIS_SITUACION = Setup.getValueKey(GRUPO_PROPERTY, "siris_situacion.tipo_situacion");
 	public static final String SIRIS_VALIDACION_TIPO_VALIDACION = Setup.getValueKey(GRUPO_PROPERTY, "siris_validacion.tipo_validacion");
 	public static final String SIRIS_INFORME_TIPO_EVENTO = Setup.getValueKey(GRUPO_PROPERTY, "siris_informe.tipo_evento");
 	

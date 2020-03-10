@@ -7,6 +7,7 @@ import sbs.siris.domain.entity.Canales;
 import sbs.siris.domain.entity.Impacto;
 import sbs.siris.domain.entity.Informe;
 import sbs.siris.domain.entity.PlanAccion;
+import sbs.siris.domain.entity.Situacion;
 import sbs.siris.domain.entity.Validacion;
 
 public class ReporteDTO implements Serializable {
@@ -17,6 +18,13 @@ public class ReporteDTO implements Serializable {
 	private List<Informe> informe;
 	private List<Impacto> impacto;
 	private List<Canales> canales;
+	
+	private List<Situacion> situaciones;
+	private String esSituacionCanal;
+	private String esSituacionProd;
+	private String esSituacionServ;
+	private String esSituacionProc;
+	
 	private List<PlanAccion> planAccion;
 	private List<Validacion> validaciones;
 	
@@ -56,5 +64,35 @@ public class ReporteDTO implements Serializable {
 	}
 	public void setTipEvento(String tipEvento) {
 		this.tipEvento = tipEvento;
+	}
+	public List<Situacion> getSituaciones() {
+		return situaciones;
+	}
+	public void setSituaciones(List<Situacion> situaciones) {
+		this.situaciones = situaciones;
+	}
+	public String getEsSituacionCanal() {
+		return esSituacionCanal;
+	}
+	public void setEsSituacionCanal(String esSituacionCanal) {
+		this.esSituacionCanal = esSituacionCanal;
+	}
+	public String getEsSituacionProd() {
+		return esSituacionProd;
+	}
+	public void setEsSituacionProd(String esSituacionProd) {
+		this.esSituacionProd = esSituacionProd;
+	}
+	public String getEsSituacionServ() {
+		return esSituacionServ;
+	}
+	public void setEsSituacionServ(String esSituacionServ) {
+		this.esSituacionServ = esSituacionServ;
+	}
+	public String getEsSituacionProc() {
+		return esSituacionProc;
+	}
+	public void setEsSituacionProc(String esSituacionProc) {
+		this.esSituacionProc = esSituacionProc;
 	}
 }

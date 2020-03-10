@@ -48,6 +48,8 @@ import sbs.siris.domain.entity.ParametroDomain;
 import sbs.siris.domain.entity.Parametros;
 import sbs.siris.domain.entity.PlanAccion;
 import sbs.siris.domain.entity.PlanAccionDomain;
+import sbs.siris.domain.entity.Situacion;
+import sbs.siris.domain.entity.SituacionDomain;
 import sbs.siris.domain.entity.TipoListaDomain;
 import sbs.siris.domain.entity.Validacion;
 import sbs.siris.domain.entity.ValidacionDomain;
@@ -80,6 +82,9 @@ public class EventoReporteDomain {
 	
 	@Autowired
 	private CanalesDomain canalesDomain;
+	
+	@Autowired
+	private SituacionDomain situacionDomain;
 	
 	@Autowired
 	private ImpactoDomain impactoDomain;
@@ -139,6 +144,11 @@ public class EventoReporteDomain {
 		
 		List<Canales> canales = canalesDomain.buscar(canal, null);
 		
+		Situacion situacion = new Situacion();
+		situacion.setIdEvento(idEvento);
+		
+		List<Situacion> situaciones = situacionDomain.buscar(situacion, null);
+		
 		List<Impacto> impactos = impactoDomain.buscarImpactos(idEvento);
 		
 		
@@ -156,6 +166,9 @@ public class EventoReporteDomain {
 		
 		resultado.setCanales(canales);
 		resultado.setCanalesActivos(canales);
+		
+		resultado.setSituacion(situaciones);
+		resultado.setSituacionActivos(situaciones);
 		
 		resultado.setPlanAccion(planAccion);
 		resultado.setPlanAccionActivos(planAccion);
@@ -331,14 +344,17 @@ public class EventoReporteDomain {
 		/* Inicio save informe */
 		Informe informe = parametros.getInforme();
 		
+		informe.setFecIniInterrupcion(null);
 		if( !StringUtils.isEmpty(informe.getFecIniInterrupcionStr()) ) {
 			informe.setFecIniInterrupcion(  DateTime.dateFromString(informe.getFecIniInterrupcionStr(), "dd/MM/yyyy") );
 		}
 		
+		informe.setFecFinInterrupcion(null);
 		if( !StringUtils.isEmpty(informe.getFecFinInterrupcionStr()) ) {
 			informe.setFecFinInterrupcion(  DateTime.dateFromString(informe.getFecFinInterrupcionStr(), "dd/MM/yyyy") );
 		}
 		
+		informe.setFecEnvioRepInicial(null);
 		if( !StringUtils.isEmpty(informe.getFecEnvioRepInicialStr()) ) {
 			informe.setFecEnvioRepInicial(  DateTime.dateFromString(informe.getFecEnvioRepInicialStr(), "dd/MM/yyyy") );
 		}
@@ -364,7 +380,7 @@ public class EventoReporteDomain {
 		
 		/* Inicio save canales */
 		List<Canales> canales = parametros.getCanales();
-		
+		List<Situacion> situaciones = new ArrayList<Situacion>();
 		canales.forEach((entry) -> {
 			
 			if(  ObjectUtils.isEmpty(entry.getIdCanales())  ) {//insert
@@ -381,6 +397,10 @@ public class EventoReporteDomain {
 				canalesDomain.updateByKey(entry.getIdCanales(), entry, user);
 			}
 			
+			if(entry.getSituacion() != null) {
+				entry.getSituacion().setIdCanales(entry.getIdCanales());
+				situaciones.add(entry.getSituacion());
+			}
 		});
 		
 		parametros.getCanalesActivos().forEach((entry) -> {
@@ -396,11 +416,22 @@ public class EventoReporteDomain {
 		});
 		/* Fin save canales */
 		
+		/* Inicio save situacion */
+		situaciones.forEach((entry) -> {
+			situacionDomain.registrarSituacion(entry, user);
+		});
+		
+		situacionDomain.inactivarSituacion(parametros.getSituacionActivos(), situaciones, user);
+		
+		/* Fin save situacion */
 		
 		/* Inicio save impacto */
 		List<Impacto> impactos = parametros.getImpacto();
 		
 		impactos.forEach((entry) -> {
+			
+			entry.setIndSelected( entry.getIndSelectedBol() ? 1 : 0 );
+			
 			if( ObjectUtils.isEmpty(entry.getIdImpacto()) ) {//insert
 				entry.setIdEvento(parametros.getIdEvento());
 				entry.setIdImpacto((int) impactoDomain.getSequenceLong() );

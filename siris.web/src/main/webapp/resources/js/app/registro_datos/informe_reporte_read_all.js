@@ -290,22 +290,27 @@ var app = new Vue({
 				data.impacto.forEach(function(element) {
 					
 					if( element.tipoImpacto === jbase.prop.tipo_impacto_financiero ){
+						element.indSelectedBol = element.indSelected == 1 ? true : false;
 						self.impacto_load.financiero = element;
 					}
 					
 					if( element.tipoImpacto === jbase.prop.tipo_impacto_reputacional ){
+						element.indSelectedBol = element.indSelected == 1 ? true : false;
 						self.impacto_load.reputacional = element;
 					}
 
 					if( element.tipoImpacto === jbase.prop.tipo_impacto_clientes_colaboradores ){
+						element.indSelectedBol = element.indSelected == 1 ? true : false;
 						self.impacto_load.clientes_colaboradores = element;
 					}
 
 					if( element.tipoImpacto === jbase.prop.tipo_impacto_regulatorio ){
+						element.indSelectedBol = element.indSelected == 1 ? true : false; 
 						self.impacto_load.regulatorio = element;
 					}
 
 					if( element.tipoImpacto === jbase.prop.tipo_impacto_objetivos_estrategicos ){
+						element.indSelectedBol = element.indSelected == 1 ? true : false;
 						self.impacto_load.objetivos_estrategicos = element;
 					}
 					
@@ -507,23 +512,28 @@ var app = new Vue({
         		this.tiempo_interrup_render = false;
     		}
     	},
-    	"impacto_load.objetivos_estrategicos.impactoDetail": function() {
-    		if(this.impacto_load.objetivos_estrategicos.impactoDetail === jbase.prop.tipo_impacto_detail_ninguno){
+    	"impacto_load.financiero.indSelectedBol": function() {
+    		if(this.impacto_load.financiero.indSelectedBol == false){
+    			this.impacto_load.financiero.descripcion = null;
+    		}
+    	},
+    	"impacto_load.objetivos_estrategicos.indSelectedBol": function() {
+    		if(this.impacto_load.objetivos_estrategicos.indSelectedBol == false){
     			this.impacto_load.objetivos_estrategicos.descripcion = null;
     		}
     	},
-    	"impacto_load.regulatorio.impactoDetail": function() {
-    		if(this.impacto_load.regulatorio.impactoDetail === jbase.prop.tipo_impacto_detail_ninguno){
+    	"impacto_load.regulatorio.indSelectedBol": function() {
+    		if(this.impacto_load.regulatorio.indSelectedBol == false){
     			this.impacto_load.regulatorio.descripcion = null;
     		}
     	},
-    	"impacto_load.clientes_colaboradores.impactoDetail": function() {
-    		if(this.impacto_load.clientes_colaboradores.impactoDetail === jbase.prop.tipo_impacto_detail_ninguno){
+    	"impacto_load.clientes_colaboradores.indSelectedBol": function() {
+    		if(this.impacto_load.clientes_colaboradores.indSelectedBol == false){
     			this.impacto_load.clientes_colaboradores.descripcion = null;
     		}
     	},
-    	"impacto_load.reputacional.impactoDetail": function() {
-    		if(this.impacto_load.reputacional.impactoDetail === jbase.prop.tipo_impacto_detail_ninguno){
+    	"impacto_load.reputacional.indSelectedBol": function() {
+    		if(this.impacto_load.reputacional.indSelectedBol == false){
     			this.impacto_load.reputacional.descripcion = null;
     		}
     	}

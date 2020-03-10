@@ -143,6 +143,16 @@ window.jbase = window.jbase || {};
 			sideBySide : true
 		})
 	};
+	
+	$b.customFormatDate = function(flag, css) {
+		$(css).datetimepicker({
+			format : "L",
+			locale : "es",
+			maxDate : flag ? false : 'now',
+			timeZone: 'Europe/London',
+			sideBySide : true
+		})
+	};
 
 	$b.wait = function(visible) {
 		if (visible === true) {

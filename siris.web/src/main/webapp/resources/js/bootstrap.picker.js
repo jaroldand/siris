@@ -5239,7 +5239,10 @@ function() {
                     if (!this._options.keepInvalid) {
                         if (this.input !== undefined) {
                         	if(this.input.val() != outpValue){
-                            this.input.val('' + (this.unset ? '' : this._dates[index].format(this.actualFormat)));
+                        	// ini:jquezada
+                            //this.input.val('' + (this.unset ? '' : this._dates[index].format(this.actualFormat)));
+                        	this.input.val('');
+                        	// fin:jquezada
                             // debugger;
                             this.input.trigger('input');
                             // ini:mpalacin

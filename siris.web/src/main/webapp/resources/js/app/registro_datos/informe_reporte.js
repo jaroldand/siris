@@ -7,6 +7,8 @@ var app = new Vue({
     	historic_active : false,//para el menu
     	
     	//constants
+    	tipo_situacion_operando_bajo_condiciones_normales : jbase.prop.tipo_situacion_operando_bajo_condiciones_normales,
+    	
     	tipo_productos : jbase.prop.tipo_productos,
     	tipo_servicios : jbase.prop.tipo_servicios,
     	tipo_procesos : jbase.prop.tipo_procesos,
@@ -20,12 +22,19 @@ var app = new Vue({
     	//combos
     	tipos_eventos : [],
     	impactos : [],
+    	situacion : [],
     	
     	
     	//grillas y multiselect
     	productos_list : [],
     	servicios_list : [],
     	procesos_list : [],
+    	
+    	//situacion a la fecha
+    	can_nor_interrup : [],
+    	productos : [],
+    	servicios : [],
+    	procesos : [],
     	
     	//valores temporales para las grillas
     	producto_temp : null,
@@ -47,6 +56,15 @@ var app = new Vue({
     		objetivos_estrategicos: {}
     	},
     	
+    	validacion: {
+        	checkA : {},
+        	checkB : {},
+        	checkB1 : {},
+        	checkC : {},
+        	checkD : {},
+        	checkE : {}
+        },
+    	
         model: {
         	idEvento : jbase.prop.id_evento,
         	
@@ -62,6 +80,10 @@ var app = new Vue({
         	},
         	canales : [],
         	canalesActivos :[],
+        	
+        	situacion : [],
+        	situacionActivos :[],
+        	
         	impacto : [],
         	correoInforme : {}
         }
@@ -80,6 +102,16 @@ var app = new Vue({
     	console.log("created");
     	var self = this;
     	
+    	//load validacion
+    	var url_enviar = jbase.getStringReplaced(jbase.urls.load_evento, [jbase.prop.id_evento]);
+    	jajax.apiAuthGet({
+			url : url_enviar,
+			success : function(data) {
+				console.log(data);
+				self.validacion = data;
+			}
+		});
+    	
     	//load tipos eventos
     	jajax.apiAuthGet({
 			url : jbase.urls.tipos_eventos,
@@ -89,6 +121,13 @@ var app = new Vue({
 			}
 		});
     	
+    	//load situacion
+    	jajax.apiAuthGet({
+			url : jbase.urls.situacion,
+			success : function(data) {
+				self.situacion = data;
+			}
+		});
     	
     	var url_enviar = jbase.getStringReplaced(jbase.urls.load_reporte, [jbase.prop.id_evento]);
     	//load data
@@ -109,6 +148,29 @@ var app = new Vue({
 				$("#fecha_envio_interrup").val(self.model.informe.fecEnvioRepInicial);				
 				
 				$("#fecha_ini_interrup").val(self.model.informe.fecIniInterrupcion);
+				var fecha1 = moment( $('#fecha_ini_interrup').val(), "DD/MM/YYYY");
+				
+				if( fecha1.isValid() ){
+	    			$("#fecha_impl_tmp").datetimepicker('destroy');
+	    			$("#fecha_impl_tmp").datetimepicker({
+	    				format : "L",
+	    				locale : "es",
+	    				minDate : fecha1,
+	    				timeZone: 'Europe/London',
+	    				sideBySide : true
+	    			});
+	    			
+	    			$("#fecha_fin_interrup").datetimepicker('destroy');
+	    			$("#fecha_fin_interrup").datetimepicker({
+	    				format : "L",
+	    				locale : "es",
+	    				maxDate : 'now',
+	    				minDate : fecha1,
+	    				timeZone: 'Europe/London',
+	    				sideBySide : true
+	    			});
+	    		}
+				
 				$("#fecha_fin_interrup").val(self.model.informe.fecFinInterrupcion);
 				
 				$("#hora_ini_interrup").val(self.model.informe.horIniInterrupcion);
@@ -117,6 +179,9 @@ var app = new Vue({
 				
 				self.model.canales = data.canales;
 				self.model.canalesActivos = data.canalesActivos;
+				
+				self.model.situacion = data.situacion;
+				self.model.situacionActivos = data.situacionActivos;
 				
 				self.model.planAccion = data.planAccion;
 				self.model.planAccionActivos = data.planAccionActivos;
@@ -134,12 +199,21 @@ var app = new Vue({
 						k++;
 						self.model.productos.push(element);
 						//self.productos_render = true;
-						
+						/*
 						productos_load.push({
 	    		    		name: element.tipCanalDetalle,
 	    		    		value: element.tbl_index,
 	    		    		checked: element.indCondNormal === '1' ? true : false
-	        		    });
+	        		    });*/
+						var obj = self.model.situacion.find(function(item) {
+							return item.idCanales == element.idCanales;
+						});
+						
+						if(obj){
+							obj.name = element.tipCanalDetalle;
+							obj.id = element.tbl_index;
+							self.productos.push(obj);
+						}
 					}
 					
 					if( element.tipCanalGrupo === jbase.prop.tipo_servicios ){
@@ -147,12 +221,21 @@ var app = new Vue({
 						i++;
 						self.model.servicios.push(element);
 						//self.servicios_render = true;
-						
+						/*
 						servicios_load.push({
 	    		    		name: element.tipCanalDetalle,
 	    		    		value: element.tbl_index,
 	    		    		checked: element.indCondNormal === '1' ? true : false
-	        		    });
+	        		    });*/
+						var obj = self.model.situacion.find(function(item) {
+							return item.idCanales == element.idCanales;
+						});
+						
+						if(obj){
+							obj.name = element.tipCanalDetalle;
+							obj.id = element.tbl_index;
+							self.servicios.push(obj);
+						}
 					}
 					
 					if( element.tipCanalGrupo === jbase.prop.tipo_procesos ){
@@ -160,14 +243,22 @@ var app = new Vue({
 						j++;
 						self.model.procesos.push(element);
 						//self.procesos_render = true;
-						
+						/*
 						procesos_load.push({
 	    		    		name: element.tipCanalDetalle,
 	    		    		value: element.tbl_index,
 	    		    		checked: element.indCondNormal === '1' ? true : false
-	        		    });
+	        		    });*/
+						var obj = self.model.situacion.find(function(item) {
+							return item.idCanales == element.idCanales;
+						});
+						
+						if(obj){
+							obj.name = element.tipCanalDetalle;
+							obj.id = element.tbl_index;
+							self.procesos.push(obj);
+						}
 					}
-					
 				});
 				
 				var z = 1;
@@ -176,31 +267,36 @@ var app = new Vue({
 					z++;
 				});
 				
-				
+				/*
 				$('#productos').multiselect( 'loadOptions', productos_load);
 				$('#servicios').multiselect( 'loadOptions', servicios_load);
 				$('#procesos').multiselect( 'loadOptions', procesos_load);
-				
+				*/
 				
 				data.impacto.forEach(function(element) {
 					
 					if( element.tipoImpacto === jbase.prop.tipo_impacto_financiero ){
+						element.indSelectedBol = element.indSelected == 1 ? true : false; 
 						self.impacto_load.financiero = element;
 					}
 					
 					if( element.tipoImpacto === jbase.prop.tipo_impacto_reputacional ){
+						element.indSelectedBol = element.indSelected == 1 ? true : false; 
 						self.impacto_load.reputacional = element;
 					}
 
 					if( element.tipoImpacto === jbase.prop.tipo_impacto_clientes_colaboradores ){
+						element.indSelectedBol = element.indSelected == 1 ? true : false; 
 						self.impacto_load.clientes_colaboradores = element;
 					}
 
 					if( element.tipoImpacto === jbase.prop.tipo_impacto_regulatorio ){
+						element.indSelectedBol = element.indSelected == 1 ? true : false; 
 						self.impacto_load.regulatorio = element;
 					}
 
 					if( element.tipoImpacto === jbase.prop.tipo_impacto_objetivos_estrategicos ){
+						element.indSelectedBol = element.indSelected == 1 ? true : false; 
 						self.impacto_load.objetivos_estrategicos = element;
 					}
 					
@@ -235,7 +331,19 @@ var app = new Vue({
 						self.model.canales.forEach(function(element) {
 							
 							canal_interrup.forEach(function(item) {
+								
 								if( element.tipCanalGrupo === jbase.prop.tipo_canales_afectados && item.value === element.tipCanalDetalle && isNinguno === "-1"){
+									
+									var obj = self.model.situacion.find(function(item) {
+										return item.idCanales == element.idCanales;
+									});
+									
+									if(obj){
+										obj.name = element.descCanalDetalle;
+										obj.id = element.tipCanalDetalle;
+										self.can_nor_interrup.push(obj);
+									}
+									
 									
 									var _attr = { idCanales: element.idCanales };
 									item.attributes = _attr;
@@ -261,7 +369,7 @@ var app = new Vue({
 						
 						$('#canal_interrup').multiselect( 'loadOptions', canal_interrup);
 						
-		    			$('#can_nor_interrup').multiselect( 'loadOptions', canal_normal);
+		    			//$('#can_nor_interrup').multiselect( 'loadOptions', canal_normal);
 						
 						
 						if(isNinguno !== "-1"){
@@ -394,29 +502,58 @@ var app = new Vue({
         		this.tiempo_interrup_render = false;
     		}
     	},
-    	"impacto_load.objetivos_estrategicos.impactoDetail": function() {
-    		if(this.impacto_load.objetivos_estrategicos.impactoDetail === jbase.prop.tipo_impacto_detail_ninguno){
+    	"impacto_load.financiero.indSelectedBol": function() {
+    		if(this.impacto_load.financiero.indSelectedBol == false){
+    			this.impacto_load.financiero.descripcion = null;
+    		}
+    	},
+    	"impacto_load.objetivos_estrategicos.indSelectedBol": function() {
+    		if(this.impacto_load.objetivos_estrategicos.indSelectedBol == false){
     			this.impacto_load.objetivos_estrategicos.descripcion = null;
     		}
     	},
-    	"impacto_load.regulatorio.impactoDetail": function() {
-    		if(this.impacto_load.regulatorio.impactoDetail === jbase.prop.tipo_impacto_detail_ninguno){
+    	"impacto_load.regulatorio.indSelectedBol": function() {
+    		if(this.impacto_load.regulatorio.indSelectedBol == false){
     			this.impacto_load.regulatorio.descripcion = null;
     		}
     	},
-    	"impacto_load.clientes_colaboradores.impactoDetail": function() {
-    		if(this.impacto_load.clientes_colaboradores.impactoDetail === jbase.prop.tipo_impacto_detail_ninguno){
+    	"impacto_load.clientes_colaboradores.indSelectedBol": function() {
+    		if(this.impacto_load.clientes_colaboradores.indSelectedBol == false){
     			this.impacto_load.clientes_colaboradores.descripcion = null;
     		}
     	},
-    	"impacto_load.reputacional.impactoDetail": function() {
-    		if(this.impacto_load.reputacional.impactoDetail === jbase.prop.tipo_impacto_detail_ninguno){
+    	"impacto_load.reputacional.indSelectedBol": function() {
+    		if(this.impacto_load.reputacional.indSelectedBol == false){
     			this.impacto_load.reputacional.descripcion = null;
     		}
     	}
     },
     
     methods: {
+    	editarValidacion: function(page, id_event) {
+    		var self = this;
+    		$("#div-modal_validacion").modal("hide");
+    		$('#div-modal_validacion').on('hidden.bs.modal', function() {
+    			flujoRegistro.setStep(page+"/"+id_event,'00');
+			});
+    	},
+    	showModal: function() {
+    		var self = this;
+
+    		$("#div-modal_validacion").modal("toggle");
+        },
+    	changeSitAct: function(item) {
+    		var self = this;
+    		
+    		
+    		$("#"+item.id).addClass("send_required");
+    		if( jbase.isEmptyString(item.tipoSituacion) || item.tipoSituacion == self.tipo_situacion_operando_bajo_condiciones_normales ){
+    			$("#"+item.id).removeClass("send_required");
+    			item.descripcion = null;
+    		}
+    		
+    		this.$forceUpdate();
+    	},
     	load_data: function() {
     		
     	},
@@ -445,10 +582,17 @@ var app = new Vue({
     		    return item.tbl_index !== index
     		});
     		
+    		self[name_table] = self[name_table].filter(function(item) {
+    		    return item.id != index
+    		});
+    		
     		var k = 0;
     		Object.keys(self.model[name_table]).forEach(function(key) {
     			
     			self.model[name_table][key].tbl_index = name_table + "_" + k;
+    			
+    			self[name_table][key].id = name_table + "_" + k;
+    			
     			k++;
 			});
     		
@@ -505,6 +649,8 @@ var app = new Vue({
 		    });
     		
     		$('#'+name_table).multiselect( 'loadOptions', checkeados);
+    		
+    		self[name_table].push({ id : name_table + "_" + index_table, name : self[field] } );
     		
     		//clean data
     		self[field] = null;
@@ -579,15 +725,16 @@ var app = new Vue({
      	enviar_informe: function(evt) {
      		var self = this;
      		var is_no_valid = false;
-     		$('#regiones_interrup').addClass("send_required");
-     		$( '#canal_interrup' ).next().find('> .ms-options > ul').find('input').each(function() {
+     		
+     		//$('#regiones_interrup').addClass("send_required");
+     		/*$( '#canal_interrup' ).next().find('> .ms-options > ul').find('input').each(function() {
 				var $this = $(this);
 				
 				if($this.prop('checked') && ( $this.prop('value') === jbase.prop.ninguno_a || $this.prop('value') === jbase.prop.ninguno_b || $this.prop('value') === jbase.prop.ninguno_c ) ){
 					
 					$('#regiones_interrup').removeClass("send_required");
 				}
-			});
+			});*/
      		
      		
      		/*if( !(self.model.productos && self.model.productos.length > 0) ){
@@ -612,7 +759,7 @@ var app = new Vue({
      		}*/
      		
      		
-     		if( !(self.model.planAccion && self.model.planAccion.length > 0) ){
+     		/*if( !(self.model.planAccion && self.model.planAccion.length > 0) ){
      			
      			$("#desc_plan_temp").val("");
      			$("#area_resp_temp").val("");
@@ -620,36 +767,35 @@ var app = new Vue({
      			
      			jbase.validRegistro("required_plan_acc");
      			is_no_valid = true;
-     		}
-     		
+     		}*/
      		
      		$('#desc_finan_interrup').removeClass("send_required");
      		$("#desc_finan_interrup").parent().removeClass("is-invalid");
-     		if( !jbase.isEmptyString( self.impacto_load.financiero.impactoDetail ) ){
+     		if( self.impacto_load.financiero.indSelectedBol == true ){
      			$('#desc_finan_interrup').addClass("send_required");
      		}
      		
      		$('#desc_repu_interrup').removeClass("send_required");
      		$("#desc_repu_interrup").parent().removeClass("is-invalid");
-     		if( self.impacto_load.reputacional.impactoDetail !== jbase.prop.tipo_impacto_detail_ninguno ){
+     		if( self.impacto_load.reputacional.indSelectedBol == true ){
      			$('#desc_repu_interrup').addClass("send_required");
      		}
      		
      		$('#desc_cli_interrup').removeClass("send_required");
      		$("#desc_cli_interrup").parent().removeClass("is-invalid");
-     		if( self.impacto_load.clientes_colaboradores.impactoDetail !== jbase.prop.tipo_impacto_detail_ninguno ){
+     		if( self.impacto_load.clientes_colaboradores.indSelectedBol == true ){
      			$('#desc_cli_interrup').addClass("send_required");
      		}
      		
      		$('#desc_reg_interrup').removeClass("send_required");
      		$("#desc_reg_interrup").parent().removeClass("is-invalid");
-     		if( self.impacto_load.regulatorio.impactoDetail !== jbase.prop.tipo_impacto_detail_ninguno ){
+     		if( self.impacto_load.regulatorio.indSelectedBol == true ){
      			$('#desc_reg_interrup').addClass("send_required");
      		}
      		
      		$('#desc_obj_interrup').removeClass("send_required");
      		$("#desc_obj_interrup").parent().removeClass("is-invalid");
-     		if( self.impacto_load.objetivos_estrategicos.impactoDetail !== jbase.prop.tipo_impacto_detail_ninguno ){
+     		if( self.impacto_load.objetivos_estrategicos.indSelectedBol == true ){
      			$('#desc_obj_interrup').addClass("send_required");
      		}
      		
@@ -710,7 +856,71 @@ var app = new Vue({
     				$("#fecha_ini_interrup").parent().addClass("is-invalid");
     				$("#fecha_envio_interrup").parent().addClass("is-invalid");
     				
-    				jnoty.showMessage(jnoty.typeMessage.warning, "La fecha de inicio de interrupción no puede ser mayor a la fecha de envío de interrupción!", 2000);
+    				jnoty.showStickyMessage(jnoty.typeMessage.warning, "La fecha de inicio de interrupción no puede ser mayor a la fecha de envío de interrupción!", false);
+    				return false;
+    			}
+    		}
+    		
+    		//validamos Tiempo de afectación al público
+    		if( !jbase.isEmptyString(self.model.informe.totalInterrupcion) && (self.model.informe.menorInterrupcion >  self.model.informe.totalInterrupcion) ){
+    			jnoty.showStickyMessage(jnoty.typeMessage.warning, "El tiempo de afectación al público no puede ser mayor al tiempo de interrupción!", 2000);
+    			return false;
+    		}
+    		
+    		//validamos al menos una selección de impactos
+    		$("#impactos_interrupcion").removeClass("seccion-invalid");
+    		if( self.impacto_load.financiero.indSelectedBol == false
+     				&& self.impacto_load.reputacional.indSelectedBol == false
+     				&& self.impacto_load.clientes_colaboradores.indSelectedBol == false
+     				&& self.impacto_load.regulatorio.indSelectedBol == false
+     				&& self.impacto_load.objetivos_estrategicos.indSelectedBol == false
+     		){
+    			
+    			$("#impactos_interrupcion").addClass("seccion-invalid");
+    			jnoty.showStickyMessage(jnoty.typeMessage.warning, "Debe seleccionar al menos un impacto!", false);
+				return false;
+         	}
+    		
+    		$("#afectaciones").removeClass("seccion-invalid");
+    		$("#situacion_interrupcion").removeClass("seccion-invalid");
+    		//inicio validamos las afectaciones
+    		var afectaciones = self.can_nor_interrup.concat(self.productos).concat(self.servicios).concat(self.procesos);
+    		
+    		if( afectaciones.length <= 0 ) {
+    			$("#afectaciones").addClass("seccion-invalid");
+    			jnoty.showStickyMessage(jnoty.typeMessage.warning, "Debe ingresar al menos una afectación!", false);
+				return false;
+         	}
+    		//fin validamos las afectaciones
+    		
+    		//inicio validamos las situaciones de las afectaciones
+    		var situaciones = self.can_nor_interrup.concat(self.productos).concat(self.servicios).concat(self.procesos);
+    		var is_valid = false;
+    		situaciones.forEach(function(element) {
+    			if( !jbase.isEmptyString(element.tipoSituacion) ){
+    				is_valid = true;
+    			}
+    		});
+    		
+    		if( !is_valid ){
+    			$("#situacion_interrupcion").addClass("seccion-invalid");
+    			jnoty.showStickyMessage(jnoty.typeMessage.warning, "Debe ingresar al menos una situación!", false);
+				return false;
+         	}
+    		//fin validamos las situaciones de las afectaciones
+    		
+    		//validamos la fecha de impl de plan de acción debería ser mayor a la fecha de inicio de interrup.
+    		for (var i = 0; i < self.model.planAccion.length; i++) {
+    			
+    			var fechaIni = moment( $('#fecha_ini_interrup').val(), "DD/MM/YYYY");
+    			var fechaFin = moment( self.model.planAccion[i].fecImplementacionStr, "DD/MM/YYYY");
+    			
+    			var diff = fechaFin.diff(fechaIni, 'h', true); // Diff in hours
+    			
+    			if(diff < 0){
+    				$("#fecha_impl_tmp").parent().addClass("is-invalid");
+    				
+    				jnoty.showStickyMessage(jnoty.typeMessage.warning, "La fecha de implementación de planes de acción debería ser siempre mayores que la fecha de inicio de interrupción!", false);
     				return false;
     			}
     		}
@@ -718,7 +928,7 @@ var app = new Vue({
     		$("#mail_interrup").parent().removeClass("is-invalid");
     		if( !jbase.isValidEmail(self.model.correoInforme.desCorreo) ){
     			$("#mail_interrup").parent().addClass("is-invalid");
-    			jnoty.showMessage(jnoty.typeMessage.warning, "El formato de correo no es correcto!", 2000);
+    			jnoty.showStickyMessage(jnoty.typeMessage.warning, "El formato de correo no es correcto!", false);
 				return false;
     		}
      		
@@ -757,6 +967,8 @@ var app = new Vue({
      		
      		self.model.canales = self.model.productos.concat(self.model.servicios).concat(self.model.procesos);
      		
+     		//self.model.situacion = self.can_nor_interrup.concat(self.productos).concat(self.servicios).concat(self.procesos);
+     		
      		
      		$( '#canal_interrup' ).next().find('> .ms-options > ul').find('input').each(function() {
 				var $this = $(this);
@@ -766,8 +978,10 @@ var app = new Vue({
 						idCanales : $this.attr('idCanales'),
 						tipCanalGrupo : jbase.prop.tipo_canales_afectados,
             			tipCanalDetalle : $this.prop('value'),
-            			indCondNormal : ( $( '#can_nor_interrup' ).next().find('> .ms-options > ul').find("input:checkbox[value*='"+$this.prop('value')+"']").prop('checked') ? '1' : '0'),
-            			descCanalDetalleStr : $this.prop('title')
+            			descCanalDetalleStr : $this.prop('title'),
+            			situacion : self.can_nor_interrup.find(function(item) {
+            							return item.id == $this.prop('value');
+            						})
 					});
 				}
 				
@@ -788,17 +1002,23 @@ var app = new Vue({
 			});
      		
      		self.model.productos.forEach(function(item) {
-     			item.indCondNormal = ( $( '#productos' ).next().find('> .ms-options > ul').find("input:checkbox[value*='"+ item.tbl_index +"']").prop('checked') ? '1' : '0');
+     			item.situacion = self.productos.find(function(item_) {
+					return item_.id == item.tbl_index;
+				});
      			item.descCanalDetalleStr = item.tipCanalDetalle;
      		});
      		
      		self.model.servicios.forEach(function(item) {
-     			item.indCondNormal = ( $( '#servicios' ).next().find('> .ms-options > ul').find("input:checkbox[value*='"+ item.tbl_index +"']").prop('checked') ? '1' : '0');
+     			item.situacion = self.servicios.find(function(item_) {
+					return item_.id == item.tbl_index;
+				});
      			item.descCanalDetalleStr = item.tipCanalDetalle;
      		});
      		
      		self.model.procesos.forEach(function(item) {
-     			item.indCondNormal = ( $( '#procesos' ).next().find('> .ms-options > ul').find("input:checkbox[value*='"+ item.tbl_index +"']").prop('checked') ? '1' : '0');
+     			item.situacion = self.procesos.find(function(item_) {
+					return item_.id == item.tbl_index;
+				});
      			item.descCanalDetalleStr = item.tipCanalDetalle;
      		});
      		
@@ -931,35 +1151,84 @@ var app = new Vue({
     		jnoty.confirm("Se adjuntará el archivo al reporte ¿Desea continuar?", function () {self.uploadFile(file_upload); } );
     		
     	},
-    	calcularTotalHoras: function() {
+    	validarTiempoAfecPub: function() {
     		var self = this;
+    		
+    		if( !jbase.isEmptyString(self.model.informe.totalInterrupcion) && (self.model.informe.menorInterrupcion >  self.model.informe.totalInterrupcion) ){
+    			jnoty.showStickyMessage(jnoty.typeMessage.warning, "El tiempo de afectación al público no puede ser mayor al tiempo de interrupción!", 2000);
+    			self.model.informe.menorInterrupcion = "";
+    			this.$forceUpdate();
+    		}
+    		
+    	},
+    	calcularTotalHoras: function(id_component) {
+    		var self = this;
+    		
+    		var fecha1 = moment( $('#fecha_ini_interrup').val(), "DD/MM/YYYY");
+    		var hora1 = moment( jbase.isEmptyString($('#hora_ini_interrup').val()) || $('#hora_ini_interrup').val().length != 5 ? "90:90" : $('#hora_ini_interrup').val(), "HH:mm");
+    		
+    		if( fecha1.isValid() ){
+    			$("#fecha_impl_tmp").datetimepicker('destroy');
+    			$("#fecha_impl_tmp").datetimepicker({
+    				format : "L",
+    				locale : "es",
+    				minDate : fecha1,
+    				timeZone: 'Europe/London',
+    				sideBySide : true
+    			});
+    			
+    			$("#fecha_fin_interrup").datetimepicker('destroy');
+    			$("#fecha_fin_interrup").datetimepicker({
+    				format : "L",
+    				locale : "es",
+    				maxDate : 'now',
+    				minDate : fecha1,
+    				timeZone: 'Europe/London',
+    				sideBySide : true
+    			});
+    		}
     		
     		if(self.model.informe.eventoFinBol != true){
     			console.log("calcularHoras");
     			
-    			var fecha1 = moment( $('#fecha_ini_interrup').val(), "DD/MM/YYYY");
-    			var hora1 = moment( jbase.isEmptyString($('#hora_ini_interrup').val()) ? "90:90" : $('#hora_ini_interrup').val(), "HH:mm");
-    			
         		var fecha2 = moment( $('#fecha_fin_interrup').val(), "DD/MM/YYYY");
-        		var hora2 = moment( jbase.isEmptyString($('#hora_fin_interrup').val()) ? "90:90" : $('#hora_fin_interrup').val(), "HH:mm");
+        		var hora2 = moment( jbase.isEmptyString($('#hora_fin_interrup').val()) || $('#hora_fin_interrup').val().length != 5 ? "90:90" : $('#hora_fin_interrup').val(), "HH:mm");
         		
+        		$('#tiempo_interrup').val("");
+        		this.model.informe.totalInterrupcion = null;
         		
         		if( fecha1.isValid() && fecha2.isValid() && hora1.isValid() && hora2.isValid() ){
         			
         			var fechaIni = moment( $('#fecha_ini_interrup').val() + " " + $('#hora_ini_interrup').val(), "DD/MM/YYYY HH:mm");
         			var fechaFin = moment( $('#fecha_fin_interrup').val() + " " + $('#hora_fin_interrup').val(), "DD/MM/YYYY HH:mm");
         			
-        			var diff = fechaFin.diff(fechaIni, 'h', true); // Diff in hours
-        			if(diff < 0){
-        				
-        				$('#tiempo_interrup').val("");
-                		this.model.informe.totalInterrupcion = null;
-        				
-                		jnoty.showMessage(jnoty.typeMessage.warning, "Verifique las fechas ingresadas!", 2000);
-                		
-        			}else{
-        				$('#tiempo_interrup').val(jbase.redondear(diff, 2));
-                		this.model.informe.totalInterrupcion = jbase.redondear(diff, 2);
+        			var fechaIniValid = moment(new Date(), 'DD/MM/YYYY HH:mm').diff(fechaIni, 'h', true) > 0 ? true : false;//verificamos que la fecha hora no supere a la actual
+        			var fechaFinValid = moment(new Date(), 'DD/MM/YYYY HH:mm').diff(fechaFin, 'h', true) > 0 ? true : false;//verificamos que la fecha hora no supere a la actual
+        			
+        			if( !fechaIniValid ){
+        				$('#hora_ini_interrup').val("");
+        			}
+        			if( !fechaFinValid ){
+        				$('#hora_fin_interrup').val("");
+        			}
+        			
+        			if( fechaIniValid && fechaFinValid ){
+        				var diff = fechaFin.diff(fechaIni, 'h', true); // Diff in hours
+            			
+            			if(diff < 0){
+            				
+            				$('#tiempo_interrup').val("");
+                    		this.model.informe.totalInterrupcion = null;
+            				
+                    		jnoty.showMessage(jnoty.typeMessage.warning, "Verifique las fechas ingresadas!", 2000);
+                    		$('#'+id_component).val("");
+            			}else{
+            				$('#tiempo_interrup').val(jbase.redondear(diff, 2));
+                    		this.model.informe.totalInterrupcion = jbase.redondear(diff, 2);
+            			}
+        			}
+        			else{
+        				jnoty.showMessage(jnoty.typeMessage.warning, "La fecha y hora no puede ser mayor que la fecha y hora actual!", 2000);
         			}
         		}
     			
@@ -1101,6 +1370,10 @@ var app = new Vue({
 	    		    		}
             		    });
             			$('#can_nor_interrup').multiselect( 'loadOptions', checkeados);
+            			$('#regiones_interrup').addClass("send_required");
+            			
+            			
+            			self.can_nor_interrup.push( { id : thisOpt.val(), name: thisOpt.prop('title')  } );
             			
             		} else {//marca la opcion Ninguno
             			
@@ -1129,9 +1402,14 @@ var app = new Vue({
             			$('#canal_interrup').multiselect( 'loadOptions', checkeados);
             			$('#regiones_interrup').multiselect('reset');
             			$('#can_nor_interrup').multiselect( 'loadOptions', []);
+            			$('#regiones_interrup').removeClass("send_required");
+            			$('#regiones_interrup').parent().removeClass("is-invalid");
+            			$('#regiones_interrup').parent().find(".ms-options-wrap").removeClass("ms-options-invalid-sbs");
             			
             			$('#regiones_interrup').multiselect('disable');
             			$('#can_nor_interrup').multiselect('disable');
+            			
+            			self.can_nor_interrup = [];
             		}
             		
             	} else if("canal_interrup" === $(element).prop('id') && !thisOpt.prop('checked')){//evento al hacer no check
@@ -1152,6 +1430,17 @@ var app = new Vue({
 	            		    }
 	            		});
 	            		$('#can_nor_interrup').multiselect( 'loadOptions', checkeados);
+	            		
+	            		if( checkeados.length <= 0){
+	            			$('#regiones_interrup').removeClass("send_required");
+	            			$('#regiones_interrup').parent().removeClass("is-invalid");
+	            			$('#regiones_interrup').parent().find(".ms-options-wrap").removeClass("ms-options-invalid-sbs");
+	            		}
+	            		
+	            		self.can_nor_interrup = self.can_nor_interrup.filter(function(item) {
+        	    		    return item.id != thisOpt.val()
+        	    		});
+	            		
             		
             		} else {//marca la opcion Ninguno
             			
@@ -1184,13 +1473,92 @@ var app = new Vue({
             		
             	}
             	/*FIN DE CANALES*/
+            	
+            	
+            	/*INICIO DE REGIONES*/
+            	if("regiones_interrup" === $(element).prop('id') && thisOpt.prop('checked')){//evento al hacer check
+            		
+            		$("#canal_interrup").addClass("send_required");
+
+            		if(thisOpt.val() == jbase.prop.ubigeo_cod_ubigeo_nivel_nacional){//marca la opcion nivel nacional
+            			
+            			var checkeados = [];
+            			$( '#regiones_interrup' ).next().find('> .ms-options > ul').find('input').each(function() {
+                		    var $this = $(this);
+                		    
+                		    var ischeck = false;
+                		    var isdisable = true;
+                		    if($this.prop('value') === thisOpt.val()){
+                		    	isdisable = false;
+                		    	ischeck = true;
+                		    }
+                		    
+                		    checkeados.push({
+            		    		name: $this.prop('title'),
+            		    		value: $this.prop('value'),
+            		    		checked: ischeck,
+            		    		attributes : {
+            		    			disabled: isdisable
+            		    		}
+                		    });
+                		    
+            			});
+            			
+            			$('#regiones_interrup').multiselect( 'loadOptions', checkeados);
+            			
+            		}
+            		
+            	} else if("regiones_interrup" === $(element).prop('id') && !thisOpt.prop('checked')){//evento al hacer no check
+            		
+            		if(thisOpt.val() == jbase.prop.ubigeo_cod_ubigeo_nivel_nacional){//marca la opcion nivel nacional
+            			
+            			var checkeados = [];
+            			$( '#regiones_interrup' ).next().find('> .ms-options > ul').find('input').each(function() {
+                		    var $this = $(this);
+                		    
+                		    if($this.prop('value') !== thisOpt.val()){
+                		    	$this.prop('disabled', false);
+                		    }
+                		    
+                		    
+                		    checkeados.push({
+            		    		name: $this.prop('title'),
+            		    		value: $this.prop('value'),
+            		    		checked: false,
+            		    		attributes : {
+            		    			disabled: false
+            		    		}
+                		    });
+                		    
+            			});
+            			
+            			$('#regiones_interrup').multiselect( 'loadOptions', checkeados);
+            			
+            		}
+            		
+            		
+            		$( '#regiones_interrup' ).next().find('> .ms-options > ul').find('input').each(function() {
+            			var $this = $(this);
+            			
+            			$('#canal_interrup').removeClass("send_required");
+            			$('#canal_interrup').parent().removeClass("is-invalid");
+            			$('#canal_interrup').parent().find(".ms-options-wrap").removeClass("ms-options-invalid-sbs");
+            			if($this.prop('checked') == true){
+            				$("#canal_interrup").addClass("send_required");
+            			}
+            			
+            		});
+            		
+            	}
+            	/*FIN DE REGIONES*/
             }
         });
     	
-    	jbase.decimal(1);//decimal 1 place
+    	jbase.decimal(2);//decimal 1 place
     	jbase.positive_integer();//positive-integer
     	
     	jbase.formatDate(true);
+    	jbase.customFormatDate(true, '.sbs-date-nomaxdate');
     	
     	$("#app").show();
     }

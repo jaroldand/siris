@@ -22,7 +22,13 @@ public class TipoListaController extends BaseController<TipoLista, String> {
 	public TipoListaController(TipoListaDomain domain) {
 		super.setDomain(domain);
 	}
-
+	
+	@GetMapping("/situacion")
+	public DeferredResult<ResponseEntity<List<ClaveValor>>> situacion() {
+		return AsyncResult.Call(() -> {
+			return new ResponseEntity<List<ClaveValor>>(((TipoListaDomain) domain).situacion(), HttpStatus.OK);
+		});
+	}
 	
 	@GetMapping("/tipos_eventos")
 	public DeferredResult<ResponseEntity<List<ClaveValor>>> tiposEventos() {

@@ -22,8 +22,12 @@
     
     jbase.prop.tipo_impacto_detail_ninguno = /*[[${T(sbs.siris.cross.resources.TipoValor).SIRIS_IMPACTO_IMPACTO_DETAIL_NINGUNO}]]*/ "";
     
+    jbase.prop.tipo_situacion_operando_bajo_condiciones_normales = /*[[${T(sbs.siris.cross.resources.TipoValor).SIRIS_SITUACION_TIPO_SITUACION_OPERANDO_BAJO_CONDICIONES_NORMALES}]]*/ "";
+    
     jbase.prop.tipo_ent_vig = /*[[${T(sbs.siris.web.controller.base.HelperController).getTipoEntVig()}]]*/ "";
     jbase.prop.name_session_user = /*[[${T(sbs.siris.web.controller.base.HelperController).getUserNameApp()}]]*/ "";
+    
+    jbase.prop.ubigeo_cod_ubigeo_nivel_nacional = /*[[${T(sbs.siris.cross.resources.TipoValor).SIRIS_UBIGEO_COD_UBIGEO_NIVEL_NACIONAL}]]*/ "";
 	
 	jbase.prop.id_evento = /*[[${idEvento}]]*/;
 /*]]>*/
@@ -54,6 +58,7 @@
             </div>
 	    </div>
         
+         <fieldset><legend><a href="javascript:void(0)" v-on:click="showModal">A. Validación</a></legend></fieldset>
          <fieldset><legend>B. Informe de Interrupción</legend>
             <div class="row sbs-rectangle">
 	         <div class="card-body">
@@ -137,7 +142,7 @@
 	                       	<div class="col-md-1">Día: </div>
 	                       	<div class="col-md-3">
 	                       		<div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label md-datepicker" v-bind:class="{ 'is-dirty': (model.informe.fecIniInterrupcion ? true : false) }">
-                                    <input type="text" id="fecha_ini_interrup" name="fecha_ini_interrup" class="mdl-textfield__input datetimepicker-input sbs-date send_required" data-target="#fecha_ini_interrup" v-on:blur="calculaHoras()"/>
+                                    <input type="text" id="fecha_ini_interrup" name="fecha_ini_interrup" class="mdl-textfield__input datetimepicker-input sbs-date send_required" data-target="#fecha_ini_interrup" v-on:blur="calcularTotalHoras('fecha_ini_interrup')"/>
                                     <label class="mdl-textfield__label" for="fecha_ini_interrup">Día</label>
                                     <div class="mdl-button mdl-button--primary mdl-button--icon mdl-button--date" data-target="#fecha_ini_interrup" data-toggle="datetimepicker">
                                         <i class="fas fa-calendar-alt"></i>
@@ -148,7 +153,7 @@
 	                       	<div class="col-md-1">Hora:</div>
 	                       	<div class="col-md-3">
 	                       		<div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label" v-bind:class="{ 'is-dirty': (model.informe.horIniInterrupcion ? true : false) }">
-                                    <input class="mdl-textfield__input send_required" type="text" id="hora_ini_interrup" name="hora_ini_interrup" v-on:blur="calculaHoras()">
+                                    <input class="mdl-textfield__input send_required" type="text" id="hora_ini_interrup" name="hora_ini_interrup" v-on:blur="calcularTotalHoras('hora_ini_interrup')">
                                     <label class="mdl-textfield__label" for="hora_ini_interrup">Hora Formato 24h (HH:mm)</label>
                                 </div>
 	                       	</div>
@@ -174,7 +179,7 @@
 			                       	<div class="col-md-1">Día: </div>
 			                       	<div class="col-md-3">
 			                       		<div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label md-datepicker" v-bind:class="{ 'is-disabled': (model.informe.eventoFinBol === true), 'is-dirty': (model.informe.fecFinInterrupcion ? true : false) }">
-		                                    <input type="text" id="fecha_fin_interrup" name="fecha_fin_interrup" class="mdl-textfield__input datetimepicker-input sbs-date" data-target="#fecha_fin_interrup" :disabled="model.informe.eventoFinBol === true" v-on:blur="calculaHoras()" v-bind:class="{ 'send_required': (model.informe.eventoFinBol === false) }"/>
+		                                    <input type="text" id="fecha_fin_interrup" name="fecha_fin_interrup" class="mdl-textfield__input datetimepicker-input sbs-date" data-target="#fecha_fin_interrup" :disabled="model.informe.eventoFinBol === true" v-on:blur="calcularTotalHoras('fecha_fin_interrup')" v-bind:class="{ 'send_required': (model.informe.eventoFinBol === false) }"/>
 		                                    <label class="mdl-textfield__label" for="fecha_fin_interrup">Día</label>
 		                                    <div class="mdl-button mdl-button--primary mdl-button--icon mdl-button--date" data-target="#fecha_fin_interrup" data-toggle="datetimepicker">
 		                                        <i class="fas fa-calendar-alt"></i>
@@ -184,7 +189,7 @@
 			                       	<div class="col-md-1">Hora: </div>
 			                       	<div class="col-md-3">
 			                       		<div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label" v-bind:class="{ 'is-disabled': (model.informe.eventoFinBol === true), 'is-dirty': (model.informe.horFinInterrupcion ? true : false) }">
-		                                    <input class="mdl-textfield__input" type="text" id="hora_fin_interrup" name="hora_fin_interrup" :disabled="model.informe.eventoFinBol === true" v-on:blur="calculaHoras()" v-bind:class="{ 'send_required': (model.informe.eventoFinBol === false) }">
+		                                    <input class="mdl-textfield__input" type="text" id="hora_fin_interrup" name="hora_fin_interrup" :disabled="model.informe.eventoFinBol === true" v-on:blur="calcularTotalHoras('hora_fin_interrup')" v-bind:class="{ 'send_required': (model.informe.eventoFinBol === false) }">
 		                                    <label class="mdl-textfield__label" for="hora_fin_interrup">Hora Formato 24h (HH:mm)</label>
 		                                </div>
 			                       	</div>
@@ -198,45 +203,46 @@
 			                        	<p>c) Tiempo de interupción</p>
 			                       	</div>
 			                       	<div class="col-md-4">
-			                       		<div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label" v-bind:class="{ 'is-disabled': (model.informe.eventoFinBol === true) , 'is-dirty': (model.informe.totalInterrupcion ? true : false) }">
-		                                    <input class="mdl-textfield__input decimal" type="text" id="tiempo_interrup" name="tiempo_interrup" :disabled="model.informe.eventoFinBol === true" v-model="model.informe.totalInterrupcion" maxlength="10" v-bind:class="{ 'send_required': (model.informe.eventoFinBol === false) }">
+			                       		<div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label" v-bind:class="{ 'is-disabled': true , 'is-dirty': (model.informe.totalInterrupcion ? true : false) }">
+		                                    <input class="mdl-textfield__input" type="text" id="tiempo_interrup" name="tiempo_interrup" :disabled="true" v-model="model.informe.totalInterrupcion" maxlength="10" v-bind:class="{ 'send_required': (model.informe.eventoFinBol === false) }">
 		                                    <label class="mdl-textfield__label" for="tiempo_interrup">Total Horas:</label>
 		                                </div>
 			                       	</div>
-			                       	<div class="col-md-1">
+			                       	<!-- div class="col-md-1">
 			                            <a href="javascript:void(0)" class="btn btn-block mdl-button mdl-js-button mdl-button--raised mdl-button--colored mdl-js-ripple-effect sbs-button-standard" id="calcularHoras"
 			                            	:disabled="model.informe.eventoFinBol === true" @click.exact="calcularTotalHoras()">
 			                                <span>Calcular</span>
 			                            </a>
 			                            <span class="mdl-tooltip mdl-tooltip--large mdl-tooltip--top" for="calcularHoras">Ingresar el inicio y fin de las fechas y horas de interrupción</span>
 			                        </div>
-			                       	<div class="col-md-3"></div>
+			                       	<div class="col-md-3"></div-->
+		                       	</div>
+		                    </div>
+		                    
+		                    
+		                    <div class="col-md-12">
+		                       	<div class="row">
+		                       		<div class="col-md-1"></div>
+			                       	<div class="col-md-3">
+			                        	<p>d) Tiempo de afectación al público</p>
+			                       	</div>
+			                       	<div class="col-md-4">
+			                       		<div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label" v-bind:class="{ 'is-dirty': (model.informe.menorInterrupcion ? true : false) }">
+		                                    <input class="mdl-textfield__input decimal send_required" type="text" id="tiempo_afec_pub" name="tiempo_afec_pub" v-model="model.informe.menorInterrupcion" maxlength="10" v-on:blur="validarTiempoAfecPub()">
+		                                    <label class="mdl-textfield__label" for="tiempo_afec_pub">Total Horas:</label>
+		                                </div>
+			                       	</div>
 		                       	</div>
 		                    </div>
 	                       	
 	                   </div>
 	           	</div>
 	           	
-	           	<div class="alert alert-secondary">
+	           	<div class="alert alert-secondary" id="afectaciones">
 	           		<div class="row">
-		         		<div class="col-md-5">
-                        	<p>4. Menor tiempo objetivo de interupción del producto/proceso/canal interrumpido</p>
-                       	</div>
-                       	<div class="col-md-3">
-                      		<div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label" v-bind:class="{ 'is-dirty': (model.informe.menorInterrupcion ? true : false) }">
-                                  <input class="mdl-textfield__input decimal send_required" type="text" id="menor_time_interrup" name="menor_time_interrup" maxlength="8" v-model="model.informe.menorInterrupcion">
-                                  <label class="mdl-textfield__label" for="menor_time_interrup">Total Horas:</label>
-                            </div>
-                      	</div>
-                      	<div class="col-md-4"></div>
-	                </div>
-	           	</div>
-	           	
-	           	<div class="alert alert-secondary" >
-	           		<div class="row">
-		         		<div class="col-md-12"><p>5. Afectación</p></div>
-		         		
-		         		<div class="col-md-12"><p>5.1 Canales de atención</p></div>
+		         		<div class="col-md-12"><p>4. Afectación</p></div>
+		         		<div class="col-md-12"><p>Deberá completar al menos uno de los siguientes items del 4.1 al 4.4</p></div>
+		         		<div class="col-md-12"><p>4.1 Canales de atención</p></div>
 		         		
 		         		
 		         		<div class="col-md-2 my-auto">
@@ -244,7 +250,7 @@
                        	</div>
 		         		<div class="col-md-4">
 			         		<div class="mdl-selectfield mdl-js-selectfield mdl-selectfield--floating-label">
-	                           <select id="canal_interrup" name="canal_interrup" class="mdl-selectfield__select multiselect_sbs send_required" multiple="multiple">
+	                           <select id="canal_interrup" name="canal_interrup" class="mdl-selectfield__select multiselect_sbs" multiple="multiple">
 	                                <option>
                                     </option>
 	                            </select>
@@ -258,7 +264,7 @@
                        	</div>
 		         		<div class="col-md-4">
 			         		<div class="mdl-selectfield mdl-js-selectfield mdl-selectfield--floating-label">
-	                           <select id="regiones_interrup" name="regiones_interrup" class="mdl-selectfield__select multiselect_sbs send_required" multiple="multiple">
+	                           <select id="regiones_interrup" name="regiones_interrup" class="mdl-selectfield__select multiselect_sbs" multiple="multiple">
 	                                <option>
                                     </option>
 	                            </select>
@@ -267,7 +273,7 @@
 	                        </div>
 		         		</div>
 		         		
-		         		<div class="col-md-2"><p>5.2 Productos</p></div>
+		         		<div class="col-md-2"><p>4.2 Productos</p></div>
 		         		<div class="col-md-4">
 		         			<div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label">
                                   <input class="mdl-textfield__input required_afec_prod" type="text" id="product_interrup" name="product_interrup" v-model="producto_temp" maxlength="80">
@@ -315,7 +321,7 @@
                         </div>
                         
                         
-                        <div class="col-md-2"><p>5.3 Servicios</p></div>
+                        <div class="col-md-2"><p>4.3 Servicios</p></div>
 		         		<div class="col-md-4">
 		         			<div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label">
                                   <input class="mdl-textfield__input required_afec_serv" type="text" id="servicios_interrup" name="servicios_interrup" v-model="servicio_temp" maxlength="80">
@@ -361,7 +367,7 @@
                         </div>
                         
                         
-                        <div class="col-md-2"><p>5.4 Procesos</p></div>
+                        <div class="col-md-2"><p>4.4 Procesos</p></div>
 		         		<div class="col-md-4">
 		         			<div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label">
                                   <input class="mdl-textfield__input required_afec_proc" type="text" id="procesos_interrup" name="procesos_interrup" v-model="proceso_temp" maxlength="80">
@@ -408,116 +414,68 @@
 	                </div>
 	           	</div>
 	           	
-	           	<div class="alert alert-secondary" >
+	           	<div class="alert alert-secondary" id="impactos_interrupcion">
            			<div class="row">
-           				<div class="col-md-12"><p>6. Principales impactos de la interrupción</p></div>
+           				<div class="col-md-12"><p>5. Principales impactos de la interrupción</p></div>
            				
-           				<div class="col-md-2"></div>
-           				<div class="col-md-1"><p>Financiero</p>
+           				<div class="col-md-12"><p>Se debe seleccionar al menos uno de los siguientes impactos</p></div>
+           				
+           				<div class="col-md-1"><input type="checkbox" class="mdl-checkbox__input look-forward float-right" v-model="impacto_load.financiero.indSelectedBol"></div>
+           				<div class="col-md-2"><p>Financiero</p>
            				</div>
-           				<div class="col-md-5">
-                     		<div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label" v-bind:class="{ 'is-dirty': (impacto_load.financiero.descripcion ? true : false) }">
-                                  <input class="mdl-textfield__input" type="text" id="desc_finan_interrup" name="desc_finan_interrup" v-model="impacto_load.financiero.descripcion" maxlength="30">
+           				<div class="col-md-9">
+                     		<div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label" v-bind:class="{ 'is-dirty': (impacto_load.financiero.descripcion ? true : false), 'is-disabled': (impacto_load.financiero.indSelectedBol == false) }">
+                                  <input class="mdl-textfield__input" type="text" id="desc_finan_interrup" name="desc_finan_interrup" v-model="impacto_load.financiero.descripcion" maxlength="200" :disabled="impacto_load.financiero.indSelectedBol == false">
                                   <label class="mdl-textfield__label" for="desc_finan_interrup">Descripción</label>
                             </div>
            				</div>
-           				<div class="col-md-4">
-                     		<div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label" v-bind:class="{ 'is-dirty': (impacto_load.financiero.impactoDetail ? true : false) }">
-                                  <input class="mdl-textfield__input decimal" type="text" id="imp_finan_interrup" name="imp_finan_interrup" v-model="impacto_load.financiero.impactoDetail" maxlength="10">
-                                  <label class="mdl-textfield__label" for="imp_finan_interrup">S/. Impactos</label>
-                            </div>
+
+           				<div class="col-md-1"><input type="checkbox" class="mdl-checkbox__input look-forward float-right" v-model="impacto_load.reputacional.indSelectedBol"></div>
+           				<div class="col-md-2"><p>Reputacional</p>
            				</div>
-
-
-
-           				<div class="col-md-2"></div>
-           				<div class="col-md-1"><p>Reputacional</p>
-           				</div>
-           				<div class="col-md-5">
-                     		<div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label" v-bind:class="{ 'is-dirty': (impacto_load.reputacional.descripcion ? true : false), 'is-disabled': (impacto_load.reputacional.impactoDetail === tipo_impacto_detail_ninguno) }">
-                                  <input class="mdl-textfield__input" type="text" id="desc_repu_interrup" name="desc_repu_interrup" v-model="impacto_load.reputacional.descripcion" maxlength="30" :disabled="impacto_load.reputacional.impactoDetail === tipo_impacto_detail_ninguno">
+           				<div class="col-md-9">
+                     		<div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label" v-bind:class="{ 'is-dirty': (impacto_load.reputacional.descripcion ? true : false), 'is-disabled': (impacto_load.reputacional.indSelectedBol == false) }">
+                                  <input class="mdl-textfield__input" type="text" id="desc_repu_interrup" name="desc_repu_interrup" v-model="impacto_load.reputacional.descripcion" maxlength="200" :disabled="impacto_load.reputacional.indSelectedBol == false">
                                   <label class="mdl-textfield__label" for="desc_repu_interrup">Descripción</label>
                             </div>
            				</div>
-           				<div class="col-md-4">
-                     		<div class="mdl-selectfield mdl-js-selectfield mdl-selectfield--floating-label" v-bind:class="{ 'is-dirty': (impacto_load.reputacional.impactoDetail ? true : false) }">
-                               <select id="imp_repu_interrup" name="imp_repu_interrup" class="mdl-selectfield__select send_required" v-model="impacto_load.reputacional.impactoDetail">
-	                                <option v-for="obj in impactos" v-bind:value="obj.key">
-                                        {{ obj.value }}
-                                    </option>
-	                            </select>
-                               <div class="mdl-selectfield__icon"><i class="fas fa-sort-down"></i></div>
-                               <label class="mdl-selectfield__label" for="imp_repu_interrup">Impactos</label>
-                           </div>
-           				</div>
 
 
-           				<div class="col-md-2"></div>
-           				<div class="col-md-1"><p>Clientes/<br/>colaboradores</p>
+           				<div class="col-md-1"><input type="checkbox" class="mdl-checkbox__input look-forward float-right" v-model="impacto_load.clientes_colaboradores.indSelectedBol"></div>
+           				<div class="col-md-2"><p>Clientes/<br/>colaboradores</p>
            				</div>
-           				<div class="col-md-5">
-                     		<div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label" v-bind:class="{ 'is-dirty': (impacto_load.clientes_colaboradores.descripcion ? true : false), 'is-disabled': (impacto_load.clientes_colaboradores.impactoDetail === tipo_impacto_detail_ninguno) }">
-                                  <input class="mdl-textfield__input" type="text" id="desc_cli_interrup" name="desc_cli_interrup" v-model="impacto_load.clientes_colaboradores.descripcion" maxlength="30" :disabled="impacto_load.clientes_colaboradores.impactoDetail === tipo_impacto_detail_ninguno">
+           				<div class="col-md-9">
+                     		<div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label" v-bind:class="{ 'is-dirty': (impacto_load.clientes_colaboradores.descripcion ? true : false), 'is-disabled': (impacto_load.clientes_colaboradores.indSelectedBol == false) }">
+                                  <input class="mdl-textfield__input" type="text" id="desc_cli_interrup" name="desc_cli_interrup" v-model="impacto_load.clientes_colaboradores.descripcion" maxlength="200" :disabled="impacto_load.clientes_colaboradores.indSelectedBol == false">
                                   <label class="mdl-textfield__label" for="desc_cli_interrup">Descripción</label>
                             </div>
            				</div>
-           				<div class="col-md-4">
-                     		<div class="mdl-selectfield mdl-js-selectfield mdl-selectfield--floating-label" v-bind:class="{ 'is-dirty': (impacto_load.clientes_colaboradores.impactoDetail ? true : false) }">
-                               <select id="imp_cli_interrup" name="imp_cli_interrup" class="mdl-selectfield__select send_required" v-model="impacto_load.clientes_colaboradores.impactoDetail">
-	                                <option v-for="obj in impactos" v-bind:value="obj.key">
-                                        {{ obj.value }}
-                                    </option>
-	                            </select>
-                               <div class="mdl-selectfield__icon"><i class="fas fa-sort-down"></i></div>
-                               <label class="mdl-selectfield__label" for="imp_cli_interrup">Impactos</label>
-                           </div>
+
+
+
+           				<div class="col-md-1"><input type="checkbox" class="mdl-checkbox__input look-forward float-right" v-model="impacto_load.regulatorio.indSelectedBol"></div>
+           				<div class="col-md-2"><p>Regulatorio</p>
            				</div>
-
-
-
-           				<div class="col-md-2"></div>
-           				<div class="col-md-1"><p>Regulatorio</p>
-           				</div>
-           				<div class="col-md-5">
-                     		<div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label" v-bind:class="{ 'is-dirty': (impacto_load.regulatorio.descripcion ? true : false), 'is-disabled': (impacto_load.regulatorio.impactoDetail === tipo_impacto_detail_ninguno) }">
-                                  <input class="mdl-textfield__input" type="text" id="desc_reg_interrup" name="desc_reg_interrup" v-model="impacto_load.regulatorio.descripcion" maxlength="30" :disabled="impacto_load.regulatorio.impactoDetail === tipo_impacto_detail_ninguno">
+           				<div class="col-md-9">
+                     		<div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label" v-bind:class="{ 'is-dirty': (impacto_load.regulatorio.descripcion ? true : false), 'is-disabled': (impacto_load.regulatorio.indSelectedBol == false) }">
+                                  <input class="mdl-textfield__input" type="text" id="desc_reg_interrup" name="desc_reg_interrup" v-model="impacto_load.regulatorio.descripcion" maxlength="200" :disabled="impacto_load.regulatorio.indSelectedBol == false">
                                   <label class="mdl-textfield__label" for="desc_reg_interrup">Descripción</label>
                             </div>
            				</div>
-           				<div class="col-md-4">
-                     		<div class="mdl-selectfield mdl-js-selectfield mdl-selectfield--floating-label" v-bind:class="{ 'is-dirty': (impacto_load.regulatorio.impactoDetail ? true : false) }">
-                               <select id="imp_reg_interrup" name="imp_reg_interrup" class="mdl-selectfield__select send_required" v-model="impacto_load.regulatorio.impactoDetail">
-	                                <option v-for="obj in impactos" v-bind:value="obj.key">
-                                        {{ obj.value }}
-                                    </option>
-	                            </select>
-                               <div class="mdl-selectfield__icon"><i class="fas fa-sort-down"></i></div>
-                               <label class="mdl-selectfield__label" for="imp_reg_interrup">Impactos</label>
-                           </div>
+
+
+
+           				<div class="col-md-1"><input type="checkbox" class="mdl-checkbox__input look-forward float-right" v-model="impacto_load.objetivos_estrategicos.indSelectedBol"></div>
+           				<div class="col-md-2"><p>Objetivos estratégico</p>
            				</div>
-
-
-
-           				<div class="col-md-2"></div>
-           				<div class="col-md-1"><p>Objetivos estratégico</p>
-           				</div>
-           				<div class="col-md-5">
-                     		<div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label" v-bind:class="{ 'is-dirty': (impacto_load.objetivos_estrategicos.descripcion ? true : false), 'is-disabled': (impacto_load.objetivos_estrategicos.impactoDetail === tipo_impacto_detail_ninguno) }">
-                                  <input class="mdl-textfield__input" type="text" id="desc_obj_interrup" name="desc_obj_interrup" v-model="impacto_load.objetivos_estrategicos.descripcion" maxlength="30" :disabled="impacto_load.objetivos_estrategicos.impactoDetail === tipo_impacto_detail_ninguno">
+           				<div class="col-md-9">
+                     		<div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label" v-bind:class="{ 'is-dirty': (impacto_load.objetivos_estrategicos.descripcion ? true : false), 'is-disabled': (impacto_load.objetivos_estrategicos.indSelectedBol == false) }">
+                                  <input class="mdl-textfield__input" type="text" id="desc_obj_interrup" name="desc_obj_interrup" v-model="impacto_load.objetivos_estrategicos.descripcion" maxlength="200" :disabled="impacto_load.objetivos_estrategicos.indSelectedBol == false">
                                   <label class="mdl-textfield__label" for="desc_obj_interrup">Descripción</label>
                             </div>
            				</div>
-           				<div class="col-md-4">
-                     		<div class="mdl-selectfield mdl-js-selectfield mdl-selectfield--floating-label" v-bind:class="{ 'is-dirty': (impacto_load.objetivos_estrategicos.impactoDetail ? true : false) }">
-                               <select id="imp_obj_interrup" name="imp_obj_interrup" class="mdl-selectfield__select send_required" v-model="impacto_load.objetivos_estrategicos.impactoDetail">
-	                                <option v-for="obj in impactos" v-bind:value="obj.key">
-                                        {{ obj.value }}
-                                    </option>
-	                           </select>
-                               <div class="mdl-selectfield__icon"><i class="fas fa-sort-down"></i></div>
-                               <label class="mdl-selectfield__label" for="imp_obj_interrup">Impactos</label>
-                           </div>
-           				</div>
+           				
+           				
            			</div>
            		</div>
            		
@@ -525,7 +483,7 @@
            		
            		<div class="alert alert-secondary" >
            			<div class="row">
-           				<div class="col-md-4"><p>7. Descripción de medidas y acciones tomadas durante el evento</p></div>
+           				<div class="col-md-4"><p>6. Descripción de medidas y acciones tomadas durante el evento</p></div>
            				<div class="col-md-8">
 		           			<div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label" v-bind:class="{ 'is-dirty': (model.informe.descAcciones ? true : false) }">
 							    <textarea class="mdl-textfield__input send_required" type="text" rows= "3" id="acc_interrup" v-model="model.informe.descAcciones" maxlength="800"></textarea>
@@ -537,64 +495,139 @@
 	           	
 	           	
 	           	
-	           	<div class="alert alert-secondary" >
+	           	<div class="alert alert-secondary" id="situacion_interrupcion">
            			<div class="row">
-           				<div class="col-md-12"><p>8. Situación del evento en la fecha de envío del reporte final</p></div>
+           				<div class="col-md-12"><p>7. ¿Cuál es la situación al momento del registro y envío del reporte?</p></div>
            				
            				
-           				<div class="col-md-2"><p>Canales</p></div>
-           				<div class="col-md-5">
-	           				<div class="mdl-selectfield mdl-js-selectfield mdl-selectfield--floating-label">
-	                           <select id="can_nor_interrup" name="can_nor_interrup" class="mdl-selectfield__select multiselect_sbs" multiple="multiple">
-	                           		<option>
-                                    </option>
-	                            </select>
-	                           <div class="mdl-selectfield__icon"><i class="fas fa-sort-down"></i></div>
-	                           <label class="mdl-selectfield__label" for="can_nor_interrup">Operando bajo condiciones normales</label>
-	                        </div>
+           				<div class="col-md-1" v-show="can_nor_interrup.length"><p>Canales</p></div>
+	                    <div class="col-md-11" v-show="can_nor_interrup.length">
+	                    
+	                      <table class="mdl-data-table mdl-js-data-table mdl-shadow--2dp">
+                              <tbody>
+                               	<tr v-for="item in can_nor_interrup">
+                                   <td class="mdl-data-table__cell--non-numeric" width="30%">{{item.name}}</td>
+                                   <td class="mdl-data-table__cell--non-numeric" width="30%">
+                                   		<div class="mdl-selectfield mdl-js-selectfield mdl-selectfield--floating-label" v-bind:class="{ 'is-dirty': ( item.tipoSituacion ? true : false) }">
+                                            <select class="mdl-selectfield__select" v-model="item.tipoSituacion" v-on:change="changeSitAct(item)">
+                                            	  <option></option>
+                                                  <option v-for="obj in situacion" v-bind:value="obj.key">
+                                                              {{ obj.value }}
+                                                   </option>
+                                             </select>
+                                            <div class="mdl-selectfield__icon"><i class="fas fa-sort-down"></i></div>
+                                            <label class="mdl-selectfield__label">Situación actual</label>
+                                        </div>
+                                   </td>
+                                   <td class="mdl-data-table__cell--non-numeric">
+                                   		<div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label" v-bind:class="{ 'is-disabled': ( (item.tipoSituacion == null || item.tipoSituacion == '' || item.tipoSituacion == tipo_situacion_operando_bajo_condiciones_normales) ? true : false), 'is-dirty': ( item.descripcion ? true : false) }">
+                                            <input class="mdl-textfield__input" v-bind:id="item.id" type="text" v-model="item.descripcion" maxlength="200"
+                                            v-bind:class="{ 'send_required': (item.tipoSituacion == null || item.tipoSituacion == '' || item.tipoSituacion == tipo_situacion_operando_bajo_condiciones_normales) ? false : true }"
+                                            :disabled=" (item.tipoSituacion == null || item.tipoSituacion == '' || item.tipoSituacion == tipo_situacion_operando_bajo_condiciones_normales) ? true : false">
+                                            <label class="mdl-textfield__label">Descripción</label>
+                                        </div>
+                                   </td>
+                                </tr>
+                          	</tbody>
+                          </table>
+                          <br/>
 	                    </div>
-	                    <div class="col-md-5"></div>
 	                    
 	                    
-	                    <div class="col-md-2"><p>Productos</p></div>
-           				<div class="col-md-5">
-	           				<div class="mdl-selectfield mdl-js-selectfield mdl-selectfield--floating-label">
-	                           <select id="productos" name="productos" class="mdl-selectfield__select multiselect_sbs" multiple="multiple">
-	                           		<option>
-                                    </option>
-	                            </select>
-	                           <div class="mdl-selectfield__icon"><i class="fas fa-sort-down"></i></div>
-	                           <label class="mdl-selectfield__label" for="prod_nor_interrup">Operando bajo condiciones normales</label>
-	                        </div>
+	                    <div class="col-md-1" v-show="productos.length"><p>Productos</p></div>
+           				<div class="col-md-11" v-show="productos.length">
+           					<table class="mdl-data-table mdl-js-data-table mdl-shadow--2dp">
+	                              <tbody>
+	                               	<tr v-for="item in productos">
+	                                   <td class="mdl-data-table__cell--non-numeric" width="30%">{{item.name}}</td>
+	                                   <td class="mdl-data-table__cell--non-numeric" width="30%">
+	                                   		<div class="mdl-selectfield mdl-js-selectfield mdl-selectfield--floating-label" v-bind:class="{ 'is-dirty': ( item.tipoSituacion ? true : false) }">
+	                                            <select class="mdl-selectfield__select" v-model="item.tipoSituacion" v-on:change="changeSitAct(item)">
+	                                            	  <option></option>
+	                                                  <option v-for="obj in situacion" v-bind:value="obj.key">
+	                                                              {{ obj.value }}
+	                                                   </option>
+	                                             </select>
+	                                            <div class="mdl-selectfield__icon"><i class="fas fa-sort-down"></i></div>
+	                                            <label class="mdl-selectfield__label">Situación actual</label>
+	                                        </div>
+	                                   </td>
+	                                   <td class="mdl-data-table__cell--non-numeric">
+	                                   		<div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label" v-bind:class="{ 'is-disabled': ( (item.tipoSituacion == null || item.tipoSituacion == '' || item.tipoSituacion == tipo_situacion_operando_bajo_condiciones_normales) ? true : false), 'is-dirty': ( item.descripcion ? true : false) }">
+	                                            <input class="mdl-textfield__input" v-bind:id="item.id" type="text" v-model="item.descripcion" maxlength="200"
+	                                            v-bind:class="{ 'send_required': (item.tipoSituacion == null || item.tipoSituacion == '' || item.tipoSituacion == tipo_situacion_operando_bajo_condiciones_normales) ? false : true }"
+	                                            :disabled=" (item.tipoSituacion == null || item.tipoSituacion == '' || item.tipoSituacion == tipo_situacion_operando_bajo_condiciones_normales) ? true : false">
+	                                            <label class="mdl-textfield__label">Descripción</label>
+	                                        </div>
+	                                   </td>
+	                                </tr>
+	                          	</tbody>
+	                         </table>
+	                         <br/>
+	           			</div>
+	                    
+	                    <div class="col-md-1" v-show="servicios.length"><p>Servicios</p></div>
+           				<div class="col-md-11" v-show="servicios.length">
+	           				<table class="mdl-data-table mdl-js-data-table mdl-shadow--2dp">
+	                              <tbody>
+	                               	<tr v-for="item in servicios">
+	                                   <td class="mdl-data-table__cell--non-numeric" width="30%">{{item.name}}</td>
+	                                   <td class="mdl-data-table__cell--non-numeric" width="30%">
+	                                   		<div class="mdl-selectfield mdl-js-selectfield mdl-selectfield--floating-label" v-bind:class="{ 'is-dirty': ( item.tipoSituacion ? true : false) }">
+	                                            <select class="mdl-selectfield__select" v-model="item.tipoSituacion" v-on:change="changeSitAct(item)">
+	                                            	  <option></option>
+	                                                  <option v-for="obj in situacion" v-bind:value="obj.key">
+	                                                              {{ obj.value }}
+	                                                   </option>
+	                                             </select>
+	                                            <div class="mdl-selectfield__icon"><i class="fas fa-sort-down"></i></div>
+	                                            <label class="mdl-selectfield__label">Situación actual</label>
+	                                        </div>
+	                                   </td>
+	                                   <td class="mdl-data-table__cell--non-numeric">
+	                                   		<div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label" v-bind:class="{ 'is-disabled': ( (item.tipoSituacion == null || item.tipoSituacion == '' || item.tipoSituacion == tipo_situacion_operando_bajo_condiciones_normales) ? true : false), 'is-dirty': ( item.descripcion ? true : false) }">
+	                                            <input class="mdl-textfield__input" v-bind:id="item.id" type="text" v-model="item.descripcion" maxlength="200"
+	                                            v-bind:class="{ 'send_required': (item.tipoSituacion == null || item.tipoSituacion == '' || item.tipoSituacion == tipo_situacion_operando_bajo_condiciones_normales) ? false : true }"
+	                                            :disabled=" (item.tipoSituacion == null || item.tipoSituacion == '' || item.tipoSituacion == tipo_situacion_operando_bajo_condiciones_normales) ? true : false">
+	                                            <label class="mdl-textfield__label">Descripción</label>
+	                                        </div>
+	                                   </td>
+	                                </tr>
+	                          	</tbody>
+	                         </table>
+	                         <br/>
 	                    </div>
-	                    <div class="col-md-5"></div>
 	                    
-	                    <div class="col-md-2"><p>Servicios</p></div>
-           				<div class="col-md-5">
-	           				<div class="mdl-selectfield mdl-js-selectfield mdl-selectfield--floating-label">
-	                           <select id="servicios" name="servicios" class="mdl-selectfield__select multiselect_sbs" multiple="multiple">
-	                           		<option>
-                                    </option>
-	                            </select>
-	                           <div class="mdl-selectfield__icon"><i class="fas fa-sort-down"></i></div>
-	                           <label class="mdl-selectfield__label" for="serv_nor_interrup">Operando bajo condiciones normales</label>
-	                        </div>
+	                    <div class="col-md-1" v-show="procesos.length"><p>Procesos</p></div>
+           				<div class="col-md-11" v-show="procesos.length">
+	           				<table class="mdl-data-table mdl-js-data-table mdl-shadow--2dp">
+	                              <tbody>
+	                               	<tr v-for="item in procesos">
+	                                   <td class="mdl-data-table__cell--non-numeric" width="30%">{{item.name}}</td>
+	                                   <td class="mdl-data-table__cell--non-numeric" width="30%">
+	                                   		<div class="mdl-selectfield mdl-js-selectfield mdl-selectfield--floating-label" v-bind:class="{ 'is-dirty': ( item.tipoSituacion ? true : false) }">
+	                                            <select class="mdl-selectfield__select" v-model="item.tipoSituacion" v-on:change="changeSitAct(item)">
+	                                            	  <option></option>
+	                                                  <option v-for="obj in situacion" v-bind:value="obj.key">
+	                                                              {{ obj.value }}
+	                                                   </option>
+	                                             </select>
+	                                            <div class="mdl-selectfield__icon"><i class="fas fa-sort-down"></i></div>
+	                                            <label class="mdl-selectfield__label">Situación actual</label>
+	                                        </div>
+	                                   </td>
+	                                   <td class="mdl-data-table__cell--non-numeric">
+	                                   		<div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label" v-bind:class="{ 'is-disabled': ( (item.tipoSituacion == null || item.tipoSituacion == '' || item.tipoSituacion == tipo_situacion_operando_bajo_condiciones_normales) ? true : false), 'is-dirty': ( item.descripcion ? true : false) }">
+	                                            <input class="mdl-textfield__input" v-bind:id="item.id" type="text" v-model="item.descripcion" maxlength="200"
+	                                            v-bind:class="{ 'send_required': (item.tipoSituacion == null || item.tipoSituacion == '' || item.tipoSituacion == tipo_situacion_operando_bajo_condiciones_normales) ? false : true }"
+	                                            :disabled=" (item.tipoSituacion == null || item.tipoSituacion == '' || item.tipoSituacion == tipo_situacion_operando_bajo_condiciones_normales) ? true : false">
+	                                            <label class="mdl-textfield__label">Descripción</label>
+	                                        </div>
+	                                   </td>
+	                                </tr>
+	                          	</tbody>
+	                         </table>
 	                    </div>
-	                    <div class="col-md-5"></div>
-	                    
-	                    
-	                    <div class="col-md-2"><p>Procesos</p></div>
-           				<div class="col-md-5">
-	           				<div class="mdl-selectfield mdl-js-selectfield mdl-selectfield--floating-label">
-	                           <select id="procesos" name="procesos" class="mdl-selectfield__select multiselect_sbs" multiple="multiple">
-	                           		<option>
-                                    </option>
-	                            </select>
-	                           <div class="mdl-selectfield__icon"><i class="fas fa-sort-down"></i></div>
-	                           <label class="mdl-selectfield__label" for="proc_nor_interrup">Operando bajo condiciones normales</label>
-	                        </div>
-	                    </div>
-	                    <div class="col-md-5"></div>
            				
            			</div>
            		</div>
@@ -602,7 +635,7 @@
            		
            		<div class="alert alert-secondary" >
            			<div class="row">
-           				<div class="col-md-12"><p>9. Planes de acción orientados a reducir la posibilidad de ocurrendia de eventos de similares características</p></div>
+           				<div class="col-md-12"><p>8. Planes de acción orientados a reducir la posibilidad de ocurrencia de eventos de similares características</p></div>
            				
            				
            				<div class="col-md-4">
@@ -619,7 +652,7 @@
            				</div>
            				<div class="col-md-3">
 	           				<div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label md-datepicker">
-	                            <input type="text" id="fecha_impl_tmp" name="fecha_impl_tmp" class="mdl-textfield__input datetimepicker-input sbs-date required_plan_acc" data-target="#fecha_impl_tmp"/>
+	                            <input type="text" id="fecha_impl_tmp" name="fecha_impl_tmp" class="mdl-textfield__input datetimepicker-input sbs-date-nomaxdate required_plan_acc" data-target="#fecha_impl_tmp"/>
 	                            <label class="mdl-textfield__label" for="fecha_impl_tmp">Fecha de implementación</label>
 	                            <div class="mdl-button mdl-button--primary mdl-button--icon mdl-button--date" data-target="#fecha_impl_tmp" data-toggle="datetimepicker">
 	                                <i class="fas fa-calendar-alt"></i>
@@ -691,7 +724,7 @@
            		
            		<div class="alert alert-secondary" >
            			<div class="row">
-           				<div class="col-md-2"><p>10. Comentarios adicionales</p></div>
+           				<div class="col-md-2"><p>9. Comentarios adicionales</p></div>
            				<div class="col-md-10">
 		           			<div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label" v-bind:class="{ 'is-dirty': (model.informe.comentAdic ? true : false) }">
 							    <textarea class="mdl-textfield__input" type="text" rows= "3" id="comment_adic_interrup" v-model="model.informe.comentAdic" maxlength="800"></textarea>
@@ -704,7 +737,7 @@
 						<div class="col-md-4" v-if="is_upload_open === true">
 		           			<div class="mdl-textfield mdl-js-textfield mdl-textfield--file mdl-textfield--floating-label" v-bind:class="{ 'is-dirty': (model.informe.fileComentAdic ? true : false) }">
                               	<input class="mdl-textfield__input" type="text" id="mdr_upload" readonly>
-                                <label class="mdl-textfield__label" for="mdr_upload">Archivo máximo: 5MB. Tipos: .xls .ppt .pdf .zip</label>
+                                <label class="mdl-textfield__label" for="mdr_upload">Adjuntar</label>
                                 <div class="mdl-button mdl-js-button mdl-button--raised mdl-button--colored mdl-button--file sbs-button-standard">
 										Adjuntar <input type="file" onclick="this.value=null;" id="mdr_fileDoc" ref="mdr_fileDoc" v-on:change="handleFileUpload()"/>
 								</div>
@@ -734,7 +767,7 @@
            		
            		<div class="alert alert-secondary" >
            			<div class="row">
-           				<div class="col-md-4"><p>11. Fecha de envío de reporte inicial al buzón continuidad@sbs.gob.pe</p></div>
+           				<div class="col-md-4"><p>10. Fecha de envío de reporte inicial al buzón continuidad@sbs.gob.pe</p></div>
            				<div class="col-md-4">
 	           				<div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label md-datepicker" v-bind:class="{ 'is-dirty': (model.informe.fecEnvioRepInicial ? true : false) }">
 	                            <input type="text" id="fecha_envio_interrup" name="fecha_envio_interrup" class="mdl-textfield__input datetimepicker-input sbs-date send_required" data-target="#fecha_envio_interrup"/>
@@ -752,7 +785,7 @@
            		
            		<div class="alert alert-secondary" >
            			<div class="row">
-           				<div class="col-md-12"><p>12. Datos de contacto</p></div>
+           				<div class="col-md-12"><p>11. Datos de contacto</p></div>
            				
            				<div class="col-md-3">
                        		<div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label" v-bind:class="{ 'is-dirty': (model.informe.contactoNomb ? true : false) }">
@@ -789,11 +822,91 @@
          
         </div>
         
-         <div class="form-group row"></div>
+        <div class="form-group row"></div>
         
-        
+        <div class="form-group row">
+           	<div class="offset-md-3 col-md-3">
+                 <a href="javascript:void(0)" class="btn btn-block mdl-button mdl-js-button mdl-button--raised mdl-button--colored mdl-js-ripple-effect sbs-submit" @click.exact="confirmar">
+                     <span><i class="fas fa-save"></i>Guardar</span>
+                 </a>
+            </div>
+            <div class="col-md-3">
+                 <a href="javascript:void(0)" class="btn btn-block mdl-button mdl-js-button mdl-button--raised mdl-button--colored mdl-js-ripple-effect sbs-submit" @click.exact="enviar">
+                     <span><i class="fas fa-share-alt-square"></i>Enviar</span>
+                 </a>
+            </div>
+            <div class="col-md-3">
+                <a href="javascript:void(0)" class="btn btn-block mdl-button mdl-js-button mdl-button--raised mdl-button--colored mdl-js-ripple-effect sbs-submit" @click.exact="cancelar">
+                    <span><i class="fas fa-window-close"></i>Cancelar</span>
+                </a>
+            </div>
+	    </div>
         
     </div>
+    
+    
+    <div class="modal fade" id="div-modal_validacion" tabindex="-1" role="dialog" aria-labelledby="div-modal-tit" aria-hidden="true" data-keyboard="false" data-backdrop="static">
+	    <div id="adv" class="modal-dialog modal-lg" role="document">
+	        <div class="modal-content">
+	            <div class="modal-header">
+	                <h5 class="modal-title" id="div-modal-tit">A. Validación</h5>
+	                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+	                            <span aria-hidden="true">&times;</span>
+	                        </button>
+	            </div>
+	            <div class="modal-body">
+	
+	                <div class="form-group row">
+	                    <div class="col-sm-12">
+	                    	Las opciones que describen el evento de interrupción que va a reportar son:
+	                    </div>
+	                </div>
+	                
+	                <div class="row">
+				         <div class="card-body">
+					         <div class="alert alert-secondary" v-show="validacion.checkA.selectedBol">
+					           		a) La interrupción se debió a un evento planificado y controlado.
+					           		<input type="checkbox" class="mdl-checkbox__input look-forward float-right" disabled="disabled" v-model="validacion.checkA.selectedBol">
+					         </div>
+				           	
+				           	<div class="alert alert-secondary" v-show="validacion.checkB.selectedBol">
+				           			b) Se interrumpió algún canal de atención.
+				           			<input type="checkbox" class="mdl-checkbox__input look-forward float-right" disabled="disabled" v-model="validacion.checkB.selectedBol">
+				           	</div>
+				           	
+				           	<div class="alert alert-secondary" v-show="validacion.checkB1.selectedBol">
+				           			c) Al menos alguno de los canales afectados se interrumpió en más del 25% a nivel nacional o regional.
+				           			<input type="checkbox" class="mdl-checkbox__input look-forward float-right" disabled="disabled" v-model="validacion.checkB1.selectedBol">
+				           	</div>
+				           	
+				           	<div class="alert alert-secondary" v-show="validacion.checkC.selectedBol">
+				           			d) La duración de la interrupción fue mayor al tiempo objetivo de recuperación de los productos o servicios afectados.
+				           			<input type="checkbox" class="mdl-checkbox__input look-forward float-right" disabled="disabled" v-model="validacion.checkC.selectedBol">
+				           	</div>
+				           	
+				           	<div class="alert alert-secondary" v-show="validacion.checkD.selectedBol">
+				           			e) La duración de la interrupción fue mayor que 4 horas.
+				           			<input type="checkbox" class="mdl-checkbox__input look-forward float-right" disabled="disabled" v-model="validacion.checkD.selectedBol">
+				           	</div>
+				           	
+				           	<div class="alert alert-secondary" v-show="validacion.checkE.selectedBol">
+				           			f) Se activó el Comité de Crisis.
+				           			<input type="checkbox" class="mdl-checkbox__input look-forward float-right" disabled="disabled" v-model="validacion.checkE.selectedBol">
+				           	</div>
+				         </div>
+		          </div>
+	
+	            </div>
+	
+	            <div class="modal-footer">
+	                <button type="button" class="btn btn-secondary" @click.prevent="editarValidacion('module/valida_reporte', model.idEvento)">Editar</button>
+	                <button type="button" class="btn btn-secondary" data-dismiss="modal">Cerrar</button>
+	            </div>
+	
+	        </div>
+	    </div>
+	</div>
+    
 </div>
 
 <js layout:fragment="scripts"> <script th:src="@{/resources/bundle/js_app_informe_reporte.js}"></script></js>

@@ -63,6 +63,7 @@
 		<security:intercept-url pattern="/public/**" access="permitAll" requires-channel="any" /> <!-- isAuthenticated() -->
 		<security:intercept-url pattern="/resources/fonts/**" access="permitAll" requires-channel="any" />
 		<security:intercept-url pattern="/resources/imgs/**" access="permitAll" requires-channel="any" />
+		<security:intercept-url pattern="/resources/help/**" access="permitAll" requires-channel="any" />
 
 		<security:intercept-url pattern="/siris_web/registro_siris/**" access="hasRole('ROLE_APP')" requires-channel="any" /> <!-- isAuthenticated() -->
 
