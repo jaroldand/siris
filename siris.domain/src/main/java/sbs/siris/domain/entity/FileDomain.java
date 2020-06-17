@@ -1,6 +1,7 @@
 package sbs.siris.domain.entity;
 
 import java.io.UnsupportedEncodingException;
+import java.nio.charset.StandardCharsets;
 import java.util.Date;
 import java.util.List;
 
@@ -50,7 +51,8 @@ public class FileDomain extends BaseDomain<File> {
 		String nombreDocumento = "";
 		
 		try {
-			nombreDocumento = new String(documento.getDesDocumento().getBytes(), "utf-8");
+			//nombreDocumento = new String(documento.getDesDocumento().getBytes(), "utf-8");
+			nombreDocumento = java.net.URLDecoder.decode(documento.getDesDocumento(), StandardCharsets.UTF_8.name());
 			documento.setDesDocumento(nombreDocumento);
 		} catch (UnsupportedEncodingException e) {
 			e.printStackTrace();

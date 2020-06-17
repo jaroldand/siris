@@ -1106,7 +1106,7 @@ var app = new Vue({
     		var archtipo = jbase.getCodExtension(file_upload.name)
     		
     		form.append("idFile", jbase.isEmptyString(self.model.informe.fileComentAdic) === true ? -1 : self.model.informe.fileComentAdic);
-    		form.append("desDocumento", file_upload.name.substring(0, file_upload.name.lastIndexOf(".")));
+    		form.append("desDocumento", encodeURIComponent( file_upload.name.substring(0, file_upload.name.lastIndexOf(".")) ) );
 			form.append("tipDocumento", archtipo.type);
 			form.append("desExtension", archtipo.name);
 			form.append("numTamanio", file_upload.size);
